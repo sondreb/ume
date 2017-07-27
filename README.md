@@ -38,7 +38,6 @@ If someone loose their private key, the community owner can transfer ownership o
 ## Development Notes and Ideas
 
 
-
 ## Developer Instructions
 
 To host the app on your local machine, make sure you install Node.js and install this simple http server.
@@ -52,8 +51,21 @@ Navigate to the repo root, then src/app and run this command:
 http-server -c-1
 ```
 
+This will host the app on localhost:8080.
 
+Open another shell and navigate to src/gateway and run:
 
+```
+npm install
+```
+
+And then run:
+
+```
+node index.js
+```
+
+This will host the Web Socket (socket.io) endpoint on localhost:8081.
 
 
 ## License

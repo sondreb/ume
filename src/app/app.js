@@ -1,6 +1,7 @@
 var db = null;
 var ia = null;
 var messages = null;
+var socket = null;
 
 function onPopulate() {
 
@@ -22,6 +23,8 @@ function onPublish() {
 
     // Clear the user input.
     document.getElementById('message').value = '';
+
+    socket.emit('publish', text);
 }
 
 function deleteDatabase() {
@@ -95,6 +98,17 @@ function runProgramLogic() {
         autoloadCallback: databaseInitialize,
         autosave: true,
         autosaveInterval: 4000
+    });
+
+    socket = io('http://localhost:8081');
+    socket.on('connect', function () {
+        log('Connected to Gateway');
+    });
+    socket.on('event', function (data) {
+        log('Event Received: ' + data);
+    });
+    socket.on('disconnect', function () {
+        log('Disconnected from Gateway');
     });
 
     log('onStart');
