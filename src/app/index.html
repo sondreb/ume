@@ -17,13 +17,15 @@
     <br><br>
     <textarea id="message"></textarea><br>
     <button id="publishButton" onclick="onPublish()">Publish</button>
+    <br><br>
+    <button id="generateButton" onclick="generateKeys()">Generate Keys</button>
 
-    
+    <script src="webcrypto-shim.js"></script>
+    <script src="crypto.js"></script>
     <script src="lokijs.min.js"></script>
     <script src="loki-indexed-adapter.min.js"></script>
     <script src="socket.io.js"></script>
     <script src="app.js"></script>
-
 </body>
 
 </html>

@@ -70,4 +70,5 @@ This will host the Web Socket (socket.io) endpoint on localhost:8081.
 
 ## License
     
-MIT © [Sondre Bjellås](http://sondreb.com)
+MIT © [Sondre Bjellås](http://sondreb.com)   
+MIT © [darkwire.io](https://github.com/seripap/darkwire.io)
