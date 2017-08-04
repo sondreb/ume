@@ -1,9 +1,8 @@
 # ume
 
-Community Collaboration without centralized storage
+Community Collaboration without centralized storage and end-to-end-encrypted communication.
 
-"ume" (You & Me)
-
+"ume" (YouMe)
 
 **ume** is a collaborative app that runs in your web browser and all content is stored on your local browser storage using IndexedDB. There are no central server hosting the content, it is all hosted on every individual web browser.
 
@@ -15,6 +14,24 @@ Community Collaboration without centralized storage
 
 Any operations on the file system is prone to problems. Using **ume** is done under
 no warranty. Make sure you take backups before using **ume**. The developers gives no guarantee that information created and published using **ume** won't be lost for any reason. While great care is taken to avoid problems, you are using the app under your own risk.
+
+If you loose your private keys, you won't be able to manage your existing content and you need a new invitation to gain access to the community. Keep your keys safe on preferably external storage (USB stick).
+
+## Security
+
+- The app and gateway does not at any time retrieve your IP address or any unique device IDs. Before though of rouge gateway hosts, which could do IP-logging. Use gateways you trust.
+
+- The gateway receives no messages that it can decrypt in any way. The gateway have no capability to read any metadata from messages.
+
+- All content is stored in clear-text and unencrypted within the web browser. If your device is stolen, the community information can be read from the device.
+
+- All content in a community can at any time be exported to a text-based format (JSON) by anyone with access to the community.
+
+- Users can stay entirely anonymous with only a unique identifier as their "nickname". Membership to different communities, will give different unique identifiers and different set of public/private keys.
+
+- The web browser is notoriously **not a very secure** and safe environment. The possibility of XSS (Cross-Side-Scripting) attacks and other forms of attacks on **ume**, could leak information and your private keys. There are no way around this, as long as the app is built to run within the web browser without any plugins and installations.
+
+- If you need privacy and safety of information on a device or computer that can be **lost or stolen**, do not rely on **ume**. If you still use **ume** and want better security, ensure you are using disk encryption on your harddrive.
 
 ## Message Flow
 
@@ -66,6 +83,17 @@ node index.js
 ```
 
 This will host the Web Socket (socket.io) endpoint on localhost:8081.
+
+## Questions and Answers
+
+Q: Will there be an **ume** app for mobile devices?   
+A: No, the app only supports running in the web browser.
+
+Q: Are the content and security keys stored safely in the web browser?   
+A: No, there are few options to store local information in an encrypted and secure manner when only relying on the web browser. Developing a Cordova and/or Electron container could enable more secure local storage.
+
+Q: Can I use **ume** to share sensitive and secret information?   
+A: While the app has been built for security and privacy as the main reasons for existing, you should not rely on **ume** for sensitive and secret information. This is an open source project with limited resources available for security review and monitoring of potential hacks, exploits, etc.
 
 
 ## License

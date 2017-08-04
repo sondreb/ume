@@ -143,6 +143,15 @@ function generatePublicKey(cb) {
     }
 }
 
+function createCommunity() {
+    
+    console.log('Create Community.');
+
+    
+
+
+}
+
 function generateKeys() {
     generatePublicKey(function (key) {
         encrypt('YOUANDMEØÆÅ', key);
