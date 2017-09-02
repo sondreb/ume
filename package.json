@@ -1,0 +1,25 @@
+{
+  "name": "ume",
+  "version": "0.0.1",
+  "description": "Community Collaboration without centralized storage and end-to-end-encrypted communication.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "watch-http-server src/app",
+    "start-test": "watch-http-server tests",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sondreb/ume.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sondreb/ume/issues"
+  },
+  "homepage": "https://github.com/sondreb/ume#readme"
+}

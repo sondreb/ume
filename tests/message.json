@@ -1,0 +1,33 @@
+// Notes for development
+// 1. Should the keys be shortened to reduce data transfer and storage?
+//    Example: "C" instead of "Community".
+
+// Message transfered through gateway. To know where to redirect the messages, we need the "Community" identifier which is the room a user is registered too.
+// The payload is a JSON structured that is encrypted and digitally signed by the author. Do we need digest (message integrity) check as well?
+{
+    "Community": "DigestFromCommunity",
+    "Payload": "EncryptedAndSigned"
+}
+
+// The payload is decrypted using the community key, which all members of a community has, will result in this "Payload" construct:
+{
+    "Payload": {
+        "Room": "UniqueRoomNameNoSpacesOrSpecialCharacters",
+        "Author": "UniqueAuthorIdentifierDerivedFromPublicKeyAlsoUsedToPickPublicKeyForDecryption",
+        "Body": "EncryptedBody"
+    }
+}
+
+// The Body element contains the actual post by the user, and must be decrypted with their public key (and it was signed with the private key)
+{
+    "Body": {
+        "Id": "940572e6-32f1-424e-9ddc-2459577abb14",
+        "Parent": "",
+        "Title": "Title - Can be any text",
+        "Content": "Hello World everyone!",
+        "Author": "UniqueAuthorIdentifierDerivedFromPublicKeyAlsoUsedToPickPublicKeyForDecryption",
+        "Created": "2017-01-01",
+        "Modified": "2017-02-01",
+        "Tags": ["Introduction", "Human"]
+    }
+}

@@ -1,0 +1,26 @@
+{
+    "keys": [
+        {
+            "type": "community",
+            "id": "HASH DERIVED FROM PUBLIC KEY",
+            "key": "PublicOrPrivateKeyValue",
+            "signature": "SignatureVerificationOfKeyAndMetadata",
+            "metadata": {
+                "name": "Party Community",
+                "archieved:": false
+            }
+        },
+        {
+            "type": "user",
+            "id": "HASH DERIVED FROM PUBLIC KEY",
+            "key": "PublicOrPrivateKeyValue",
+            "signature": "SignatureVerificationOfKeyAndMetadata",
+            "metadata": {
+                "username": "test",
+                "name": "John Doe",
+                "email:": null,
+                "phone": "0"
+            }
+        }
+    ]
+}

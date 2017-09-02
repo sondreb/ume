@@ -1,0 +1,23 @@
+// BASE64 encode the whole invite before sending it to a member.
+{
+    "type": "invite-request",
+    "signature": "f1dihi5eGnE342a+TIi4srmvfYFJrPnRDAXb3vY+JYLoxuVrkcNrE6GAyF7hKjv09pE1JZIhpj8W4hKD7yEhYA==",
+    "request": {
+        "community": "6h8szS3kNVziT9u77FUmzkhK2xwu7a0e8pmwjzOH5fU=",
+        "invitationId": "IuoZFoYXIHbqu9GN3ODSfQH/2waqiECWKC466CDLO+g="
+    }
+}
+
+// Encrypted with invitation ID, which only the community owner should know and can decrypt.
+{
+    "type": "invite-response",
+    "signature": "f1dihi5eGnE342a+TIi4srmvfYFJrPnRDAXb3vY+JYLoxuVrkcNrE6GAyF7hKjv09pE1JZIhpj8W4hKD7yEhYA==",
+    "request": {
+        "community": "6h8szS3kNVziT9u77FUmzkhK2xwu7a0e8pmwjzOH5fU=",
+        "invitationId": "IuoZFoYXIHbqu9GN3ODSfQH/2waqiECWKC466CDLO+g="
+    },
+    "response": {
+        "publicKey": "base64-encoded-jwk",
+        "privateKey": "pass-phrase-encrypted-base64-encoded-jwk" // Allows users to restore their private key when changing computer devices.
+    }
+}

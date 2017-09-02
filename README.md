@@ -33,6 +33,33 @@ If you loose your private keys, you won't be able to manage your existing conten
 
 - If you need privacy and safety of information on a device or computer that can be **lost or stolen**, do not rely on **ume**. If you still use **ume** and want better security, ensure you are using disk encryption on your harddrive.
 
+- "ume" is based on the [ECDSA](https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm) (Elliptic Curve Digital Signature Algorithm) for message signing and integrity checking. [Wikipedia reference] and uses [ECDH](https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman) for sharing secret keys.
+
+## Functionality
+
+- Create a new community, key for community is a pass phrase.
+
+- Create a invite key for new users.
+
+- Activate invite key, generating new public/private key pair from a pass phrase.
+
+- Local backup of community pass phrase and user account pass phrase.
+
+- Local backup of whole community, all messages.
+
+- Ability to archivate a community, rendering it read-only mode and not accepting new entries.
+
+- 
+
+## Background
+
+Q: Why was üme built?
+
+A: It was built for the challenge of building a highly secure and anonymous forum that did not require any infrastructure. Being able to create ad-hoc communities
+that only lasts for a project or certain amount of time, is something üme is good for.
+
+It also allows for people who don't want to use other social networks, which require a lot of personal information details and does extensive logging and analysis of user patterns and everything that we share, to still be social in a manner where the user decides how much information they want to share. The only requirement for a user is a unique identifier derived from the public key. If you don't want to share nickname, real-name or other contanct details, you don't have to.
+
 ## Message Flow
 
 1. User writes a new entry and choose the publish action.
@@ -53,6 +80,10 @@ The community owner can transfer ownership of entries. The history of ownership 
 If someone loose their private key, the community owner can transfer ownership of all entries from one user, to another.
 
 ## Development Notes and Ideas
+
+Q: Why is ume built without jQUery or Angular?
+
+A: For security reasons, ume should always attempt to rely on as few third party libraries as possible.
 
 
 ## Developer Instructions
@@ -84,6 +115,17 @@ node index.js
 
 This will host the Web Socket (socket.io) endpoint on localhost:8081.
 
+### Local Web Server
+
+```
+npm install watch-http-server -g
+```
+
+```
+npm start
+```
+
+
 ## Questions and Answers
 
 Q: Will there be an **ume** app for mobile devices?   
@@ -97,6 +139,5 @@ A: While the app has been built for security and privacy as the main reasons for
 
 
 ## License
-    
-MIT © [Sondre Bjellås](http://sondreb.com)   
-MIT © [darkwire.io](https://github.com/seripap/darkwire.io)
+
+MIT © [Sondre Bjellås](http://sondreb.com)
