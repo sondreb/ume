@@ -31,4 +31,8 @@ function toggleMenu() {
     document.getElementById('menu-button').addEventListener('click', toggleMenu);
     document.getElementById('menu-button-close').addEventListener('click', toggleMenu);
 
+    document.getElementById('wipe-data').addEventListener('click', () => {
+        document.getElementById('wipe-success').style.display = 'block';
+    });
+
 }());
