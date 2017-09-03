@@ -7,264 +7,11 @@
     <link rel="stylesheet" href="app2.css">
     <link rel="stylesheet" href="fonts/Material_Design_Icons/material-icons.css">
     <link rel="stylesheet" href="fonts/Open_Sans/OpenSans.css">
-
+    <link rel="stylesheet" href="layout.css">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
     <meta name="theme-color" content="#C4841C">
     <meta name="msapplication-navbutton-color" content="#C4841C">
     <meta name="apple-mobile-web-app-status-bar-style" content="#C4841C">
-
-
-
-    <style>
-         :root {
-            /* Considered changing the variable in JavaScript as oppose to having both variables here, 
-             changed back to using only CSS variables and changin the classes. */
-            --menu-width: 72px;
-            --menu-width-open: 300px;
-            --search-height: 52px;
-        }
-
-        html,
-        body {
-            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: white;
-        }
-
-        .action {
-            cursor: pointer;
-        }
-
-        .logo {
-            height: 100px;
-            margin-top: 40px;
-            margin-bottom: 40px;
-        }
-
-        .menu {
-            position: absolute;
-            width: var(--menu-width);
-            height: 100%;
-            overflow: none;
-            padding: 0px;
-            background: #6DA5AF;
-            background: linear-gradient(to bottom right, #6DA5AF, #ECF4CD);
-            border-right: 1px solid white;
-            font-size: 14px;
-        }
-
-        .menu-container {
-            padding: 6px;
-        }
-
-        .menu .opened {
-            display: none;
-        }
-
-        .menu.open {
-            width: var(--menu-width-open);
-        }
-
-        .menu.open .opened {
-            display: inline-block;
-        }
-
-        .menu.open .closed {
-            display: none;
-        }
-
-        .menu-legend {
-            font-size: 24px;
-            margin-top: 14px;
-            margin-left: 10px;
-            vertical-align: top;
-        }
-
-        .menu-item {
-            cursor: pointer;
-        }
-
-        .menu-item:hover {
-            color: white;
-        }
-
-        .menu {
-            /* transition: width 0.2s ease-in;
-            transition: height 0.2s ease-in; */
-            transition: width 0.1s;
-            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-
-        .menu.open {
-            /* transition: width 0.3s ease-out;
-            transition: height 0.3s ease-out; */
-            transition: width 0.2s;
-            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-        }
-
-        .container {
-            left: var(--menu-width);
-            position: absolute;
-            width: calc(100% - var(--menu-width));
-            height: 100%;
-            overflow: none;
-        }
-
-        .container.open {
-            left: var(--menu-width-open);
-            width: calc(100% - var(--menu-width-open));
-        }
-
-        .top-bar {
-            height: var(--search-height);
-            overflow: none;
-            padding: 4px;
-        }
-
-        .top-bar input,
-        button {
-            font-size: 24px;
-            padding: 10px;
-        }
-
-        .top-bar input {
-            width: calc(100% - 164px);
-        }
-
-        .top-bar button {
-            width: 140px;
-        }
-
-        .content {
-            height: calc(100% - var(--search-height));
-            overflow: auto;
-            padding: 20px;
-        }
-
-        .centered {
-            text-align: center;
-        }
-
-        .title-opened {
-            color: white;
-            font-size: 48px !important;
-            margin: 0;
-            padding: 0;
-            display: inline-block;
-            vertical-align: top;
-            text-align: center;
-            margin-left: 40px;
-        }
-
-        .title-closed {
-            color: white;
-            font-size: 20px !important;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        .app-title:hover {
-            text-decoration: underline;
-            cursor: pointer;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .page-open {
-            display: block;
-        }
-
-
-
-        @media all and (min-width: 600px) {
-            .aside {
-                flex: 1 auto;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            /* body {
-                margin: 40px !important;
-            } */
-        }
-
-        @media (max-width: 700px) {
-
-            .title-closed {
-                display: none;
-            }
-
-            .menu-container>div {
-                float: left;
-            }
-
-            .menu .opened-device {
-                display: none;
-            }
-
-            .menu.open .opened-device {
-                display: inline-block;
-            }
-
-            .logo {
-                height: 48px;
-                margin-top: 0px;
-                margin-bottom: 0px;
-            }
-
-            .menu-item {
-                margin-left: 20px;
-            }
-
-            .menu {
-                width: 100% !important;
-                height: var(--menu-width) !important;
-                bottom: 0px !important;
-
-                border-right: 0 !important;
-                border-top: 1px solid white;
-
-                overflow: auto;
-            }
-
-            .menu.open {
-                width: 100% !important;
-                height: var(--menu-width-open) !important;
-                bottom: 0px !important;
-            }
-
-            .container {
-                left: 0 !important;
-                width: 100% !important;
-                /*bottom: var(--menu-width) !important;*/
-                height: calc(100% - var(--menu-width));
-            }
-
-            .container.open {
-                left: 0 !important;
-                width: 100% !important;
-                /*bottom: var(--menu-width-open) !important;*/
-                height: calc(100% - var(--menu-width-open));
-            }
-
-            .menu {
-                transition: height 0.1s;
-                transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-            }
-
-            .menu.open {
-                transition: height 0.2s;
-                transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
-            }
-        }
-
-        @media (min-width: 700px) and (orientation: landscape) {}
-    </style>
 </head>
 
 <body>
@@ -274,24 +21,77 @@
         <div id="content" class="content">
 
             <div class="page page-open" id="page-home">
-                WELCOME!
-                <button data-ume-page="introduction">Read the introduction</button>
+                <h1>
+                    Hi, welcome to üme, the collaborative community!
+                </h1>
+
+                <p>
+                    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you
+                    are both the host of the community and a member.
+                </p>
+
+                <button data-ume-page="introduction">Read the introduction...</button>
+                <p>&nbsp;</p>
+                <p>
+                    <div class="action-item" data-ume-page="settings"><i class="material-icons">settings</i> Settings</div>
+                </p>
             </div>
             <div class="page" id="page-introduction">
-                <i class="material-icons">face</i> This is the content
-                <p>&nbsp;</p>
-                This is the content
-                <p>&nbsp;</p>This is the content
-                <p>&nbsp;</p>This is the content
-                <p>&nbsp;</p>This is the content
-                <p>&nbsp;</p>This is the content
-                <p>&nbsp;</p>This is the content
-                <p>&nbsp;</p>
 
+                <h1>
+                    Hi, welcome to üme, the collaborative community!
+                </h1>
+
+                <p>
+                    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you
+                    are both the host of the community and a member.
+                </p>
+
+                <p>üme is also special in another way, and that is how it enables community members to be anonymous and secure
+                    in their communication.
+                </p>
+
+                <p>Since üme only runs in your browser, and the browser is inherently insecure, no garantue can be give in regards
+                    to your privacy. All communication is secured with encryption and digital signatures. It is important
+                    that you trust the content in your community, so every message is signed by the creator.
+                </p>
+
+                <p>
+                    It is important that at least two member is online in the community to ensure that data is sent. The community owner must
+                    be online for new members to be able to join. Only the community owner's device can verify invitations.
+                </p>
+
+                <p>üme relies on a gateway for sending messages to all community members, this ensure that individual community
+                    members cannot discover the IP address of another user. The gateway is open source, but don't use a gateway
+                    host you don't trust, as the gateway could be modified to log the members IP addresse. Even with a log
+                    of IP addresses, all messages communicated are encrypted and cannot easily be decrypted. You should combine
+                    the use of üme with Tor Project and/or Virtual Private Network (VPN).
+                </p>
+
+                <p>
+                    All the content of a community is stored in an unencrypted manner in the web browser. If your device is stolen, the information
+                    can be accessed. There is an option to entirely delete local cache and always restore a community from
+                    the other members. This is a handy feature to use if accessing a community using someone elses computer
+                    or at an internet café.
+                </p>
+
+                <p>
+                    The app have a very easy functionality to take local backup copies of your communities, make sure you use them often.
+                </p>
+
+                <p>
+                    By using üme, you are accepting that the use of this app is entirely on your own responsbility. No guarantee is given by
+                    the developers, and we advice you to review the <a href="https://github.com/sondreb/ume"
+                        target="_blank">üme source code</a> at any time.
+                </p>
+                <i class="material-icons">favorite_border</i>
+                <p>
+                    <button data-ume-page="home">Go back...</button>
+                </p>
             </div>
             <div class="page" id="page-create">
-                   CREATE SOME NEW CONTENT!
-                </div>
+                CREATE SOME NEW CONTENT!
+            </div>
             <div class="page" id="page-security">
                 SECURITY!
             </div>
@@ -303,6 +103,13 @@
             </div>
             <div class="page" id="page-clear">
                 CLEAR DEVICE
+            </div>
+
+            <div class="page" id="page-settings">
+                <i class="material-icons float-right">settings</i>
+                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+                <h1>Settings</h1>
+
             </div>
 
         </div>
