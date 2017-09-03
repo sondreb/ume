@@ -3,7 +3,7 @@
      changed back to using only CSS variables and changin the classes. */
     --menu-width: 72px;
     --menu-width-open: 300px;
-    --search-height: 52px;
+    --search-height: 60px;
 }
 
 html,
@@ -25,6 +25,10 @@ body {
     margin-bottom: 40px;
 }
 
+.list li {
+    margin-bottom: 10px;
+}
+
 .menu {
     position: absolute;
     width: var(--menu-width);
@@ -33,7 +37,6 @@ body {
     padding: 0px;
     background: #6DA5AF;
     background: linear-gradient(to bottom right, #6DA5AF, #ECF4CD);
-    border-right: 1px solid white;
     font-size: 14px;
 }
 
@@ -102,6 +105,9 @@ body {
 .top-bar {
     height: var(--search-height);
     overflow: none;
+}
+
+.top-bar-container {
     padding: 4px;
 }
 
@@ -120,7 +126,7 @@ button {
 }
 
 .content {
-    height: calc(100% - var(--search-height));
+    height: calc(100% - var(--search-height) - 40px);
     overflow: auto;
     padding: 20px;
 }
@@ -167,6 +173,9 @@ button {
     display: inline-flex;
     vertical-align: text-top;
     cursor: pointer;
+    height: 48px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .action-item:hover {
@@ -224,9 +233,6 @@ float: right;
         height: var(--menu-width) !important;
         bottom: 0px !important;
 
-        border-right: 0 !important;
-        border-top: 1px solid white;
-
         overflow: auto;
     }
 
@@ -248,6 +254,11 @@ float: right;
         width: 100% !important;
         /*bottom: var(--menu-width-open) !important;*/
         height: calc(100% - var(--menu-width-open));
+    }
+
+    .content {
+        /* Don't know why the extra 32px was needed to make it look proper. */
+        height: calc(100% - var(--menu-width) - var(--search-height) + 32px) !important; 
     }
 
     .menu {

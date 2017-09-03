@@ -17,7 +17,10 @@
 <body>
     <div id="container" class="container">
         <div class="top-bar">
-            <input type="text" /><button>Search</button></div>
+            <div class="top-bar-container">
+                <input type="text" /><button>Search</button>
+            </div>
+        </div>
         <div id="content" class="content">
 
             <div class="page page-open" id="page-home">
@@ -33,6 +36,10 @@
                 <button data-ume-page="introduction">Read the introduction...</button>
                 <p>&nbsp;</p>
                 <p>
+                    <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
+                    <div class="action-item" data-ume-page="communities"><i class="material-icons">donut_small</i> Communities</div>
+                    <div class="action-item" data-ume-page="security"><i class="material-icons">security</i> Security</div>
+                    <div class="action-item" data-ume-page="clear"><i class="material-icons">delete_forever</i> Clear Device</div>
                     <div class="action-item" data-ume-page="settings"><i class="material-icons">settings</i> Settings</div>
                 </p>
             </div>
@@ -90,10 +97,134 @@
                 </p>
             </div>
             <div class="page" id="page-create">
+                <i class="material-icons float-right">add</i>
+                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+                <h1>Create</h1>
+
                 CREATE SOME NEW CONTENT!
             </div>
+            <div class="page" id="page-communities">
+                <i class="material-icons float-right">donut_small</i>
+                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+                <h1>Communities</h1>
+
+                <p>Apperas to be a bit empty here. Do you want to join existing community or create a new one?</p>
+                <p>
+                    <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
+                </p>
+            </div>
             <div class="page" id="page-security">
-                SECURITY!
+                <i class="material-icons float-right">security</i>
+                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+                <h1>Security</h1>
+
+                <p>
+                    üme has security as the most importance concern. It is built to ensure your privacy and security. All details regarding security
+                    implementation details are publicly available and source code is available for review. Before you use
+                    üme, you should familiar yourself with the security introduction.
+                </p>
+
+                <button data-ume-page="security-introduction">Read the security introduction...</button>
+
+            </div>
+            <div class="page" id="page-security-introduction">
+                <i class="material-icons float-right">security</i>
+                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+                <h1>Security introduction</h1>
+
+                <p>
+                    üme has security as the most importance concern. It is built to ensure your privacy and security. All details regarding security
+                    implementation details are publicly available and source code is available for review. Before you use
+                    üme, you should familiar yourself with the security introduction.
+                </p>
+
+                <p>
+                    <ul class="list">
+                        <li>The app and gateway does not at any time retrieve your IP address or any unique device IDs. Before
+                            though of rouge gateway hosts, which could do IP-logging. Use gateways you trust.</li>
+                        <li>The gateway receives no messages that it can decrypt in any way. The gateway have no capability to
+                            read any metadata from messages.</li>
+                        <li>All content is stored in clear-text and unencrypted within the web browser. If your device is stolen,
+                            the community information can be read from the device.</li>
+                        <li>All content in a community can at any time be exported to a text-based format (JSON) by anyone with
+                            access to the community.</li>
+                        <li>Users can stay entirely anonymous with only a unique identifier as their "nickname". Membership to
+                            different communities, will give different unique identifiers and different set of public/private
+                            keys.
+                        </li>
+                        <li>The web browser is notoriously **not a very secure** and safe environment. The possibility of XSS
+                            (Cross-Side-Scripting) attacks and other forms of attacks on üme, could leak information and
+                            your private keys. There are no way around this, as long as the app is built to run within the
+                            web browser without any plugins and installations.</li>
+                        <li>If you need privacy and safety of information on a device or computer that can be **lost or stolen**,
+                            do not rely on üme. If you still use üme and want better security, ensure you are using disk
+                            encryption on your harddrive.</li>
+                        <li>üme is based on the <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a>                            (Elliptic Curve Digital Signature Algorithm) for message signing and integrity checking. [Wikipedia
+                            reference] and uses <a href="https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman">ECDH</a>                            for sharing secret keys.</li>
+                    </ul>
+                </p>
+
+                <h2>FAQ</h2>
+
+                <p>
+                    Q: Why was üme built?
+                </p>
+                <p>
+                    A: It was built for the challenge of building a highly secure and anonymous forum that did not require any infrastructure.
+                    Being able to create ad-hoc communities that only lasts for a project or certain amount of time, is something
+                    üme is good for.
+                </p>
+                <p>
+                    It also allows for people who don't want to use other social networks, which require a lot of personal information details
+                    and does extensive logging and analysis of user patterns and everything that we share, to still be social
+                    in a manner where the user decides how much information they want to share. The only requirement for
+                    a user is a unique identifier derived from the public key. If you don't want to share nickname, real-name
+                    or other contanct details, you don't have to.
+                </p>
+
+                <p>
+                    Q: Will there be an üme app for mobile devices?
+                </p>
+                <p>
+                    A: No, the app only supports running in the web browser.
+                </p>
+
+                <p>
+                    Q: Are the content and security keys stored safely in the web browser?
+                </p>
+                <p>
+                    A: No. There are few options to store local information in an encrypted and secure manner when only relying on the web browser.
+                    Developing a Cordova and/or Electron container could enable more secure local storage.
+                </p>
+
+                <p>
+                    Q: Can I use üme to share sensitive and secret information?
+                </p>
+                <p>
+                    A: While the app has been built for security and privacy as the main reasons for existing, you should not rely on üme for
+                    sensitive and secret information. This is an open source project with limited resources available for
+                    security review and monitoring of potential hacks, exploits, etc.
+                </p>
+
+                <h2>Disclaimer</h2>
+
+                <p>
+                    Any operations on the file system is prone to problems. Using üme is done under no warranty. Make sure you take backups before
+                    using üme.
+
+                    <p>The developers gives no guarantee that information created and published using üme won't be lost for
+                        any reason at any time.
+                    </p>
+                    <p>While great care is taken to avoid problems, you are using the app under your own risk. If you loose
+                        your private keys, you won't be able to manage your existing content and you need a new invitation
+                        to gain access to the community. Keep your keys safe on preferably external storage (USB stick).
+                    </p>
+
+                    <i class="material-icons">favorite_border</i>
+                    <p>
+                        <button data-ume-page="security">Go back...</button>
+                    </p>
+
             </div>
             <div class="page" id="page-backup">
                 BACKUP
@@ -102,7 +233,26 @@
                 KEYS
             </div>
             <div class="page" id="page-clear">
-                CLEAR DEVICE
+                <i class="material-icons float-right">delete_forever</i>
+                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+                <h1>Clear Device</h1>
+                <p>
+                    To protect your privacy, you can clear this device of all community data.
+                </p>
+                <p>
+                    BEWARE: If you clear the device, all your keys will be lost. Make sure you have a backup of your keys or remember your pass
+                    phrase.
+                </p>
+                <p>
+                    <div class="action-item" data-ume-page="backup"><i class="material-icons">cloud_download</i> Backup first</div>
+                </p>
+                <p>
+                    The data wipe removes data from your browser cache. If the device is stolen, the data can potentially still be retrieved
+                    by recovering deleted files on the harddrive.
+                </p>
+                <p>
+                    <div class="action-item" data-ume-page="backup"><i class="material-icons">delete_forever</i> Wipe all data on device</div>
+                </p>
             </div>
 
             <div class="page" id="page-settings">
@@ -133,9 +283,10 @@
             <!-- <i class="material-icons">check_circle</i> -->
 
             <div class="menu-item" data-ume-page="create"><i class="material-icons">add</i><span class="menu-legend opened"> Create</span></div>
-            <div class="menu-item opened-device" data-ume-page="backup"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div>
+            <div class="menu-item" data-ume-page="communities"><i class="material-icons">donut_small</i><span class="menu-legend opened"> Communities</span></div>
+            <!-- <div class="menu-item opened-device" data-ume-page="backup"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div> -->
             <div class="menu-item" data-ume-page="security"><i class="material-icons">security</i><span class="menu-legend opened">  Security</span></div>
-            <div class="menu-item opened-device" data-ume-page="keys"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div>
+            <!-- <div class="menu-item opened-device" data-ume-page="keys"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div> -->
             <div class="menu-item" data-ume-page="clear"><i class="material-icons">delete_forever</i><span class="menu-legend opened">  Clear Device</span></div>
 
             <!-- Community: i123120sd0d1 -->
