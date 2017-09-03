@@ -103,10 +103,10 @@
                 <h1>Create</h1>
 
                 <p>You can create posts, communities, invites and more on this page.</p>
-                <div class="action-item" data-ume-page="create"><i class="material-icons">comment</i> New post</div><br>
-                <div class="action-item" data-ume-page="create"><i class="material-icons">donut_small</i> New community</div><br>
-                <div class="action-item" data-ume-page="create"><i class="material-icons">verified_user</i> New invite</div><br>
-                <div class="action-item" data-ume-page="create"><i class="material-icons">restore</i> Restore from pass phrase</div><br>
+                <div class="action-item" data-ume-page="create-post"><i class="material-icons">comment</i> New post</div><br>
+                <div class="action-item" data-ume-page="create-community"><i class="material-icons">donut_small</i> New community</div><br>
+                <div class="action-item" data-ume-page="create-invite"><i class="material-icons">vpn_key</i> New invite</div><br>
+                <div class="action-item" data-ume-page="restore-pass-phrase"><i class="material-icons">restore</i> Restore from pass phrase</div><br>
                 <br>
 
                 <!-- <i class="material-icons">verified_user</i>
@@ -118,6 +118,186 @@
                 <i class="material-icons">message</i> -->
 
             </div>
+
+            <div class="page" id="page-create-post">
+                <i class="material-icons float-right">comment</i>
+                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
+                <h1>New post</h1>
+                <p>Posts are your means of communication within a community. It allows for basic text editor and topics.</p>
+                <p>
+                    Community:<br>
+                    <select>
+                                <option>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun! </option>
+                                <option>52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | üme planning group</option>
+                                <option>62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</option>
+                            </select>
+                </p>
+                <p>
+                    Channel:<br>
+                    <input type="text" />
+                </p>
+                <p>
+                    <textarea class="post-text">
+
+                        </textarea>
+                </p>
+                <p>
+                    <button class="key-button">Publish</button>
+                </p>
+            </div>
+
+            <div class="page" id="page-create-community">
+                <i class="material-icons float-right">donut_small</i>
+                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
+                <h1>New community</h1>
+                <p>You can create any number of new communities. When you create a community, you become the sole owner of the
+                    community.
+                </p>
+                <p>It is important that you keep a backup of your private key and pass phrase, in case you loose your data or
+                    change device.</p>
+                <p>As the owner of a community, you can invite new members, archieve the community (make it read-only) and delete
+                    the community (members can make a decision to save backup before removing).</p>
+                <p>Running a community comes with some responsibility. You need to be online for new members to activate their
+                    invitation. For security reasons, the invites cannot be distributed to other members.</p>
+                <p>A community with no other users, will never be synchronized online and can never be restored from pass phrase.
+                    Make sure you invite someone to join your community.</p>
+                <p>In the future, it might be possible for a community owner to remove a post done by other users.</p>
+
+
+                <button>Generate Community</button>
+                <br><br>
+
+                <h2>1. Community key pair</h2>
+
+                <p>Restoring a community using the private key does not require other users to be connected, but you will not
+                    receive any existing posts until others have connected.</p>
+
+                <p>
+                    Private Key:
+                    <textarea class="key-text" readonly></textarea>
+                    <button class="key-button">Save Key to local disk</button>
+                </p>
+
+                <p>
+                    Public Key:
+                    <textarea class="key-text" readonly></textarea>
+                    <button class="key-button">Save Key to local disk</button>
+                </p>
+                <br>
+
+                <h2>2. Pass phrase for community restore</h2>
+                <p>The following pass phrase must be remembered or save, to make it possible to restore a community ownership
+                    on another device. Restoring a community from the pass phrase, require at least one other member to be
+                    connected.
+                </p>
+                <p>
+                    Pass phrase:
+                    <textarea class="key-text" readonly></textarea>
+                    <button class="key-button">Save Pass phrase to local disk</button>
+                </p>
+                <br>
+
+                <h2>3. Community details</h2>
+                <p>
+                    No details for the community is required to fill out. You can leave all fields empty, you can change them later.
+                </p>
+                <p>
+                    Name:
+                    <input type="text" />
+                </p>
+                <p>
+                    Icon:
+
+                </p>
+                <br>
+
+                <h2>4. Gateway affinity</h2>
+                <p>
+                    A community can be locked to a specific gateway, or it can be broadcasted on all your registered gateways.
+                </p>
+                <p>
+                    Gateway:
+                    <select>
+                        <option>Use all gateways</option>
+                        <option>https://localhost:8080</option>
+                    </select>
+                </p>
+                <br>
+
+                <h2>5. Save community</h2>
+                <p>The final step is to save a community. This will persist the community key pair to your currenct device.
+                    Next step will be to invite members to join your community.</p>
+                <p>
+                    <button data-ume-page="create-invite">Save</button>
+                </p>
+                <br>
+
+            </div>
+
+            <div class="page" id="page-create-invite">
+                <i class="material-icons float-right">vpn_key</i>
+                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
+                <h1>New invite</h1>
+                <p>You can create any number of invites to communities you own.
+                </p>
+                <p>You have to be online for members to activate their invites.</p>
+                <p>Invites are only stored locally on this device, if you run "Clear Device" and restore on another, the invites
+                    will no longer be valid.</p>
+                <p>Invites are single-use.</p>
+                <p>Invites can include information about gateway. This can be used to simplify the experience for new members,
+                    but it exposes the gateway used by the community. Do not include the gateway in the invitation for additional
+                    secure, and communicate the gateway with the member through other secure channels.</p>
+
+                <p>
+                    Community:
+                    <select>
+                        <option>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun! </option>
+                        <option>52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | üme planning group</option>
+                        <option>62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</option>
+                    </select>
+                </p>
+
+                <p>
+                    Gateway:
+                    <select>
+                            <option>Do not include a gateway in the invite</option>
+                            <option>https://localhost:8080</option>
+                        </select>
+                </p>
+
+                <button>Generate Invite</button>
+                <br><br>
+
+                <h2>Invite</h2>
+                <p>The generated invite is valid until you as community owner, deletes it from the invitation list (available
+                    within the community). The invite should be sent using a secure channel.</p>
+                <p>
+                    Invitation:
+                    <textarea class="key-text" readonly></textarea>
+                    <button class="key-button">Save invitation to local disk</button>
+                </p>
+
+            </div>
+
+            <div class="page" id="page-restore-pass-phrase">
+                <i class="material-icons float-right">vpn_key</i>
+                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
+                <h1>Restore from pass phrase</h1>
+                <p>You can restore both a community and your membership with a pass phrase. Simply fill out and we'll attempt
+                    to restore.
+                </p>
+                <p>If there are no members in the community online, you cannot restore. We'll let you know if there are nobody
+                    online.
+                </p>
+                <p>
+                    Pass phrase:
+                    <textarea class="key-text"></textarea>
+                    <button class="key-button">Restore</button>
+                </p>
+                <br>
+
+            </div>
+
             <div class="page" id="page-search">
                 <i class="material-icons float-right">search</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
@@ -156,6 +336,9 @@
                     <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
                 </p> -->
             </div>
+
+
+
             <div class="page" id="page-security">
                 <i class="material-icons float-right">security</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
