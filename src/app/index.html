@@ -7,18 +7,19 @@
     <link rel="stylesheet" href="app2.css">
     <link rel="stylesheet" href="fonts/Material_Design_Icons/material-icons.css">
     <link rel="stylesheet" href="fonts/Open_Sans/OpenSans.css">
-    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="app.css">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta name="theme-color" content="#C4841C">
-    <meta name="msapplication-navbutton-color" content="#C4841C">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#C4841C">
+    <meta name="theme-color" content="#6DA5AF">
+    <meta name="msapplication-navbutton-color" content="#6DA5AF">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#6DA5AF">
 </head>
 
 <body>
     <div id="container" class="container">
         <div class="top-bar">
             <div class="top-bar-container">
-                <input type="text" /><button>Search</button>
+                <input type="text" /><i class="material-icons action" data-ume-page="search">search</i>
+                <!-- <button>Search</button> -->
             </div>
         </div>
         <div id="content" class="content">
@@ -34,14 +35,14 @@
                 </p>
 
                 <button data-ume-page="introduction">Read the introduction...</button>
-                <p>&nbsp;</p>
+                <!-- <p>&nbsp;</p>
                 <p>
                     <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
                     <div class="action-item" data-ume-page="communities"><i class="material-icons">donut_small</i> Communities</div>
                     <div class="action-item" data-ume-page="security"><i class="material-icons">security</i> Security</div>
                     <div class="action-item" data-ume-page="clear"><i class="material-icons">delete_forever</i> Clear Device</div>
                     <div class="action-item" data-ume-page="settings"><i class="material-icons">settings</i> Settings</div>
-                </p>
+                </p> -->
             </div>
             <div class="page" id="page-introduction">
 
@@ -101,17 +102,59 @@
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Create</h1>
 
-                CREATE SOME NEW CONTENT!
+                <p>You can create posts, communities, invites and more on this page.</p>
+                <div class="action-item" data-ume-page="create"><i class="material-icons">comment</i> New post</div><br>
+                <div class="action-item" data-ume-page="create"><i class="material-icons">donut_small</i> New community</div><br>
+                <div class="action-item" data-ume-page="create"><i class="material-icons">verified_user</i> New invite</div><br>
+                <div class="action-item" data-ume-page="create"><i class="material-icons">restore</i> Restore from pass phrase</div><br>
+                <br>
+
+                <!-- <i class="material-icons">verified_user</i>
+                <i class="material-icons">contact_mail</i>
+                <i class="material-icons">vpn_key</i>
+                <i class="material-icons">question_answer</i>
+                <i class="material-icons">restore</i>
+                <i class="material-icons">comment</i>
+                <i class="material-icons">message</i> -->
+
+            </div>
+            <div class="page" id="page-search">
+                <i class="material-icons float-right">search</i>
+                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+                <h1>Search results</h1>
+                <p>Nothing found.</p>
             </div>
             <div class="page" id="page-communities">
                 <i class="material-icons float-right">donut_small</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Communities</h1>
 
-                <p>Apperas to be a bit empty here. Do you want to join existing community or create a new one?</p>
+                <p>These are the communities that you have joined.</p>
+
+                <p class="community-item">
+                    <i class="material-icons community-icon">free_breakfast</i>
+                    <i class="material-icons float-right action" data-ume-page="home">chevron_right</i>
+                    <strong>Friday Fun!</strong><br>
+                    <span class="community-item-id">31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 12<br>                    Latest post: 2017-09-03 15:03<br>
+                </p>
+
+                <p class="community-item">
+                    <i class="material-icons community-icon">hot_tub</i>
+                    <i class="material-icons float-right action" data-ume-page="home">chevron_right</i>
+                    <strong>üme planning group</strong><br>
+                    <span class="community-item-id">52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 4<br>                    Latest post: 2017-09-03 12:20<br>
+                </p>
+
+                <p class="community-item">
+                    <i class="material-icons community-icon">cake</i>
+                    <i class="material-icons float-right action" data-ume-page="home">chevron_right</i>
+                    <span class="community-item-id">62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 354<br>                    Latest post: 2017-09-03 16:03<br>
+                </p>
+
+                <!-- <p>Apperas to be a bit empty here. Do you want to join existing community or create a new one?</p>
                 <p>
                     <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
-                </p>
+                </p> -->
             </div>
             <div class="page" id="page-security">
                 <i class="material-icons float-right">security</i>
@@ -251,7 +294,10 @@
                     by recovering deleted files on the harddrive.
                 </p>
                 <p>
-                    <div class="action-item" data-ume-page="backup"><i class="material-icons">delete_forever</i> Wipe all data on device</div>
+                    <div class="action-item" id="wipe-data"><i class="material-icons">delete_forever</i> Wipe all data on device</div>
+                </p>
+                <p class="warning-card hidden" id="wipe-success">
+                    Success. All data was wiped. Close the window or tab to exit üme.
                 </p>
             </div>
 
@@ -285,9 +331,10 @@
             <div class="menu-item" data-ume-page="create"><i class="material-icons">add</i><span class="menu-legend opened"> Create</span></div>
             <div class="menu-item" data-ume-page="communities"><i class="material-icons">donut_small</i><span class="menu-legend opened"> Communities</span></div>
             <!-- <div class="menu-item opened-device" data-ume-page="backup"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div> -->
-            <div class="menu-item" data-ume-page="security"><i class="material-icons">security</i><span class="menu-legend opened">  Security</span></div>
+            <div class="menu-item" data-ume-page="security"><i class="material-icons">security</i><span class="menu-legend opened"> Security</span></div>
             <!-- <div class="menu-item opened-device" data-ume-page="keys"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div> -->
-            <div class="menu-item" data-ume-page="clear"><i class="material-icons">delete_forever</i><span class="menu-legend opened">  Clear Device</span></div>
+            <div class="menu-item opened-device" data-ume-page="clear"><i class="material-icons">delete_forever</i><span class="menu-legend opened"> Clear Device</span></div>
+            <div class="menu-item opened-device" data-ume-page="settings"><i class="material-icons">settings</i><span class="menu-legend opened"> Settings</span></div>
 
             <!-- Community: i123120sd0d1 -->
         </div>
