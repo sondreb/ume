@@ -34,6 +34,11 @@
                 </p>
 
                 <button data-ume-page="introduction">Read the introduction...</button>
+
+                <p class="warning-card">
+                    WARNING: THIS IS AN UNRELEASED SOFTWARE. DO NOT USE FOR ANYTHING. WAIT FOR THE RELEASE.
+                </p>
+
                 <!-- <p>&nbsp;</p>
                 <p>
                     <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
@@ -163,7 +168,7 @@
                 <p>In the future, it might be possible for a community owner to remove a post done by other users.</p>
 
 
-                <button id="generate-community">Generate Community</button>
+                <button data-ume-action="onGenerateCommunity">Generate Community</button>
                 <br><br>
 
                 <h2>1. Community key pair</h2>
@@ -174,32 +179,36 @@
                 <p>
                     Private Key:
                     <textarea id="community-private-key" class="key-text" readonly></textarea>
-                    <button id="community-private-key-save" class="key-button">Save Key to local disk</button>
+                    <button data-ume-action="onSaveCommunityPrivateKey" class="key-button">Save Key to local disk</button>
                 </p>
 
                 <p>
                     Public Key:
                     <textarea id="community-public-key" class="key-text" readonly></textarea>
-                    <button id="community-public-key-save" class="key-button">Save Key to local disk</button>
+                    <button data-ume-action="onSaveCommunityPublicKey" class="key-button">Save Key to local disk</button>
                 </p>
                 <br>
 
                 <h2>2. Pass phrase for community restore</h2>
                 <p>The following pass phrase must be remembered or save, to make it possible to restore a community ownership
                     on another device. Restoring a community from the pass phrase, require at least one other member to be
-                    connected. A tip when storing the pass phrase, is to modify the words slightly, 
-                    perhaps exchange one word for another that only you remember. If stolen, then it is useless unless they know what you changed.
+                    connected. A tip when storing the pass phrase, is to modify the words slightly, perhaps exchange one
+                    word for another that only you remember. If stolen, then it is useless unless they know what you changed.
                 </p>
                 <p>
                     Pass phrase:
                     <textarea id="community-pass-phrase" class="key-text" readonly></textarea>
-                    <button id="community-pass-phrase-save" class="key-button">Save Pass phrase to local disk</button>
+                    <button data-ume-action="onSaveCommunityPassPhrase" class="key-button">Save Pass phrase to local disk</button>
                 </p>
                 <br>
 
                 <h2>3. Community details</h2>
                 <p>
-                    No details for the community is required to fill out. You can leave all fields empty, you can change them later.
+                    No details for the community is required to fill out. You can leave all fields empty, you can change them later. Remember the community Id for the next screen, 
+                    when you will generate invitations to this community.
+                </p>
+                <p>
+                    ID: <strong><span id="community-id"></span></strong>
                 </p>
                 <p>
                     Name:
@@ -226,7 +235,8 @@
 
                 <h2>5. Save community</h2>
                 <p>The final step is to save a community. This will persist the community key pair to your currenct device.
-                    Next step will be to invite members to join your community.</p>
+                    Next step will be to invite members to join your community, including yourself.</p>
+                    <p>Yes, that is right. To be able to gain access to this new community, you need to invite yourself.</p>
                 <p>
                     <button data-ume-page="create-invite">Save</button>
                 </p>
@@ -304,6 +314,31 @@
                 <h1>Search results</h1>
                 <p>Nothing found.</p>
             </div>
+
+            <div class="page" id="page-community">
+                <i class="material-icons float-right">hot_tub</i>
+                <i class="material-icons float-right action" data-ume-page="communities">chevron_left</i>
+                <h1>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun!</h1>
+
+                <p>This is our Friday Fun community! Share everything that is fun on a Friday.</p>
+
+                <h2>Topics</h2>
+                <p>
+                    Memes (20)<br>
+                    I forgot it's Friday! (4)<br>
+                    Random (325)<br>
+                </p>
+
+                <h2>Members</h2>
+                <p>
+                    22PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | John Doe<br>
+                    x2PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=<br>
+                    87PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Mr. Nick (nick@gmail.com)<br>
+                </p>
+
+
+            </div>
+
             <div class="page" id="page-communities">
                 <i class="material-icons float-right">donut_small</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
@@ -313,21 +348,21 @@
 
                 <p class="community-item">
                     <i class="material-icons community-icon">free_breakfast</i>
-                    <i class="material-icons float-right action" data-ume-page="home">chevron_right</i>
+                    <i class="material-icons float-right action" data-ume-page="community">chevron_right</i>
                     <strong>Friday Fun!</strong><br>
                     <span class="community-item-id">31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 12<br>                    Latest post: 2017-09-03 15:03<br>
                 </p>
 
                 <p class="community-item">
                     <i class="material-icons community-icon">hot_tub</i>
-                    <i class="material-icons float-right action" data-ume-page="home">chevron_right</i>
+                    <i class="material-icons float-right action" data-ume-page="community">chevron_right</i>
                     <strong>üme planning group</strong><br>
                     <span class="community-item-id">52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 4<br>                    Latest post: 2017-09-03 12:20<br>
                 </p>
 
                 <p class="community-item">
                     <i class="material-icons community-icon">cake</i>
-                    <i class="material-icons float-right action" data-ume-page="home">chevron_right</i>
+                    <i class="material-icons float-right action" data-ume-page="community">chevron_right</i>
                     <span class="community-item-id">62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 354<br>                    Latest post: 2017-09-03 16:03<br>
                 </p>
 
@@ -477,17 +512,33 @@
                     by recovering deleted files on the harddrive.
                 </p>
                 <p>
-                    <div class="action-item" id="wipe-data"><i class="material-icons">delete_forever</i> Wipe all data on device</div>
+                    <div class="action-item" data-ume-action="onWipeData"><i class="material-icons">delete_forever</i> Wipe all data on device</div>
                 </p>
                 <p class="warning-card hidden" id="wipe-success">
                     Success. All data was wiped. Close the window or tab to exit üme.
                 </p>
             </div>
 
-            <div class="page" id="page-settings">
+            <div class="page" id="page-settings" data-ume-opened="onSettingsOpened">
                 <i class="material-icons float-right">settings</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Settings</h1>
+
+                <p>To begin using üme, you need to be connected to at least one gateway. Manage your gateway connections below.</p>
+
+                <h2>Add gateway</h2>
+
+                <p>
+                    <input id="gateway-url" type="text" /><br>
+                    <button id="gateway-save" data-ume-input="gateway-url" data-ume-action="onGatewaySave">Save Gateway</button>
+                </p>
+
+                <h2>Gateways</h2>
+
+                <p id="gateway-list">
+
+                </p>
+
 
             </div>
 
@@ -497,12 +548,12 @@
         <div class="menu-container">
 
             <div class="opened logo">
-                <i class="material-icons action menu-button menu-item" id="menu-button">chevron_left</i>
+                <i class="material-icons action menu-button menu-item" data-ume-action="toggleMenu">chevron_left</i>
                 <h1 class="title-opened app-title" data-ume-page="home">üme</h1>
             </div>
 
             <div class="closed logo">
-                <i class="material-icons action menu-button menu-item" id="menu-button-close">chevron_right</i>
+                <i class="material-icons action menu-button menu-item" data-ume-action="toggleMenu">chevron_right</i>
                 <h1 class="title-closed app-title" data-ume-page="home">üme</h1>
             </div>
 
@@ -530,4 +581,5 @@
     <script src="socket.io.js"></script>
     <script src="app.js"></script>
 </body>
+
 </html>

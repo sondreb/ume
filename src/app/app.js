@@ -312,7 +312,8 @@ function log(text) {
 // Now let's implement the autoloadback referenced in loki constructor
 function databaseInitialize() {
     var entries = db.getCollection("entries");
-    messages = db.getCollection("messages");
+    var messages = db.getCollection("messages");
+    var gateways = db.getCollection("gateways");
 
     // Since our LokiFsStructuredAdapter is partitioned, the default 'quickstart3.db'
     // file will actually contain only the loki database shell and each of the collections
@@ -325,6 +326,11 @@ function databaseInitialize() {
         entries = db.addCollection("entries", { indices: ['x'], clone: true });
     }
 
+    if (gateways === null) {
+        // first time run so add and configure collection with some arbitrary options
+        gateways = db.addCollection("gateways");
+    }
+
     // Now let's add a second collection only to prove that this saved partition (quickstart3.db.1) 
     // doesn't need to be saved every time the other partitions do if it never gets any changes
     // which need to be saved.  The first time we run this should be the only time we save it.
@@ -332,6 +338,10 @@ function databaseInitialize() {
         messages = db.addCollection("messages");
         messages.insert({ txt: "i will only insert into this collection during databaseInitialize" });
     }
+
+    window.ume.storage.entries = entries;
+    window.ume.storage.message = messages;
+    window.ume.storage.gateways = gateways;
 
     // kick off any program logic or start listening to external events
     runProgramLogic();
@@ -355,6 +365,39 @@ function runProgramLogic() {
     log("Wait 4 seconds for the autosave timer to save our new addition")
     log("If you waited 4 seconds, the next time you run this script the numbers should increase by 1");
     log("The four second interval can be adjusted in the call to loki constructor");
+
+    var gateways = window.ume.storage.gateways.data;
+
+    gateways.forEach((item) => {
+        
+        //var gatewayUrl = element('gateways').value;
+        //console.log('connect to: ', gatewayUrl);
+
+        console.log('Connecting to gateway: ', item.gateway);
+
+        var socket = io(item.gateway);
+
+        socket.on('connect', function () {
+            console.log('Connected to Gateway');
+            //element('connection-status').innerText = 'Connected';
+            //gatewayConnected = true;
+            // Connect to the correct community room.
+            //socket.emit('join', { "community": communityKey });
+        });
+
+        socket.on('event', function (data) {
+            console.log('Event Received: ' + data);
+        });
+
+        socket.on('disconnect', function () {
+            //element('connection-status').innerText = 'Disconnected';
+            console.log('Disconnected from Gateway');
+            gatewayConnected = false;
+        });
+
+        // Store a reference to the socket on the global ume structure.
+        window.ume.gateways.push(socket);
+    });
 }
 
 function convertStringToArrayBufferView(str) {
@@ -1098,7 +1141,7 @@ async function generateCommunity() {
         passPhrase: passPhrase,
         passPhraseKey: passPhraseKey
     };
-    
+
 }
 
 
@@ -1283,13 +1326,43 @@ function element(id) {
     return document.getElementById(id);
 }
 
+function initializeDatabase() {
+
+    ia = new LokiIndexedAdapter("ume");
+
+    db = new loki('ume.db', {
+        adapter: ia,
+        autoload: true,
+        autoloadCallback: databaseInitialize,
+        autosave: true,
+        autosaveInterval: 2000
+    });
+
+    // var entries = db.getCollection("gateway");
+    // //messages = db.getCollection("messages");
+
+    // if (entries === null) {
+    //     //entries = db.addCollection("gateway", { indices: ['x'], clone: true });
+    //     entries = db.addCollection('gateway');
+    // }
+
+    // if (messages === null) {
+    //     messages = db.addCollection("messages");
+    //     messages.insert({ txt: "i will only insert into this collection during databaseInitialize" });
+    // }
+
+
+}
+
 var gatewayConnected = false;
 
 (async function onStart() {
 
     // Populate the global ume object. This can obviously crash if anyone else puts this on global.
     window.ume = {
-        supported: true
+        supported: true,
+        storage: {},
+        gateways: new Array()
     };
 
     window.ume.crypto = window.crypto || window.msCrypto;
@@ -1309,6 +1382,8 @@ var gatewayConnected = false;
     //const crypt = window.ume.crypto.subtle;
 
     log('üme v0.0.1');
+
+    initializeDatabase();
 
     return;
 

@@ -195,6 +195,11 @@ button {
     padding: 0.4rem;
 }
 
+.small-icon {
+    font-size: 18px;
+    line-height: 18px;
+}
+
 .action-item {
     font-size: 28px;
     line-height: 32px;
