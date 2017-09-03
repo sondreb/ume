@@ -298,15 +298,15 @@ var logOutput = document.getElementById('log-output');
 function log(text) {
     console.debug(text);
 
-    var timestamp = new Date();
+    // var timestamp = new Date();
 
-    if (typeof text !== 'string') {
-        text = JSON.stringify(text);
-    }
+    // if (typeof text !== 'string') {
+    //     text = JSON.stringify(text);
+    // }
 
-    var p = document.createElement("p");
-    p.innerText = timestamp.toTimeString().split(' ')[0] + ': ' + text;
-    logOutput.appendChild(p);
+    // var p = document.createElement("p");
+    // p.innerText = timestamp.toTimeString().split(' ')[0] + ': ' + text;
+    // logOutput.appendChild(p);
 };
 
 // Now let's implement the autoloadback referenced in loki constructor
@@ -1057,12 +1057,55 @@ function b64DecodeUnicode(str) {
 //b64DecodeUnicode('4pyTIMOgIGxhIG1vZGU='); // "✓ à la mode"
 //b64DecodeUnicode('Cg=='); // "\n"
 
-async function simulate() {
+async function generateCommunity() {
 
     var salt = "ume-salt-value-for-derived-key";
 
     var crypt = new OpenCrypto();
 
+    // First thing a user does, is generate or join a community.
+    var communityKeys = await generateKeyPair();
+
+    // Keep it secret, keep it safe.
+    // Similar to how we encrypt the users private key, we will also put the community private key on the network of users, to ensure it can be
+    // restored in case of emergency, of if a user do not want to store any local cached copy and always restore a community from the network.
+    var communityPrivateKey = await exportJwkFromKeyObject(communityKeys.privateKey);
+
+    // Spread it safely, always hidden in plain view.
+    var communityPublicKey = await exportJwkFromKeyObject(communityKeys.publicKey);
+
+    // Should the computed hash for Community Public Key be based upon the whole JWK (JSON-structure) or a concat of the x and y values?
+    var communityPublicKeyArray = JSON.stringify(communityPublicKey);
+    var communityPrivateKeyArray = JSON.stringify(communityPrivateKey);
+
+    var communityHash = await generateHash(stringUnicodeToUint(communityPublicKeyArray));
+    var communityKey = arrayBufferToBase64(communityHash);
+
+    // What is the best balance of security and usability for pass phrase derived keys?
+    var passPhrase = generatePassPhrase(20);
+
+    // The pass phrase that a user must remember and can save. In the future, we will add support for encrypting the pass phrase for local storage, similar to how one can protect the private key in PFX files.
+    // The logic for encrypting the private key could also be used to "lock" down the ume-app and require users to unlock their private key before continue using the app.
+    console.log('passPhrase:', passPhrase);
+
+    // Generate the 256-bit key from the pass phrase. This is a deterministic generation, which ensures that a user can restore their private key on a different device.
+    var passPhraseKey = await crypt.keyFromPassphrase(passPhrase, salt);
+
+    return {
+        communityId: communityKey,
+        privateKey: btoa(communityPublicKeyArray),
+        publicKey: btoa(communityPrivateKeyArray),
+        passPhrase: passPhrase,
+        passPhraseKey: passPhraseKey
+    };
+    
+}
+
+
+async function simulate() {
+
+    var salt = "ume-salt-value-for-derived-key";
+    var crypt = new OpenCrypto();
     var userList = new Array();
 
     // First thing a user does, is generate or join a community.
@@ -1123,8 +1166,6 @@ async function simulate() {
     invitationEntity.signature = signature;
 
     console.log('Send this invite to a user: ', JSON.stringify(invitationEntity));
-
-
 
     // Save the community invitation, used for verification later on.
     //console.log('Community Invitation Key', invitation);
@@ -1269,16 +1310,17 @@ var gatewayConnected = false;
 
     log('üme v0.0.1');
 
+    return;
+
     element('gateway-connect').addEventListener('click', function () {
         if (gatewayConnected) {
             socket.close();
-        } else
-        {
+        } else {
             var gatewayUrl = element('gateways').value;
             console.log('connect to: ', gatewayUrl);
-    
+
             socket = io(gatewayUrl);
-    
+
             socket.on('connect', function () {
                 console.log('Connected to Gateway');
                 element('connection-status').innerText = 'Connected';
@@ -1286,11 +1328,11 @@ var gatewayConnected = false;
                 // Connect to the correct community room.
                 //socket.emit('join', { "community": communityKey });
             });
-    
+
             socket.on('event', function (data) {
                 console.log('Event Received: ' + data);
             });
-    
+
             socket.on('disconnect', function () {
                 element('connection-status').innerText = 'Disconnected';
                 console.log('Disconnected from Gateway');

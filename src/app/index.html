@@ -174,13 +174,13 @@
                 <p>
                     Private Key:
                     <textarea id="community-private-key" class="key-text" readonly></textarea>
-                    <button class="key-button">Save Key to local disk</button>
+                    <button id="community-private-key-save" class="key-button">Save Key to local disk</button>
                 </p>
 
                 <p>
                     Public Key:
                     <textarea id="community-public-key" class="key-text" readonly></textarea>
-                    <button class="key-button">Save Key to local disk</button>
+                    <button id="community-public-key-save" class="key-button">Save Key to local disk</button>
                 </p>
                 <br>
 
@@ -193,7 +193,7 @@
                 <p>
                     Pass phrase:
                     <textarea id="community-pass-phrase" class="key-text" readonly></textarea>
-                    <button class="key-button">Save Pass phrase to local disk</button>
+                    <button id="community-pass-phrase-save" class="key-button">Save Pass phrase to local disk</button>
                 </p>
                 <br>
 
@@ -524,6 +524,7 @@
     </div>
     <script src="layout.js"></script>
     <script src="OpenCrypto.js"></script>
+    <script src="FileSaver.min.js"></script>
     <script src="lokijs.min.js"></script>
     <script src="loki-indexed-adapter.min.js"></script>
     <script src="socket.io.js"></script>

@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <title>üme - collaborative community</title>
-    <link rel="stylesheet" href="app2.css">
     <link rel="stylesheet" href="fonts/Material_Design_Icons/material-icons.css">
     <link rel="stylesheet" href="fonts/Open_Sans/OpenSans.css">
     <link rel="stylesheet" href="app.css">
@@ -164,7 +163,7 @@
                 <p>In the future, it might be possible for a community owner to remove a post done by other users.</p>
 
 
-                <button>Generate Community</button>
+                <button id="generate-community">Generate Community</button>
                 <br><br>
 
                 <h2>1. Community key pair</h2>
@@ -174,26 +173,27 @@
 
                 <p>
                     Private Key:
-                    <textarea class="key-text" readonly></textarea>
-                    <button class="key-button">Save Key to local disk</button>
+                    <textarea id="community-private-key" class="key-text" readonly></textarea>
+                    <button id="community-private-key-save" class="key-button">Save Key to local disk</button>
                 </p>
 
                 <p>
                     Public Key:
-                    <textarea class="key-text" readonly></textarea>
-                    <button class="key-button">Save Key to local disk</button>
+                    <textarea id="community-public-key" class="key-text" readonly></textarea>
+                    <button id="community-public-key-save" class="key-button">Save Key to local disk</button>
                 </p>
                 <br>
 
                 <h2>2. Pass phrase for community restore</h2>
                 <p>The following pass phrase must be remembered or save, to make it possible to restore a community ownership
                     on another device. Restoring a community from the pass phrase, require at least one other member to be
-                    connected.
+                    connected. A tip when storing the pass phrase, is to modify the words slightly, 
+                    perhaps exchange one word for another that only you remember. If stolen, then it is useless unless they know what you changed.
                 </p>
                 <p>
                     Pass phrase:
-                    <textarea class="key-text" readonly></textarea>
-                    <button class="key-button">Save Pass phrase to local disk</button>
+                    <textarea id="community-pass-phrase" class="key-text" readonly></textarea>
+                    <button id="community-pass-phrase-save" class="key-button">Save Pass phrase to local disk</button>
                 </p>
                 <br>
 
@@ -522,8 +522,12 @@
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
-
     <script src="layout.js"></script>
+    <script src="OpenCrypto.js"></script>
+    <script src="FileSaver.min.js"></script>
+    <script src="lokijs.min.js"></script>
+    <script src="loki-indexed-adapter.min.js"></script>
+    <script src="socket.io.js"></script>
+    <script src="app.js"></script>
 </body>
-
 </html>
