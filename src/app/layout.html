@@ -13,6 +13,8 @@
     <meta name="msapplication-navbutton-color" content="#C4841C">
     <meta name="apple-mobile-web-app-status-bar-style" content="#C4841C">
 
+
+
     <style>
          :root {
             /* Considered changing the variable in JavaScript as oppose to having both variables here, 
@@ -88,6 +90,20 @@
             color: white;
         }
 
+        .menu {
+            /* transition: width 0.2s ease-in;
+            transition: height 0.2s ease-in; */
+            transition: width 0.1s;
+            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
+        .menu.open {
+            /* transition: width 0.3s ease-out;
+            transition: height 0.3s ease-out; */
+            transition: width 0.2s;
+            transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+
         .container {
             left: var(--menu-width);
             position: absolute;
@@ -149,6 +165,21 @@
             padding: 0;
             text-align: center;
         }
+
+        .app-title:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page-open {
+            display: block;
+        }
+
+
 
         @media all and (min-width: 600px) {
             .aside {
@@ -220,6 +251,16 @@
                 /*bottom: var(--menu-width-open) !important;*/
                 height: calc(100% - var(--menu-width-open));
             }
+
+            .menu {
+                transition: height 0.1s;
+                transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+            }
+
+            .menu.open {
+                transition: height 0.2s;
+                transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+            }
         }
 
         @media (min-width: 700px) and (orientation: landscape) {}
@@ -231,15 +272,39 @@
         <div class="top-bar">
             <input type="text" /><button>Search</button></div>
         <div id="content" class="content">
-            <i class="material-icons">face</i> This is the content
-            <p>&nbsp;</p>
-            This is the content
-            <p>&nbsp;</p>This is the content
-            <p>&nbsp;</p>This is the content
-            <p>&nbsp;</p>This is the content
-            <p>&nbsp;</p>This is the content
-            <p>&nbsp;</p>This is the content
-            <p>&nbsp;</p>
+
+            <div class="page page-open" id="page-home">
+                WELCOME!
+                <button data-ume-page="introduction">Read the introduction</button>
+            </div>
+            <div class="page" id="page-introduction">
+                <i class="material-icons">face</i> This is the content
+                <p>&nbsp;</p>
+                This is the content
+                <p>&nbsp;</p>This is the content
+                <p>&nbsp;</p>This is the content
+                <p>&nbsp;</p>This is the content
+                <p>&nbsp;</p>This is the content
+                <p>&nbsp;</p>This is the content
+                <p>&nbsp;</p>
+
+            </div>
+            <div class="page" id="page-create">
+                   CREATE SOME NEW CONTENT!
+                </div>
+            <div class="page" id="page-security">
+                SECURITY!
+            </div>
+            <div class="page" id="page-backup">
+                BACKUP
+            </div>
+            <div class="page" id="page-keys">
+                KEYS
+            </div>
+            <div class="page" id="page-clear">
+                CLEAR DEVICE
+            </div>
+
         </div>
     </div>
     <div id="menu" class="menu">
@@ -247,12 +312,12 @@
 
             <div class="opened logo">
                 <i class="material-icons action menu-button menu-item" id="menu-button">chevron_left</i>
-                <h1 class="title-opened">üme</h1>
+                <h1 class="title-opened app-title" data-ume-page="home">üme</h1>
             </div>
 
             <div class="closed logo">
                 <i class="material-icons action menu-button menu-item" id="menu-button-close">chevron_right</i>
-                <h1 class="title-closed">üme</h1>
+                <h1 class="title-closed app-title" data-ume-page="home">üme</h1>
             </div>
 
             <!-- <i class="material-icons action menu-button" id="menu-button">all_inclusive</i> -->
@@ -260,30 +325,17 @@
             <!-- <i class="material-icons">face</i> -->
             <!-- <i class="material-icons">check_circle</i> -->
 
-            <div class="menu-item"><i class="material-icons">add</i><span class="menu-legend opened"> Create</span></div>
-            <div class="menu-item opened-device"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div>
-            <div class="menu-item"><i class="material-icons">security</i><span class="menu-legend opened">  Security</span></div>
-            <div class="menu-item opened-device"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div>
-            <div class="menu-item opened-device"><i class="material-icons">clear</i><span class="menu-legend opened">  Exit</span></div>
-            <div class="menu-item opened-device"><i class="material-icons">delete_sweep</i><span class="menu-legend opened">  Clear Device</span></div>
-            <div class="menu-item"><i class="material-icons">delete_forever</i><span class="menu-legend opened">  Clear Device</span></div>
+            <div class="menu-item" data-ume-page="create"><i class="material-icons">add</i><span class="menu-legend opened"> Create</span></div>
+            <div class="menu-item opened-device" data-ume-page="backup"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div>
+            <div class="menu-item" data-ume-page="security"><i class="material-icons">security</i><span class="menu-legend opened">  Security</span></div>
+            <div class="menu-item opened-device" data-ume-page="keys"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div>
+            <div class="menu-item" data-ume-page="clear"><i class="material-icons">delete_forever</i><span class="menu-legend opened">  Clear Device</span></div>
 
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('menu').classList.toggle('open');
-            document.getElementById('container').classList.toggle('open');
-            document.getElementById('content').classList.toggle('open');
-        }
-
-        document.getElementById('menu-button').addEventListener('click', toggleMenu);
-        document.getElementById('menu-button-close').addEventListener('click', toggleMenu);
-    </script>
-
-
+    <script src="layout.js"></script>
 </body>
 
 </html>
