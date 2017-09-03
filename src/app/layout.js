@@ -1,5 +1,3 @@
-
-
 function page(id) {
 
     var pages = document.getElementsByClassName('page-open');
@@ -33,6 +31,20 @@ function toggleMenu() {
 
     document.getElementById('wipe-data').addEventListener('click', () => {
         document.getElementById('wipe-success').style.display = 'block';
+    });
+
+    document.getElementById('generate-community').addEventListener('click', async () => {
+        
+        var results = await generateCommunity();
+
+        console.log(results);
+
+        document.getElementById('community-private-key').value = results.privateKey;
+        document.getElementById('community-public-key').value = results.publicKey;
+        document.getElementById('community-pass-phrase').value = results.passPhrase;
+
+        
+
     });
 
 }());
