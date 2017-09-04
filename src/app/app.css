@@ -254,6 +254,7 @@ button {
     border: 1px solid silver;
     background-color: #F9F9F9;
     padding: 20px;
+    margin-bottom: 10px;
 }
 
 .community-item-id {

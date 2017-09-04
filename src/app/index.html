@@ -150,7 +150,7 @@
                 </p>
             </div>
 
-            <div class="page" id="page-create-community">
+            <div class="page" id="page-create-community" data-ume-opened="onCreateCommunityOpened">
                 <i class="material-icons float-right">donut_small</i>
                 <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
                 <h1>New community</h1>
@@ -162,7 +162,7 @@
                 <p>As the owner of a community, you can invite new members, archieve the community (make it read-only) and delete
                     the community (members can make a decision to save backup before removing).</p>
                 <p>Running a community comes with some responsibility. You need to be online for new members to activate their
-                    invitation. For security reasons, the invites cannot be distributed to other members.</p>
+                    invitation. For security reasons, the invites are only stored on the owner's device.</p>
                 <p>A community with no other users, will never be synchronized online and can never be restored from pass phrase.
                     Make sure you invite someone to join your community.</p>
                 <p>In the future, it might be possible for a community owner to remove a post done by other users.</p>
@@ -204,15 +204,19 @@
 
                 <h2>3. Community details</h2>
                 <p>
-                    No details for the community is required to fill out. You can leave all fields empty, you can change them later. Remember the community Id for the next screen, 
-                    when you will generate invitations to this community.
+                    No details for the community is required to fill out. You can leave all fields empty, you can change them later. Remember
+                    the community Id for the next screen, when you will generate invitations to this community.
                 </p>
                 <p>
-                    ID: <strong><span id="community-id"></span></strong>
+                    ID: <input id="community-id" readonly type="text" />
                 </p>
                 <p>
                     Name:
-                    <input type="text" />
+                    <input id="community-name" type="text" />
+                </p>
+                <p>
+                    Description:
+                    <input id="community-description" type="text" />
                 </p>
                 <p>
                     Icon:
@@ -226,9 +230,7 @@
                 </p>
                 <p>
                     Gateway:
-                    <select>
-                        <option>Use all gateways</option>
-                        <option>https://localhost:8080</option>
+                    <select id="gateway-select-list">
                     </select>
                 </p>
                 <br>
@@ -236,15 +238,15 @@
                 <h2>5. Save community</h2>
                 <p>The final step is to save a community. This will persist the community key pair to your currenct device.
                     Next step will be to invite members to join your community, including yourself.</p>
-                    <p>Yes, that is right. To be able to gain access to this new community, you need to invite yourself.</p>
+                <p>Yes, that is right. To be able to gain access to this new community, you need to invite yourself.</p>
                 <p>
-                    <button data-ume-page="create-invite">Save</button>
+                    <button data-ume-action="onSaveCommunity">Save</button>
                 </p>
                 <br>
 
             </div>
 
-            <div class="page" id="page-create-invite">
+            <div class="page" id="page-create-invite" data-ume-opened="onCreateInviteOpened">
                 <i class="material-icons float-right">vpn_key</i>
                 <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
                 <h1>New invite</h1>
@@ -260,7 +262,7 @@
 
                 <p>
                     Community:
-                    <select>
+                    <select id="community-invite-list">
                         <option>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun! </option>
                         <option>52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | üme planning group</option>
                         <option>62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</option>
@@ -269,13 +271,10 @@
 
                 <p>
                     Gateway:
-                    <select>
-                            <option>Do not include a gateway in the invite</option>
-                            <option>https://localhost:8080</option>
-                        </select>
+                    <select id="gateway-invite-list"></select>
                 </p>
 
-                <button>Generate Invite</button>
+                <button data-ume-action="onGenerateInvite">Generate Invite</button>
                 <br><br>
 
                 <h2>Invite</h2>
@@ -315,36 +314,40 @@
                 <p>Nothing found.</p>
             </div>
 
-            <div class="page" id="page-community">
+            <div class="page" id="page-community" data-ume-opened="onCommunityOpened">
                 <i class="material-icons float-right">hot_tub</i>
                 <i class="material-icons float-right action" data-ume-page="communities">chevron_left</i>
-                <h1>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun!</h1>
+                <h1 id="community-view-name">NAME</h1>
+                <p id="community-view-id">ID</p>
 
-                <p>This is our Friday Fun community! Share everything that is fun on a Friday.</p>
+                <p id="community-view-description">DESCRIPTION</p>
 
                 <h2>Topics</h2>
                 <p>
-                    Memes (20)<br>
-                    I forgot it's Friday! (4)<br>
-                    Random (325)<br>
+                    Memes (20)<br> I forgot it's Friday! (4)<br> Random (325)<br>
                 </p>
 
                 <h2>Members</h2>
                 <p>
-                    22PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | John Doe<br>
-                    x2PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=<br>
-                    87PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Mr. Nick (nick@gmail.com)<br>
+                    22PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | John Doe<br> x2PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
+                    <br> 87PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Mr. Nick (nick@gmail.com)<br>
                 </p>
 
 
             </div>
 
-            <div class="page" id="page-communities">
+            <div class="page" id="page-communities" data-ume-opened="onCommunitiesOpened">
                 <i class="material-icons float-right">donut_small</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Communities</h1>
 
                 <p>These are the communities that you have joined.</p>
+
+                <div id="communities-list">
+
+                </div>
+
+                <br><br><br><br>
 
                 <p class="community-item">
                     <i class="material-icons community-icon">free_breakfast</i>
@@ -573,6 +576,7 @@
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
+    <script src="markup.js"></script>
     <script src="layout.js"></script>
     <script src="OpenCrypto.js"></script>
     <script src="FileSaver.min.js"></script>

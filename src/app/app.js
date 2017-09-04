@@ -314,6 +314,7 @@ function databaseInitialize() {
     var entries = db.getCollection("entries");
     var messages = db.getCollection("messages");
     var gateways = db.getCollection("gateways");
+    var communities = db.getCollection("communities");
 
     // Since our LokiFsStructuredAdapter is partitioned, the default 'quickstart3.db'
     // file will actually contain only the loki database shell and each of the collections
@@ -331,6 +332,11 @@ function databaseInitialize() {
         gateways = db.addCollection("gateways");
     }
 
+    if (communities === null) {
+        // first time run so add and configure collection with some arbitrary options
+        communities = db.addCollection("communities");
+    }
+
     // Now let's add a second collection only to prove that this saved partition (quickstart3.db.1) 
     // doesn't need to be saved every time the other partitions do if it never gets any changes
     // which need to be saved.  The first time we run this should be the only time we save it.
@@ -340,8 +346,9 @@ function databaseInitialize() {
     }
 
     window.ume.storage.entries = entries;
-    window.ume.storage.message = messages;
+    window.ume.storage.messages = messages;
     window.ume.storage.gateways = gateways;
+    window.ume.storage.communities = communities;
 
     // kick off any program logic or start listening to external events
     runProgramLogic();
