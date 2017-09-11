@@ -1,3 +1,6 @@
+/// <reference path="./container.js"/>
+/// <reference path="./markup.js"/>
+
 function page(id, parameters) {
     var pages = document.getElementsByClassName('page-open');
 
@@ -120,7 +123,57 @@ function onSettingsOpened() {
     updateGatewayList();
 }
 
-function onGenerateInvite() {
+async function importJwkKey(jwk) {
+
+    // var jwk = {
+    //     alg: 'RSASSA-PKCS1-v1_5',
+    //     key_ops: ['verify'],
+    //     ext: true,
+    //     e: 'AQAB',
+    //     kty: 'RSA',
+    //     n: 'voFDcAgBSoGnffppOk_ESoQnPg6JOYXJZRv4SD6USJgsSzmFuyqw-En7LS-WvW6twN1wwJjJAyXbzohEZQEvsaR7uTXdcFqNERXef_b-MZv7NdTm9BG2euG9zaHe5NZad89U5b9hGOS9RB_rBgIsg5VZXAuDF6HnltepsQFPWFc'
+    // };
+
+    return await window.crypto.subtle.importKey(
+        "jwk", //can be "jwk" (public or private), "spki" (public only), or "pkcs8" (private only)
+        jwk,
+        {   //these are the algorithm options
+            name: "RSASSA-PKCS1-v1_5",
+            hash: { name: "SHA-256" }, //can be "SHA-1", "SHA-256", "SHA-384", or "SHA-512"
+        },
+        false, //whether the key is extractable (i.e. can be used in exportKey)
+        ["verify"] //"verify" for public key import, "sign" for private key imports
+    )
+}
+
+// function wrapMessageForTransfer(content)
+// {
+//     var container = new Container();
+//     var message = new Message();
+//     var content = new Content();
+
+//     message.content = content;
+//     container.message = message;
+
+//     console.log('CONTAINER:');
+//     console.log(container);
+
+//     var message = {
+//         communityId: content.communityId,
+//         body: content
+//     }
+
+//     var result = JSON.stringify(message);
+//     return result;
+// }
+
+function uuidv4() {
+    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    )
+}
+
+async function onGenerateInvite() {
     console.log('Generating invite...');
 
     var communityId = input('community-invite-list');
@@ -130,8 +183,11 @@ function onGenerateInvite() {
     console.log(gateway);
 
     var community = window.ume.storage.communities.findOne({ 'id': communityId });
-
     console.log(community);
+
+    // // Get the user's public key for this specific community.
+    // var user = window.ume.storage.keys.findOne( { 'communityId' : communityId });
+    // console.log(user);
 
     // Community owner generates a new invitation:
     var invitation = {
@@ -139,18 +195,66 @@ function onGenerateInvite() {
         "invitationId": generateInviteKey()
     };
 
-    var invitationEntity = {
-        "type": "invite",
-        "signature": null,
-        "body": invitation
-    }
+    var content = new Content();
+    content.id = uuidv4();
+    content.community = community.id;
+    content.type = 'invite';
+    content.signature = null;
+    content.body = invitation;
 
-    console.log(invitationEntity);
+    // Wrap using static method (used as example).
+    var container = Content.wrap(content);
+
+    console.log(container);
+
+    // Manual wrapping.
+    var message = new Message(content);
+    message.type = 'invite';
+
+    var invitationContainer = new Container(message);
+
+    //console.log(container);
+    //console.log(invitationContainer);
+
+    // Get the private key from the key storage.
+
+    var decodedKey = atob(community.privateKey);
+    console.log(decodedKey);
+
+    var communityPrivateKeyArray = JSON.parse(decodedKey);
+    console.log(communityPrivateKeyArray);
+
+    var decodedPublicKey = atob(community.publicKey);
+    console.log(decodedPublicKey);
+
+    var communityPublicKeyArray = JSON.parse(decodedPublicKey);
+    console.log(communityPublicKeyArray);
+
+    var communityPrivateKey = await importJwkFromKeyObject(communityPrivateKeyArray, true);
+    console.log(communityPrivateKey);
+
+    var jwkKey = await exportJwkFromKeyObject(communityPrivateKey);
+    console.log(jwkKey);
+
+    var signatureBuffer = await signInvitation(communityPrivateKey, stringToUint(invitation));
+    var signatureArray = new Uint8Array(signatureBuffer);
+    var signature = arrayBufferToBase64(signatureArray);
+
+    // Store the signature on the entity.
+    content.signature = signature;
+
+    //var container = new Container(content);
+    //var wrappedInvitation = wrapMessageForTransfer(content);
+
+    console.log(container);
+    container.encrypt();
+    console.log(container);
+
+    //console.log('Send this invite to a user: ', JSON.stringify(invitationEntity));
+    document.getElementById('invitation-text').value = JSON.stringify(content);
 
     //var base64CommunityPublicKey = utoa(JSON.stringify(communityPublicKey));
     //var communityHashArray = new Uint8Array(communityHash);
-
-    return;
 
     // var signatureBuffer = await signInvitation(communityKeys.privateKey, stringToUint(invitation));
     // var signatureArray = new Uint8Array(signatureBuffer);
@@ -233,12 +337,35 @@ function updateGatewayList() {
 }
 
 function onWipeData(source) {
+
+    // Each individual clear/delete operation will be wrapped in their own try/catch to ensure everything is run and attempted.
+    // If anything fails, we'll log and show errors (TODO).
+    try {
+        window.localStorage.clear();
+    }
+    catch (err) {
+        console.error(err);
+    }
+
+    try {
+        deleteDatabase();
+    }
+    catch (err) {
+        console.error(err);
+    }
+
     document.getElementById('wipe-success').style.display = 'block';
+
 }
 
 function onSaveCommunityPrivateKey(source) {
     var text = document.getElementById('community-private-key').value;
     saveFile(text, 'community-private.key');
+}
+
+function onSaveInvite(source) {
+    var text = document.getElementById('invitation-text').value;
+    saveFile(text, 'community-invite.key');
 }
 
 function onSaveCommunityPublicKey(source) {

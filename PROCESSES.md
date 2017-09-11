@@ -54,3 +54,27 @@ OWNER KEEPS PRIVATE KEY SECRET
 PUBLIC KEY IS SHARED ONLY IF INVITATION IS ACCEPTED
 
 
+Message should be encrypted with COMMUNITY PUBLIC KEY + USER PRIVATE KEY. This will allow every member of the community to decrypt the content.
+Encryption will be done using AES-GCM, while the key will be generated with ECDSA P-256.
+
+The IV for AES-GCM needs to be stored somewhere in-transit of the messages. 
+
+The messages will be multi-broadcast to all, so all needs to be able to decrypt the messages.
+
+The invitation message must be multi-broadcast as well, as there is no way to distinguish the community owner on the gateway. Additionally to reduce the ability for a gateway to recognize who might
+be the community owner (and log their IP), all connected users will broadcast a reply to an incoming invitation message.
+
+
+CONTAINER MESSAGE {
+    CommunityId: (hash from community public key, used to send message to correct group on gateway)
+
+    OUTER MESSAGE { <- ENCRYPTED WITH COMMUNITY PUBLIC KEY
+        UserId (hash from public key, used to find public key to decrypt inner message with)
+
+        INNER MESSAGE { <- ENCRYPTED WITH USERS PRIVATE KEY (decrypted using their public key which is shared to all community members)
+            Topic: 'General',
+            Content: '',
+            Signature: (hash to verify message author)
+        }
+    }
+}

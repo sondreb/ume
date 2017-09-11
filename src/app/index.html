@@ -262,11 +262,7 @@
 
                 <p>
                     Community:
-                    <select id="community-invite-list">
-                        <option>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun! </option>
-                        <option>52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | üme planning group</option>
-                        <option>62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</option>
-                    </select>
+                    <select id="community-invite-list"></select>
                 </p>
 
                 <p>
@@ -282,8 +278,8 @@
                     within the community). The invite should be sent using a secure channel.</p>
                 <p>
                     Invitation:
-                    <textarea class="key-text" readonly></textarea>
-                    <button class="key-button">Save invitation to local disk</button>
+                    <textarea id="invitation-text" class="key-text" readonly></textarea>
+                    <button data-ume-action="onSaveInvite" class="key-button">Save invitation to local disk</button>
                 </p>
 
             </div>
@@ -341,7 +337,7 @@
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Communities</h1>
 
-                <p>These are the communities that you have joined.</p>
+                <p>These are the communities that you have joined or have created.</p>
 
                 <div id="communities-list">
 
@@ -423,8 +419,9 @@
                         <li>If you need privacy and safety of information on a device or computer that can be **lost or stolen**,
                             do not rely on üme. If you still use üme and want better security, ensure you are using disk
                             encryption on your harddrive.</li>
-                        <li>üme is based on the <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a>                            (Elliptic Curve Digital Signature Algorithm) for message signing and integrity checking. [Wikipedia
-                            reference] and uses <a href="https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman">ECDH</a>                            for sharing secret keys.</li>
+                        <li>üme is based on the <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a>                            (Elliptic Curve Digital Signature Algorithm) for message signing and integrity checking and uses
+                            <a href="https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman">ECDH</a> for sharing
+                            secret keys. And finally it relies on <a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES-GCM</a>                            for symmetric encryption of content.</li>
                     </ul>
                 </p>
 
@@ -470,6 +467,26 @@
                     security review and monitoring of potential hacks, exploits, etc.
                 </p>
 
+                <h2>The future</h2>
+
+                <p>There are many ways to improve the security and the functionality, some potential ideas that will be investigated
+                    and potentially developed:</p>
+
+                <p>Time-to-life (TTL): Allowing messages to be self-destructed after a set time. This obviously won't be 100%
+                    secure, if a user takes backup of their local community using third-party code, the TTL messages can
+                    be saved to local disk and persisted. If a message has TTL, should it be part of a regular community
+                    backup?<br> TTL on message would make it possible to have time-sensitive announcements, e.g. "Concert
+                    next weekend!" and have those disappear when they are no longer of any value.
+                </p>
+
+                <p>Elektron app: Package the web app into an elektron app, allowing users to download the app for OS X, Linux
+                    and Windows.</p>
+
+                <p>Improved UX: The app is currently built with extensive informational texts, the plan is to redo the UX and
+                    make it more user friendly with wizards and walkthroughs that shows multiple screens, as oppose to single
+                    screen with lots of options.
+                </p>
+
                 <h2>Disclaimer</h2>
 
                 <p>
@@ -512,7 +529,8 @@
                 </p>
                 <p>
                     The data wipe removes data from your browser cache. If the device is stolen, the data can potentially still be retrieved
-                    by recovering deleted files on the harddrive.
+                    by recovering deleted files on the harddrive. After you wipe all data, restart the browser, go back to
+                    üme and verify data is wiped.
                 </p>
                 <p>
                     <div class="action-item" data-ume-action="onWipeData"><i class="material-icons">delete_forever</i> Wipe all data on device</div>
@@ -576,6 +594,10 @@
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
+    <script src="storage.js"></script>
+    <script src="types.js"></script>
+    <script src="security.js"></script>
+    <script src="container.js"></script>
     <script src="markup.js"></script>
     <script src="layout.js"></script>
     <script src="OpenCrypto.js"></script>
