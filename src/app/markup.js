@@ -41,6 +41,30 @@ class Markup {
         return document.createTextNode(text);
     }
 
+    static identityListItem(id, name, icon, count, updated) {
+        var container = document.createElement('div');
+        container.classList.add('community-item');
+
+        container.appendChild(Markup.icon('vpn_key', 'community-icon'));
+
+        var openCommunityButton = Markup.icon('chevron_right', 'float-right', 'action');
+        openCommunityButton.addEventListener('click', () => {
+            page('community', id);
+        });
+        //openCommunityButton.setAttribute('data-ume-page', 'community');
+
+        container.appendChild(openCommunityButton);
+        container.appendChild(Markup.strong(name.join(':')));
+        container.appendChild(Markup.linebreak());
+        container.appendChild(Markup.span(id, 'community-item-id'));
+        container.appendChild(Markup.linebreak());
+        container.appendChild(Markup.text('Posts: ' + count));
+        container.appendChild(Markup.linebreak());
+        container.appendChild(Markup.text('Latest post: ' + updated));
+
+        return container;
+    }
+
     static communityListItem(id, name, icon, count, updated) {
         var container = document.createElement('div');
         container.classList.add('community-item');

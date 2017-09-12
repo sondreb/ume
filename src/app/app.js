@@ -1479,7 +1479,9 @@ var gatewayConnected = false;
     initializeDatabase();
 
     var storage = new DbStorage('ume');
-    await storage.initialize();
+    await storage.connect();
+
+    window.ume.storage.instance = storage;
 
     var security = new Security();
 

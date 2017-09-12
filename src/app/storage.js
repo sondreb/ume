@@ -92,9 +92,6 @@ class DbStorage {
 
             //let store = db.transaction(this.dbname).objectStore('identities');
 
-
-
-
             // let today = new Date();
             // let yesterday = new Date(today);
             // yesterday.setDate(today.getDate() - 1);
@@ -126,6 +123,147 @@ class DbStorage {
         //         }
         //     }
         // });
+    }
+
+    async connect() {
+
+        if (!('indexedDB' in window)) {
+            throw new Error('This browser doesn\'t support IndexedDB.');
+        }
+
+        var self = this;
+        return new Promise((resolve, reject) => {
+
+            let request = indexedDB.open(self.dbname, 1);
+            request.onupgradeneeded = (event) => {
+
+                // let txn = event.target.transaction;
+                // let store = txn.objectStore("text messages");
+
+                // store.name = "mobile messages";
+                // let index = store.index("recipient");
+                // index.name = "recipients";
+
+                let txn = event.target.transaction; // txn.mode == "versionchange"
+                txn.objectStoreNames; // a list of objectstore names can be accessed in this txn.
+
+                self.db = txn.db;
+
+                for (var i = 0, len = self.stores.length; i < len; i++) {
+                    let store = self.stores[i];
+
+                    if (!self.db.objectStoreNames.contains(store.name)) {
+
+                        var optional = {};
+
+                        if (store.keyPath) {
+                            optional = { "keyPath": store.keyPath };
+                        }
+
+                        var objectStore = self.db.createObjectStore(store.name, optional);
+                        //objectStore.createIndex('indexName', 'property', options);
+                    }
+                }
+
+                //resolve(event);
+            };
+
+            request.onsuccess = (event) => {
+
+                this.db = event.target.result;
+
+                this.db.onclose = (event) => {
+                    alert("the database: " + db.name + "was closed outside the script!");
+                };
+
+                resolve(event);
+
+                //var objectStore = db.createObjectStore("name", { keyPath: "myKey" });
+
+                //let store = db.transaction(this.dbname).objectStore('identities');
+
+                // let today = new Date();
+                // let yesterday = new Date(today);
+                // yesterday.setDate(today.getDate() - 1);
+                // let activities = null;
+                // let request = store.getAll(IDBKeyRange(yesterday, today), 10);
+
+                // request.onsuccess = (event) => {
+                //   activities = event.target.result;
+                // };
+
+            };
+
+            request.onerror = () => reject(request.error);
+            request.onblocked = () => { console.error('blocked'); };
+        });
+    }
+
+    async getAll(storeName) {
+
+        var self = this;
+        return new Promise((resolve, reject) => {
+
+            var store = this.stores.find((store) => store.type == storeName);
+
+            if (!store) {
+                reject('Unable to find a store for the data type. Type name: ' + storeName);
+                //throw new Error('Unable to find a store for the data type. Type name: ' + data.constructor.name);
+            }
+
+            //console.log(store);
+            //debugger;
+
+            var tx = this.db.transaction(store.name, 'readwrite');
+            var store = tx.objectStore(store.name);
+
+            //var storeIndex = store.index('index');
+            //var myIndex = objectStore.index('index');
+            //var getAllKeysRequest = storeIndex.getAllKeys();
+
+            //let request = store.getAll(IDBKeyRange(yesterday, today), 10);
+            //let request = store.getAllKeys();
+            let request = store.getAll();
+
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+
+            // store.getAll();
+
+            // await store.add(data);
+            // await tx.complete;
+
+            // let request = store.getAll(IDBKeyRange(yesterday, today), 10);
+
+            // request.onsuccess = (event) => {
+            //     activities = event.target.result;
+            // };
+
+
+            // console.log('INSERT!!');
+
+
+            // const tx = conn.transaction(self.dbname);
+            // const store = tx.objectStore(store);
+            // const request = store.put(value);
+            // request.onsuccess = () => resolve(request.result);
+            // request.onerror = () => reject(request.error);
+
+        });
+
+
+
+
+        // var db = initialize();
+        // db.put()
+
+
+        // var tx = db.transaction('identities', 'readwrite');
+        // var objectStore = tx.objectStore('identities');
+
+
+        // tx.objectStore(this.dbname).put(data);
+
     }
 
     async put(data) {

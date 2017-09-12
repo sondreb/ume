@@ -373,7 +373,7 @@
 
 
 
-            <div class="page" id="page-security">
+            <div class="page" id="page-security" data-ume-opened="onSecurityOpened">
                 <i class="material-icons float-right">security</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Security</h1>
@@ -385,6 +385,11 @@
                 </p>
 
                 <button data-ume-page="security-introduction">Read the security introduction...</button>
+
+                <div id="identities-list">
+
+                </div>
+
 
             </div>
             <div class="page" id="page-security-introduction">
@@ -475,8 +480,9 @@
                 <p>Time-to-life (TTL): Allowing messages to be self-destructed after a set time. This obviously won't be 100%
                     secure, if a user takes backup of their local community using third-party code, the TTL messages can
                     be saved to local disk and persisted. If a message has TTL, should it be part of a regular community
-                    backup?<br> TTL on message would make it possible to have time-sensitive announcements, e.g. "Concert
-                    next weekend!" and have those disappear when they are no longer of any value.
+                    backup?
+                    <br> TTL on message would make it possible to have time-sensitive announcements, e.g. "Concert next weekend!"
+                    and have those disappear when they are no longer of any value.
                 </p>
 
                 <p>Elektron app: Package the web app into an elektron app, allowing users to download the app for OS X, Linux

@@ -388,6 +388,24 @@ async function onGenerateCommunity() {
     document.getElementById('community-id').value = results.communityId;
 }
 
+async function onSecurityOpened() {
+
+    var identities = await window.ume.storage.instance.getAll(Identity.name);
+    console.log(identities);
+
+    var identitiesList = document.getElementById('identities-list');
+    identitiesList.innerHTML = '';
+
+    identities.forEach((identity) => {
+        identitiesList.appendChild(Markup.identityListItem(identity.publicKeyFingerprint, identity.verifyKeyFingerprint, 'free_breakfast', identity.count, identity.updated));
+    });
+
+    //window.ume.storage.identities.data.forEach((community) => {
+    //identitiesList.appendChild(Markup.communityListItem(community.id, community.name, 'free_breakfast', community.count, community.updated));
+    //});
+
+}
+
 (async function onStart() {
     // Hook up page navigations
     var pageLinks = document.querySelectorAll('[data-ume-page]');
