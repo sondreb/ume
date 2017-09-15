@@ -150,7 +150,7 @@
                 </p>
             </div>
 
-            <div class="page" id="page-create-community">
+            <div class="page" id="page-create-community" data-ume-opened="onCreateCommunityOpened">
                 <i class="material-icons float-right">donut_small</i>
                 <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
                 <h1>New community</h1>
@@ -162,7 +162,7 @@
                 <p>As the owner of a community, you can invite new members, archieve the community (make it read-only) and delete
                     the community (members can make a decision to save backup before removing).</p>
                 <p>Running a community comes with some responsibility. You need to be online for new members to activate their
-                    invitation. For security reasons, the invites cannot be distributed to other members.</p>
+                    invitation. For security reasons, the invites are only stored on the owner's device.</p>
                 <p>A community with no other users, will never be synchronized online and can never be restored from pass phrase.
                     Make sure you invite someone to join your community.</p>
                 <p>In the future, it might be possible for a community owner to remove a post done by other users.</p>
@@ -204,15 +204,19 @@
 
                 <h2>3. Community details</h2>
                 <p>
-                    No details for the community is required to fill out. You can leave all fields empty, you can change them later. Remember the community Id for the next screen, 
-                    when you will generate invitations to this community.
+                    No details for the community is required to fill out. You can leave all fields empty, you can change them later. Remember
+                    the community Id for the next screen, when you will generate invitations to this community.
                 </p>
                 <p>
-                    ID: <strong><span id="community-id"></span></strong>
+                    ID: <input id="community-id" readonly type="text" />
                 </p>
                 <p>
                     Name:
-                    <input type="text" />
+                    <input id="community-name" type="text" />
+                </p>
+                <p>
+                    Description:
+                    <input id="community-description" type="text" />
                 </p>
                 <p>
                     Icon:
@@ -226,9 +230,7 @@
                 </p>
                 <p>
                     Gateway:
-                    <select>
-                        <option>Use all gateways</option>
-                        <option>https://localhost:8080</option>
+                    <select id="gateway-select-list">
                     </select>
                 </p>
                 <br>
@@ -236,15 +238,15 @@
                 <h2>5. Save community</h2>
                 <p>The final step is to save a community. This will persist the community key pair to your currenct device.
                     Next step will be to invite members to join your community, including yourself.</p>
-                    <p>Yes, that is right. To be able to gain access to this new community, you need to invite yourself.</p>
+                <p>Yes, that is right. To be able to gain access to this new community, you need to invite yourself.</p>
                 <p>
-                    <button data-ume-page="create-invite">Save</button>
+                    <button data-ume-action="onSaveCommunity">Save</button>
                 </p>
                 <br>
 
             </div>
 
-            <div class="page" id="page-create-invite">
+            <div class="page" id="page-create-invite" data-ume-opened="onCreateInviteOpened">
                 <i class="material-icons float-right">vpn_key</i>
                 <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
                 <h1>New invite</h1>
@@ -260,22 +262,15 @@
 
                 <p>
                     Community:
-                    <select>
-                        <option>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun! </option>
-                        <option>52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | üme planning group</option>
-                        <option>62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</option>
-                    </select>
+                    <select id="community-invite-list"></select>
                 </p>
 
                 <p>
                     Gateway:
-                    <select>
-                            <option>Do not include a gateway in the invite</option>
-                            <option>https://localhost:8080</option>
-                        </select>
+                    <select id="gateway-invite-list"></select>
                 </p>
 
-                <button>Generate Invite</button>
+                <button data-ume-action="onGenerateInvite">Generate Invite</button>
                 <br><br>
 
                 <h2>Invite</h2>
@@ -283,8 +278,8 @@
                     within the community). The invite should be sent using a secure channel.</p>
                 <p>
                     Invitation:
-                    <textarea class="key-text" readonly></textarea>
-                    <button class="key-button">Save invitation to local disk</button>
+                    <textarea id="invitation-text" class="key-text" readonly></textarea>
+                    <button data-ume-action="onSaveInvite" class="key-button">Save invitation to local disk</button>
                 </p>
 
             </div>
@@ -315,36 +310,40 @@
                 <p>Nothing found.</p>
             </div>
 
-            <div class="page" id="page-community">
+            <div class="page" id="page-community" data-ume-opened="onCommunityOpened">
                 <i class="material-icons float-right">hot_tub</i>
                 <i class="material-icons float-right action" data-ume-page="communities">chevron_left</i>
-                <h1>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun!</h1>
+                <h1 id="community-view-name">NAME</h1>
+                <p id="community-view-id">ID</p>
 
-                <p>This is our Friday Fun community! Share everything that is fun on a Friday.</p>
+                <p id="community-view-description">DESCRIPTION</p>
 
                 <h2>Topics</h2>
                 <p>
-                    Memes (20)<br>
-                    I forgot it's Friday! (4)<br>
-                    Random (325)<br>
+                    Memes (20)<br> I forgot it's Friday! (4)<br> Random (325)<br>
                 </p>
 
                 <h2>Members</h2>
                 <p>
-                    22PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | John Doe<br>
-                    x2PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=<br>
-                    87PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Mr. Nick (nick@gmail.com)<br>
+                    22PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | John Doe<br> x2PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
+                    <br> 87PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Mr. Nick (nick@gmail.com)<br>
                 </p>
 
 
             </div>
 
-            <div class="page" id="page-communities">
+            <div class="page" id="page-communities" data-ume-opened="onCommunitiesOpened">
                 <i class="material-icons float-right">donut_small</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Communities</h1>
 
-                <p>These are the communities that you have joined.</p>
+                <p>These are the communities that you have joined or have created.</p>
+
+                <div id="communities-list">
+
+                </div>
+
+                <!-- <br><br><br><br>
 
                 <p class="community-item">
                     <i class="material-icons community-icon">free_breakfast</i>
@@ -364,7 +363,7 @@
                     <i class="material-icons community-icon">cake</i>
                     <i class="material-icons float-right action" data-ume-page="community">chevron_right</i>
                     <span class="community-item-id">62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 354<br>                    Latest post: 2017-09-03 16:03<br>
-                </p>
+                </p> -->
 
                 <!-- <p>Apperas to be a bit empty here. Do you want to join existing community or create a new one?</p>
                 <p>
@@ -374,7 +373,7 @@
 
 
 
-            <div class="page" id="page-security">
+            <div class="page" id="page-security" data-ume-opened="onSecurityOpened">
                 <i class="material-icons float-right">security</i>
                 <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
                 <h1>Security</h1>
@@ -385,7 +384,16 @@
                     üme, you should familiar yourself with the security introduction.
                 </p>
 
+                <p>
                 <button data-ume-page="security-introduction">Read the security introduction...</button>
+            </p>
+                
+            <h2>Your identities</h2>
+            
+                <div id="identities-list">
+
+                </div>
+
 
             </div>
             <div class="page" id="page-security-introduction">
@@ -420,8 +428,9 @@
                         <li>If you need privacy and safety of information on a device or computer that can be **lost or stolen**,
                             do not rely on üme. If you still use üme and want better security, ensure you are using disk
                             encryption on your harddrive.</li>
-                        <li>üme is based on the <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a>                            (Elliptic Curve Digital Signature Algorithm) for message signing and integrity checking. [Wikipedia
-                            reference] and uses <a href="https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman">ECDH</a>                            for sharing secret keys.</li>
+                        <li>üme is based on the <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a>                            (Elliptic Curve Digital Signature Algorithm) for message signing and integrity checking and uses
+                            <a href="https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman">ECDH</a> for sharing
+                            secret keys. And finally it relies on <a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES-GCM</a>                            for symmetric encryption of content.</li>
                     </ul>
                 </p>
 
@@ -467,6 +476,27 @@
                     security review and monitoring of potential hacks, exploits, etc.
                 </p>
 
+                <h2>The future</h2>
+
+                <p>There are many ways to improve the security and the functionality, some potential ideas that will be investigated
+                    and potentially developed:</p>
+
+                <p>Time-to-life (TTL): Allowing messages to be self-destructed after a set time. This obviously won't be 100%
+                    secure, if a user takes backup of their local community using third-party code, the TTL messages can
+                    be saved to local disk and persisted. If a message has TTL, should it be part of a regular community
+                    backup?
+                    <br> TTL on message would make it possible to have time-sensitive announcements, e.g. "Concert next weekend!"
+                    and have those disappear when they are no longer of any value.
+                </p>
+
+                <p>Elektron app: Package the web app into an elektron app, allowing users to download the app for OS X, Linux
+                    and Windows.</p>
+
+                <p>Improved UX: The app is currently built with extensive informational texts, the plan is to redo the UX and
+                    make it more user friendly with wizards and walkthroughs that shows multiple screens, as oppose to single
+                    screen with lots of options.
+                </p>
+
                 <h2>Disclaimer</h2>
 
                 <p>
@@ -509,7 +539,8 @@
                 </p>
                 <p>
                     The data wipe removes data from your browser cache. If the device is stolen, the data can potentially still be retrieved
-                    by recovering deleted files on the harddrive.
+                    by recovering deleted files on the harddrive. After you wipe all data, restart the browser, go back to
+                    üme and verify data is wiped.
                 </p>
                 <p>
                     <div class="action-item" data-ume-action="onWipeData"><i class="material-icons">delete_forever</i> Wipe all data on device</div>
@@ -528,8 +559,9 @@
 
                 <h2>Add gateway</h2>
 
-                <p>
-                    <input id="gateway-url" type="text" /><br>
+                <p class="input-form">
+                    <span>Name:</span><input id="gateway-name" type="text" /><br>
+                    <span>URL:</span><input id="gateway-url" type="text" /><br>
                     <button id="gateway-save" data-ume-input="gateway-url" data-ume-action="onGatewaySave">Save Gateway</button>
                 </p>
 
@@ -544,7 +576,7 @@
 
         </div>
     </div>
-    <div id="menu" class="menu">
+    <div id="menu" class="menu noselect">
         <div class="menu-container">
 
             <div class="opened logo">
@@ -573,6 +605,11 @@
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
+    <script src="storage.js"></script>
+    <script src="types.js"></script>
+    <script src="security.js"></script>
+    <script src="container.js"></script>
+    <script src="markup.js"></script>
     <script src="layout.js"></script>
     <script src="OpenCrypto.js"></script>
     <script src="FileSaver.min.js"></script>

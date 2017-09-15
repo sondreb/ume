@@ -1,4 +1,7 @@
 // @xts-check
+/// <reference path="./security.js"/>
+/// <reference path="./types.js"/>
+/// <reference path="./storage.js"/>
 
 var db = null;
 var ia = null;
@@ -284,13 +287,21 @@ function onPublish() {
     socket.emit('publish', text);
 }
 
+// DELETE DATABASE
 function deleteDatabase() {
-    // DELETE DATABASE
-    // delete 'finance'/'test' value from catalog
-    db.deleteDatabase('test', function () {
+    //window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
+    //window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+
+    window.ume.storage.adapter.deleteDatabase('ume.db');
+
+    window.ume.storage.database.deleteDatabase('ume', function () {
         log('Database Deleted.');
-        // database deleted
     });
+
+    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+
+    // Also make sure we remove the LokiCatalog.
+    window.indexedDB.deleteDatabase('LokiCatalog');
 }
 
 var logOutput = document.getElementById('log-output');
@@ -310,10 +321,15 @@ function log(text) {
 };
 
 // Now let's implement the autoloadback referenced in loki constructor
-function databaseInitialize() {
+async function databaseInitialize() {
+
+    var db = window.ume.storage.database;
+
     var entries = db.getCollection("entries");
     var messages = db.getCollection("messages");
     var gateways = db.getCollection("gateways");
+    var communities = db.getCollection("communities");
+    var identities = db.getCollection("identities");
 
     // Since our LokiFsStructuredAdapter is partitioned, the default 'quickstart3.db'
     // file will actually contain only the loki database shell and each of the collections
@@ -331,6 +347,16 @@ function databaseInitialize() {
         gateways = db.addCollection("gateways");
     }
 
+    if (communities === null) {
+        // first time run so add and configure collection with some arbitrary options
+        communities = db.addCollection("communities");
+    }
+
+    if (identities === null) {
+        // first time run so add and configure collection with some arbitrary options
+        identities = db.addCollection("identities");
+    }
+
     // Now let's add a second collection only to prove that this saved partition (quickstart3.db.1) 
     // doesn't need to be saved every time the other partitions do if it never gets any changes
     // which need to be saved.  The first time we run this should be the only time we save it.
@@ -340,16 +366,21 @@ function databaseInitialize() {
     }
 
     window.ume.storage.entries = entries;
-    window.ume.storage.message = messages;
+    window.ume.storage.messages = messages;
     window.ume.storage.gateways = gateways;
+    window.ume.storage.communities = communities;
+    window.ume.storage.identities = identities;
 
     // kick off any program logic or start listening to external events
-    runProgramLogic();
+    await runProgramLogic();
 }
 
 // While we could have done this in our databaseInitialize function, 
 //   lets go ahead and split out the logic to run 'after' initialization into this 'runProgramLogic' function
-function runProgramLogic() {
+async function runProgramLogic() {
+
+    var db = window.ume.storage.database;
+
     var entries = db.getCollection("entries");
     var entryCount = entries.count();
     var now = new Date();
@@ -369,7 +400,7 @@ function runProgramLogic() {
     var gateways = window.ume.storage.gateways.data;
 
     gateways.forEach((item) => {
-        
+
         //var gatewayUrl = element('gateways').value;
         //console.log('connect to: ', gatewayUrl);
 
@@ -398,6 +429,16 @@ function runProgramLogic() {
         // Store a reference to the socket on the global ume structure.
         window.ume.gateways.push(socket);
     });
+
+    // var security = new Security();
+    // var identity = await security.createIdentity();
+
+    // window.ume.storage.identities.insert(identity);
+
+    // var i = window.ume.storage.communities.findOne({ 'publicKeyFingerprint': identity.publicKeyFingerprint });
+
+    // console.log(JSON.stringify(i));
+    // console.log(i);
 }
 
 function convertStringToArrayBufferView(str) {
@@ -494,6 +535,43 @@ function decrypt(data, key_object, vector) {
 // }
 
 
+
+
+/** returns an ArrayBuffer containing the encrypted data. Example: new Uint8Array(encrypted). additionalData must be ArrayBuffer. */
+async function encryptContent(key, data, additionalData) {
+    return await window.crypto.subtle.encrypt(
+        {
+            name: "AES-GCM",
+
+            //Don't re-use initialization vectors!
+            //Always generate a new iv every time your encrypt!
+            //Recommended to use 12 bytes length
+            iv: window.crypto.getRandomValues(new Uint8Array(12)),
+
+            //Additional authentication data (optional)
+            additionalData: additionalData,
+
+            //Tag length (optional)
+            tagLength: 128, //can be 32, 64, 96, 104, 112, 120 or 128 (default)
+        },
+        key, //from generateKey or importKey above
+        data //ArrayBuffer of data you want to encrypt
+    );
+}
+
+/** returns an ArrayBuffer containing the decrypted data. Example: new Uint8Array(decrypted). additionalData must be ArrayBuffer. */
+async function decryptContent(key, data, additionalData) {
+    return await window.crypto.subtle.decrypt(
+        {
+            name: "AES-GCM",
+            iv: ArrayBuffer(12), //The initialization vector you used to encrypt
+            additionalData: additionalData, //The addtionalData you used to encrypt (if any)
+            tagLength: 128, //The tagLength you used to encrypt (if any)
+        },
+        key, //from generateKey or importKey above
+        data //ArrayBuffer of the data
+    );
+}
 
 // Key pair creation:
 async function createAndSaveAKeyPair() {
@@ -692,6 +770,20 @@ function stringToArrayBuffer(string) {
     return encoder.encode(string);
 }
 
+function arrayToHexString(byteArray) {
+    var hexString = "";
+    var nextHexByte;
+
+    for (var i = 0; i < byteArray.byteLength; i++) {
+        nextHexByte = byteArray[i].toString(16);  // Integer to base 16
+        if (nextHexByte.length < 2) {
+            nextHexByte = "0" + nextHexByte;     // Otherwise 10 becomes just a instead of 0a
+        }
+        hexString += nextHexByte;
+    }
+    return hexString;
+}
+
 function arrayBufferToHexString(arrayBuffer) {
     var byteArray = new Uint8Array(arrayBuffer);
     var hexString = "";
@@ -711,10 +803,10 @@ async function deriveAKey(password) {
     var salt = "ume-salt-value-for-derived-key";
     var iterations = 1000;
 
-    //var hash = document.getElementById("hash-name").value;
-    //var password = document.getElementById("password").value;
+    if (typeof password !== 'string') {
+        throw new TypeError('Expected password to be a string.');
+    }
 
-    // First, create a PBKDF2 "key" containing the password
     var baseKey = await window.crypto.subtle.importKey(
         "raw",
         stringToArrayBuffer(password),
@@ -722,44 +814,26 @@ async function deriveAKey(password) {
         false,
         ["deriveKey"]);
 
-    var aesKey = await window.crypto.subtle.deriveKey(
+    var derivedKey = await window.crypto.subtle.deriveKey(
         {
             "name": "PBKDF2",
             "salt": stringToArrayBuffer(salt),
             "iterations": iterations,
-            "hash": "SHA-512" // Is 256 enough and better performance, or should we go with 512 for added security?
+            "hash": "SHA-512"
         },
         baseKey,
-        { "name": "AES-CBC", "length": 128 }, // Key we want
-        true,                               // Extrable
-        ["encrypt", "decrypt"]              // For new key
+        { "name": "AES-GCM", "length": 256 },
+        true,
+        ["encrypt", "decrypt", "wrapKey", "unwrapKey"]
     );
 
-    var keyBytes = await window.crypto.subtle.exportKey("raw", aesKey);
+    var exportedKey = await window.crypto.subtle.exportKey("raw", derivedKey);
 
-    var hexKey = arrayBufferToHexString(keyBytes);
+    var key = arrayBufferToHexString(exportedKey);
 
-    return hexKey;
-
-    //document.getElementById("aes-key").textContent = hexKey;
-
-    // Derive a key from the password
-    // then(function (baseKey) {
-    //     return
-    // }).
-    //     // Export it so we can display it
-    //     then(function (aesKey) {
-    //         return window.crypto.subtle.exportKey("raw", aesKey);
-    //     }).
-    //     // Display it in hex format
-    //     then(function (keyBytes) {
-    //         var hexKey = arrayBufferToHexString(keyBytes);
-    //         document.getElementById("aes-key").textContent = hexKey;
-    //     }).
-    //     catch(function (err) {
-    //         alert("Key derivation failed: " + err.message);
-    //     });
+    return key;
 }
+
 
 function convertArrayBufferViewtoString(buffer) {
     var str = "";
@@ -934,6 +1008,21 @@ var jwk = {
 d = private key (private exponent)
 
 */
+
+async function importJwkFromKeyObject(keyObject, isPrivateKey) {
+    var method = isPrivateKey ? "sign" : "verify"
+
+    return window.crypto.subtle.importKey(
+        "jwk",
+        keyObject,
+        {
+            name: "ECDSA",
+            namedCurve: "P-256",
+        },
+        true,
+        [method]
+    );
+}
 
 async function exportJwkFromKeyObject(keyObject) {
     return await window.crypto.subtle.exportKey(
@@ -1118,8 +1207,8 @@ async function generateCommunity() {
     var communityPublicKey = await exportJwkFromKeyObject(communityKeys.publicKey);
 
     // Should the computed hash for Community Public Key be based upon the whole JWK (JSON-structure) or a concat of the x and y values?
-    var communityPublicKeyArray = JSON.stringify(communityPublicKey);
     var communityPrivateKeyArray = JSON.stringify(communityPrivateKey);
+    var communityPublicKeyArray = JSON.stringify(communityPublicKey);
 
     var communityHash = await generateHash(stringUnicodeToUint(communityPublicKeyArray));
     var communityKey = arrayBufferToBase64(communityHash);
@@ -1136,14 +1225,13 @@ async function generateCommunity() {
 
     return {
         communityId: communityKey,
-        privateKey: btoa(communityPublicKeyArray),
-        publicKey: btoa(communityPrivateKeyArray),
+        privateKey: btoa(communityPrivateKeyArray),
+        publicKey: btoa(communityPublicKeyArray),
         passPhrase: passPhrase,
         passPhraseKey: passPhraseKey
     };
 
 }
-
 
 async function simulate() {
 
@@ -1328,15 +1416,18 @@ function element(id) {
 
 function initializeDatabase() {
 
-    ia = new LokiIndexedAdapter("ume");
+    var ia = new LokiIndexedAdapter("ume");
 
-    db = new loki('ume.db', {
+    var db = new loki('ume.db', {
         adapter: ia,
         autoload: true,
         autoloadCallback: databaseInitialize,
         autosave: true,
         autosaveInterval: 2000
     });
+
+    window.ume.storage.adapter = ia;
+    window.ume.storage.database = db;
 
     // var entries = db.getCollection("gateway");
     // //messages = db.getCollection("messages");
@@ -1356,6 +1447,7 @@ function initializeDatabase() {
 
 var gatewayConnected = false;
 
+
 (async function onStart() {
 
     // Populate the global ume object. This can obviously crash if anyone else puts this on global.
@@ -1366,6 +1458,7 @@ var gatewayConnected = false;
     };
 
     window.ume.crypto = window.crypto || window.msCrypto;
+    window.ume.security = new Security();
 
     if (!window.ume.crypto && !window.ume.crypto.subtle) {
         window.ume.supported = false;
@@ -1384,6 +1477,44 @@ var gatewayConnected = false;
     log('üme v0.0.1');
 
     initializeDatabase();
+
+    var storage = new DbStorage('ume');
+    await storage.connect();
+
+    window.ume.storage.instance = storage;
+
+    var security = new Security();
+
+    var identity = await security.createIdentity();
+
+    //await storage.put(identity);
+    
+    // What is the best balance (length) of security and usability for pass phrase derived keys?
+    var passPhrase = security.generatePassPhrase(20);
+
+    // The pass phrase that a user must remember and can save. In the future, we will add support for encrypting the pass phrase for local storage, similar to how one can protect the private key in PFX files.
+    // The logic for encrypting the private key could also be used to "lock" down the ume-app and require users to unlock their private key before continue using the app.
+    console.log('passPhrase:', passPhrase);
+
+    // Generate the 256-bit key from the pass phrase. This is a deterministic generation, which ensures that a user can restore their private key on a different device.
+    var passPhraseKey = await security.deriveKey(passPhrase);
+
+    console.log('passPhraseKey:', passPhraseKey);
+
+    window.ume.storage.instance.put(identity);
+
+    //var keys = await security.generateKeyPair();
+
+    //security.encrypt(keys.publicKey, 'My Data!');
+    
+    // QUESTION: Do we need to verify the integrity of the user objects? What happens if I attempt to replace the key? Does it matter?
+    // var user = {
+    //     id: // hash based on public key.
+    //     publicKey: // used to verify signatures.
+    //     key: // used to decrypt messages.
+    // }
+
+
 
     return;
 

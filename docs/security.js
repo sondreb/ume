@@ -1,3 +1,182 @@
+/// <reference path="./types.js"/>
+
+class Security {
+
+    constructor() {
+        this._crypto = window.crypto || window.msCrypto;
+
+        if (!this._crypto && !this._crypto.subtle) {
+            throw new Error('Your browser does not support WebCrypto. You must upgrade or change browser.');
+        }
+
+        if (!window.TextEncoder || !window.TextDecoder) {
+            throw new Error('Your browser does not support UTF-8 encoding. You must upgrade or change browser.');
+        }
+
+        this.algorithms = {
+            symmetric: { name: "AES-GCM" },
+            asymmetric: {
+                name: "RSA-OAEP",
+                modulusLength: 2048,
+                publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
+                hash: {
+                    name: "SHA-256"
+                }
+            },
+            signing: {
+                name: "ECDSA", namedCurve: "P-256"
+            },
+            digest: {
+                name: "SHA-256"
+            }
+        };
+    }
+
+    async deriveKey(password) {
+        var salt = "ume-salt-value-for-derived-key";
+        var iterations = 1000;
+
+        if (typeof password !== 'string') {
+            throw new TypeError('Expected password to be a string.');
+        }
+
+        var baseKey = await this._crypto.subtle.importKey(
+            "raw",
+            stringToArrayBuffer(password),
+            { "name": "PBKDF2" },
+            false,
+            ["deriveKey"]);
+
+        var derivedKey = await this._crypto.subtle.deriveKey(
+            {
+                "name": "PBKDF2",
+                "salt": stringToArrayBuffer(salt),
+                "iterations": iterations,
+                "hash": "SHA-512"
+            },
+            baseKey,
+            { "name": "AES-GCM", "length": 256 },
+            true,
+            ["encrypt", "decrypt", "wrapKey", "unwrapKey"]
+        );
+
+        var exportedKey = await this._crypto.subtle.exportKey("raw", derivedKey);
+
+        var key = arrayBufferToHexString(exportedKey);
+
+        return key;
+    }
+
+    random(length) {
+        return this._crypto.getRandomValues(new Uint8Array(length));
+    }
+
+    generatePassPhrase(length) {
+        var randomValues = this.random(length);
+        var randomString = '';
+
+        for (var i = 0; i < randomValues.byteLength; i++) {
+            randomString += ' ' + randomWords[randomValues[i]];
+        }
+
+        // Remove the initial empty space of the string.
+        return randomString.substring(1);
+    }
+
+    async generateKeyPair() {
+        var key = await this._crypto.subtle.generateKey(this.algorithms.asymmetric, true, ["sign", "verify"]);
+        return key;
+    }
+
+    stringToArrayBuffer(string) {
+        var encoder = new TextEncoder('utf-8');
+        return encoder.encode(string);
+    }
+
+    // convertStringToArrayBufferView(str)
+    // {
+    //     var bytes = new Uint8Array(str.length);
+    //     for (var iii = 0; iii < str.length; iii++) 
+    //     {
+    //         bytes[iii] = str.charCodeAt(iii);
+    //     }
+
+    //     return bytes;
+    // }
+
+    async createCommunity() {
+        var community = new Community();
+
+        var keyPair = await this._crypto.subtle.generateKey(this.algorithms.asymmetric, true, ['encrypt', 'decrypt']);
+        community.publicKey = keyPair.publicKey;
+        community.privateKey = keyPair.privateKey;
+
+        var exportedPublicKey = await this._crypto.subtle.exportKey('spki', community.publicKey);
+        community.publicKeyFingerprint = new Uint8Array(await this._crypto.subtle.digest(this.algorithms.digest, exportedPublicKey));
+
+        var signingKeyPair = await this._crypto.subtle.generateKey(this.algorithms.signing, true, ['sign', 'verify']);
+        community.signingKey = signingKeyPair.privateKey;
+        community.verifyKey = signingKeyPair.publicKey;
+
+        var fingerprintVerifyKey = await this._crypto.subtle.exportKey('spki', community.verifyKey);
+        community.verifyKeyFingerprint = new Uint8Array(await this._crypto.subtle.digest(this.algorithms.digest, fingerprintVerifyKey));
+
+        console.log(community);
+
+        return community;
+    }
+
+    async createIdentity() {
+
+        var identity = new Identity();
+
+        var keyPair = await this._crypto.subtle.generateKey(this.algorithms.asymmetric, true, ['encrypt', 'decrypt']);
+        identity.publicKey = keyPair.publicKey;
+        identity.privateKey = keyPair.privateKey;
+
+        var exportedPublicKey = await this._crypto.subtle.exportKey('spki', identity.publicKey);
+        identity.publicKeyFingerprint = new Uint8Array(await this._crypto.subtle.digest(this.algorithms.digest, exportedPublicKey));
+
+        var signingKeyPair = await this._crypto.subtle.generateKey(this.algorithms.signing, true, ['sign', 'verify']);
+        identity.signingKey = signingKeyPair.privateKey;
+        identity.verifyKey = signingKeyPair.publicKey;
+
+        var fingerprintVerifyKey = await this._crypto.subtle.exportKey('spki', identity.verifyKey);
+        identity.verifyKeyFingerprint = new Uint8Array(await this._crypto.subtle.digest(this.algorithms.digest, fingerprintVerifyKey));
+
+        console.log(identity);
+
+        return identity;
+    }
+
+    async encrypt(key, data, additionalData) {
+        var dataBuffer = this.stringToArrayBuffer(data);
+
+        var encrypted = await window.crypto.subtle.encrypt(
+            {
+                name: "AES-GCM",
+
+                //Don't re-use initialization vectors!
+                //Always generate a new iv every time your encrypt!
+                //Recommended to use 12 bytes length
+                iv: this._crypto.getRandomValues(new Uint8Array(12)),
+
+                //Additional authentication data (optional)
+                //additionalData: ArrayBuffer,
+
+                //Tag length (optional)
+                tagLength: 128, //can be 32, 64, 96, 104, 112, 120 or 128 (default)
+            },
+            key, //from generateKey or importKey above
+            dataBuffer //ArrayBuffer of data you want to encrypt
+        );
+
+        return new Uint8Array(encrypted);
+    }
+}
+
+
+
 // export default class CryptoUtil {
 //   constructor() {
 //     this._crypto = window.crypto || false;
