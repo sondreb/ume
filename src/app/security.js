@@ -103,7 +103,29 @@ class Security {
 
     //     return bytes;
     // }
-    
+
+    async createCommunity() {
+        var community = new Community();
+
+        var keyPair = await this._crypto.subtle.generateKey(this.algorithms.asymmetric, true, ['encrypt', 'decrypt']);
+        community.publicKey = keyPair.publicKey;
+        community.privateKey = keyPair.privateKey;
+
+        var exportedPublicKey = await this._crypto.subtle.exportKey('spki', community.publicKey);
+        community.publicKeyFingerprint = new Uint8Array(await this._crypto.subtle.digest(this.algorithms.digest, exportedPublicKey));
+
+        var signingKeyPair = await this._crypto.subtle.generateKey(this.algorithms.signing, true, ['sign', 'verify']);
+        community.signingKey = signingKeyPair.privateKey;
+        community.verifyKey = signingKeyPair.publicKey;
+
+        var fingerprintVerifyKey = await this._crypto.subtle.exportKey('spki', community.verifyKey);
+        community.verifyKeyFingerprint = new Uint8Array(await this._crypto.subtle.digest(this.algorithms.digest, fingerprintVerifyKey));
+
+        console.log(community);
+
+        return community;
+    }
+
     async createIdentity() {
 
         var identity = new Identity();

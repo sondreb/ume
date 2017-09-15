@@ -23,3 +23,20 @@ class Gateway {
         this._type = 'Gateway';
     }
 }
+
+
+class Community {
+    constructor() {
+        this.name = null;
+        this.id = null;
+        this.description = null;
+        this.publicKey = null;
+        this.publicKeyFingerprint = null;
+        this.privateKey = null;
+        this.passPhrase = null;
+        this.passPhraseKey = null;
+        this.passPhraseCipher = null;
+        this.gateway = null;
+        this._type = 'Community';
+    }
+}

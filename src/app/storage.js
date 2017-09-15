@@ -6,7 +6,8 @@ class DbStorage {
 
         this.stores = [
             { "name": "identities", "keyPath": "publicKeyFingerprint", "type": Identity.name },
-            { "name": "communities" }, { "name": "invites" },
+            { "name": "communities", "keyPath": "id", "type": Community.name },
+            { "name": "invites" },
             { "name": "messages" }, { "name": "entries" },
             { "name": "gateways", "keyPath": "url", "type": Gateway.name }];
     }
@@ -204,7 +205,6 @@ class DbStorage {
     }
 
     async getAll(storeName) {
-
         var self = this;
         return new Promise((resolve, reject) => {
 
@@ -212,62 +212,50 @@ class DbStorage {
 
             if (!store) {
                 reject('Unable to find a store for the data type. Type name: ' + storeName);
-                //throw new Error('Unable to find a store for the data type. Type name: ' + data.constructor.name);
             }
-
-            //console.log(store);
-            //debugger;
 
             var tx = this.db.transaction(store.name, 'readwrite');
             var store = tx.objectStore(store.name);
 
-            //var storeIndex = store.index('index');
-            //var myIndex = objectStore.index('index');
-            //var getAllKeysRequest = storeIndex.getAllKeys();
-
-            //let request = store.getAll(IDBKeyRange(yesterday, today), 10);
-            //let request = store.getAllKeys();
             let request = store.getAll();
 
             request.onsuccess = () => resolve(request.result);
             request.onerror = () => reject(request.error);
+        });
+    }
 
-            // store.getAll();
+    async get(storeName, key) {
+        var self = this;
+        return new Promise((resolve, reject) => {
 
-            // await store.add(data);
-            // await tx.complete;
+            var store = this.stores.find((store) => store.type == storeName);
 
-            // let request = store.getAll(IDBKeyRange(yesterday, today), 10);
+            if (!store) {
+                reject('Unable to find a store for the data type. Type name: ' + storeName);
+            }
 
-            // request.onsuccess = (event) => {
-            //     activities = event.target.result;
-            // };
+            var tx = this.db.transaction(store.name, 'readwrite');
+            var store = tx.objectStore(store.name);
 
+            let request = store.get(key);
 
-            // console.log('INSERT!!');
-
-
-            // const tx = conn.transaction(self.dbname);
-            // const store = tx.objectStore(store);
-            // const request = store.put(value);
-            // request.onsuccess = () => resolve(request.result);
-            // request.onerror = () => reject(request.error);
-
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
         });
 
+        // var store = this.stores.find((store) => store.type == storeName);
 
+        // if (!store) {
+        //     throw new Error('Unable to find a store for the data type. Type name: ' + storeName);
+        // }
 
+        // var tx = this.db.transaction(store.name, 'readwrite');
+        // var store = tx.objectStore(store.name);
 
-        // var db = initialize();
-        // db.put()
+        // var query = await store.get(key);
+        // await tx.complete;
 
-
-        // var tx = db.transaction('identities', 'readwrite');
-        // var objectStore = tx.objectStore('identities');
-
-
-        // tx.objectStore(this.dbname).put(data);
-
+        // return query.result;
     }
 
     async put(data) {
@@ -288,17 +276,6 @@ class DbStorage {
         await tx.complete;
 
         console.log('INSERT!!');
-
-        // var db = initialize();
-        // db.put()
-
-
-        // var tx = db.transaction('identities', 'readwrite');
-        // var objectStore = tx.objectStore('identities');
-
-
-        // tx.objectStore(this.dbname).put(data);
-
     }
 
     async delete(data) {
@@ -307,7 +284,7 @@ class DbStorage {
         //var storeName = data.constructor.name;
         // if (storeName === 'Object')
         // {
-            
+
         // }
 
         var store = this.stores.find((store) => store.type == storeName);

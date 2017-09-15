@@ -81,5 +81,7 @@ Crypho relies on centralized server storage of public keys, and does not support
 # References
 
 https://github.com/diafygi/webcrypto-examples
+https://webcryptoapiex.github.io/secretnote/
+
 
 

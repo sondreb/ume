@@ -53,20 +53,6 @@ function removeGateway(item) {
     updateGatewayList();
 }
 
-class Community {
-    constructor() {
-        this.name = null;
-        this.id = null;
-        this.description = null;
-        this.publicKey = null;
-        this.privateKey = null;
-        this.passPhrase = null;
-        this.passPhraseKey = null;
-        this.passPhraseCipher = null;
-        this.gateway = null;
-    }
-}
-
 function input(id) {
     return document.getElementById(id).value;
 }
@@ -78,10 +64,10 @@ function onCreateInviteOpened(parameters) {
 
 }
 
-function onCommunityOpened(parameters) {
+async function onCommunityOpened(parameters) {
     console.log(parameters);
 
-    var community = window.ume.storage.communities.findOne({ 'id': parameters });
+    var community = await window.ume.storage.instance.get('Community', parameters); //  .communities.findOne({ 'id': parameters });
 
     if (!community) {
         page('introduction');
@@ -95,13 +81,17 @@ function onCommunityOpened(parameters) {
     }
 }
 
-function onCommunitiesOpened() {
+async function onCommunitiesOpened() {
     var communitiesList = document.getElementById('communities-list');
     communitiesList.innerHTML = '';
 
-    window.ume.storage.communities.data.forEach((community) => {
-        communitiesList.appendChild(Markup.communityListItem(community.id, community.name, 'free_breakfast', community.count, community.updated));
+    var communities = await window.ume.storage.instance.getAll(Community.name);
+    console.log(communities);
+
+    communities.forEach((community) => {
+        communitiesList.appendChild(Markup.communityListItem(community.id, community.name, 'free_breakfast', community.count || 0, community.updated || 'None'));
     });
+
 }
 
 function onSaveCommunity() {
@@ -116,9 +106,13 @@ function onSaveCommunity() {
     entity.passPhrase = input('community-pass-phrase');
     entity.gateway = input('gateway-select-list');
 
-    window.ume.storage.communities.insert(entity);
+    window.ume.storage.instance.put(entity);
+    //window.ume.storage.communities.insert(entity);
 
     console.log(entity);
+
+    // Navigate to communities page.
+    page('communities');
 }
 
 function onCreateCommunityOpened() {
@@ -319,8 +313,7 @@ async function updateGatewayList() {
 
         var gatewayDisplayName = '(' + item.url + ')';
 
-        if (item.name)
-        {
+        if (item.name) {
             gatewayDisplayName = item.name + ' ' + gatewayDisplayName;
         }
 
