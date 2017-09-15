@@ -273,6 +273,7 @@ button {
     background-color: #F9F9F9;
     padding: 20px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .community-item-id {

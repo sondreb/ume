@@ -69,12 +69,16 @@ class Markup {
         var container = document.createElement('div');
         container.classList.add('community-item');
 
+        container.addEventListener('click', () => {
+            page('community', id);
+        });
+
         container.appendChild(Markup.icon('free_breakfast', 'community-icon'));
 
         var openCommunityButton = Markup.icon('chevron_right', 'float-right', 'action');
-        openCommunityButton.addEventListener('click', () => {
-            page('community', id);
-        });
+        // openCommunityButton.addEventListener('click', () => {
+        //     page('community', id);
+        // });
         //openCommunityButton.setAttribute('data-ume-page', 'community');
 
         container.appendChild(openCommunityButton);

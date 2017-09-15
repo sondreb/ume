@@ -1501,6 +1501,8 @@ var gatewayConnected = false;
 
     console.log('passPhraseKey:', passPhraseKey);
 
+    window.ume.storage.instance.put(identity);
+
     //var keys = await security.generateKeyPair();
 
     //security.encrypt(keys.publicKey, 'My Data!');

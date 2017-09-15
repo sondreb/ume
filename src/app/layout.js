@@ -1,6 +1,11 @@
 /// <reference path="./container.js"/>
 /// <reference path="./markup.js"/>
 
+var UME_PRV_HEADER = '-- BEGIN UME PRIVATE KEY BLOCK --\n-- Ver: UME v1.0.0.0 --\n';
+var UME_PRV_FOOTER = '-- END UME PRIVATE KEY BLOCK --';
+var UME_PUB_HEADER = '-- BEGIN UME PUBLIC KEY BLOCK --\n-- Ver: UME v1.0.0.0 --\n';
+var UME_PUB_FOOTER = '-- END UME PUBLIC KEY BLOCK --';
+
 function page(id, parameters) {
     var pages = document.getElementsByClassName('page-open');
 
@@ -267,17 +272,19 @@ async function onGenerateInvite() {
 
 }
 
-function updateCommunityList() {
+async function updateCommunityList() {
 
     console.log('Update community list!');
 
     var communityList = document.getElementById('community-invite-list');
     communityList.innerHTML = '';
 
-    window.ume.storage.communities.data.forEach((item) => {
+    var communities = await window.ume.storage.instance.getAll(Community.name);
+
+    communities.forEach((item) => {
         var opt = document.createElement('option');
         opt.value = item.id;
-        opt.innerText = item.id + ' | ' + item.name;
+        opt.innerText = item.id + ' (' + item.name + ')';
         communityList.appendChild(opt);
     });
 }
