@@ -49,7 +49,7 @@ h1 {
     overflow: none;
     padding: 0px;
     background: #6DA5AF;
-    background: linear-gradient(to bottom right, #6DA5AF, #ECF4CD);
+    background: linear-gradient(to bottom right, #6DA5AF, #5d878f);
     font-size: 14px;
 }
 
@@ -100,6 +100,24 @@ h1 {
     transition: height 0.3s ease-out; */
     transition: width 0.2s;
     transition-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.input-form {
+
+}
+
+.input-form span {
+    width: 100px;
+    display: inline-block;
+}
+
+.input-form input {
+    width: 200px;
+}
+
+.input-form button {
+    margin-left: 100px;
+    margin-top: 20px;
 }
 
 .container {
@@ -260,6 +278,16 @@ button {
 .community-item-id {
     font-size: 0.8rem;
 }
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+  }
 
 @media all and (min-width: 600px) {
     .aside {

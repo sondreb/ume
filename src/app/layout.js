@@ -34,16 +34,22 @@ function onGatewaySave(source) {
 
     var linkedInput = source.getAttribute('data-ume-input');
     var gatewayUrl = document.getElementById(linkedInput).value;
+    var gatewayName = document.getElementById('gateway-name').value;
 
-    var storage = window.ume.storage.gateways;
-    storage.insert({ gateway: gatewayUrl });
+    var gateway = new Gateway();
+    gateway.url = gatewayUrl;
+    gateway.name = gatewayName;
+
+    window.ume.storage.instance.put(gateway);
+
+    //var storage = window.ume.storage.gateways;
+    //storage.insert({ gateway: gatewayUrl });
 
     updateGatewayList();
 }
 
 function removeGateway(item) {
-    var storage = window.ume.storage.gateways;
-    storage.remove(item);
+    window.ume.storage.instance.delete(item);
     updateGatewayList();
 }
 
@@ -282,7 +288,7 @@ function updateCommunityList() {
     });
 }
 
-function updateGatewayList() {
+async function updateGatewayList() {
 
     console.log('Update gateway list!');
 
@@ -305,23 +311,34 @@ function updateGatewayList() {
     optAll2.innerHTML = 'Do not include a gateway in the invite';
     gatewayInviteList.appendChild(optAll2);
 
-    window.ume.storage.gateways.data.forEach((item) => {
+    var gateways = await window.ume.storage.instance.getAll(Gateway.name);
+
+    console.log(gateways);
+
+    gateways.forEach((item) => {
+
+        var gatewayDisplayName = '(' + item.url + ')';
+
+        if (item.name)
+        {
+            gatewayDisplayName = item.name + ' ' + gatewayDisplayName;
+        }
 
         // Populate the dropdown.
         var opt = document.createElement('option');
-        opt.value = item.gateway;
-        opt.innerText = item.gateway;
+        opt.value = item.url;
+        opt.innerText = gatewayDisplayName;
         gatewaySelectList.appendChild(opt);
 
         var opt2 = document.createElement('option');
-        opt2.value = item.gateway;
-        opt2.innerText = item.gateway;
+        opt2.value = item.url;
+        opt2.innerText = gatewayDisplayName;
         gatewayInviteList.appendChild(opt2);
 
         // Populate the list in settings.
         var gatewayElement = document.createElement("div");
 
-        var node = document.createTextNode(item.gateway);
+        var node = document.createTextNode(gatewayDisplayName);
         gatewayElement.appendChild(node);
 
         var removeElement = document.createElement('i');

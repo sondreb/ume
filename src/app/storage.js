@@ -4,7 +4,11 @@ class DbStorage {
         this.dbname = dbname;
         this.db = null;
 
-        this.stores = [{ "name": "identities", "keyPath": "publicKeyFingerprint", "type": Identity.name }, { "name": "communities" }, { "name": "invites" }, { "name": "messages" }, { "name": "entries" }, { "name": "gateways" }];
+        this.stores = [
+            { "name": "identities", "keyPath": "publicKeyFingerprint", "type": Identity.name },
+            { "name": "communities" }, { "name": "invites" },
+            { "name": "messages" }, { "name": "entries" },
+            { "name": "gateways", "keyPath": "url", "type": Gateway.name }];
     }
 
     // connect(name, version) {
@@ -268,15 +272,14 @@ class DbStorage {
 
     async put(data) {
 
-        var store = this.stores.find((store) => store.type == data.constructor.name);
+        var storeName = data._type;
+        var store = this.stores.find((store) => store.type == storeName);
 
         if (!store) {
-            throw new Error('Unable to find a store for the data type. Type name: ' + data.constructor.name);
+            throw new Error('Unable to find a store for the data type. Type name: ' + storeName);
         }
 
         console.log(store);
-
-        debugger;
 
         var tx = this.db.transaction(store.name, 'readwrite');
         var store = tx.objectStore(store.name);
@@ -298,7 +301,31 @@ class DbStorage {
 
     }
 
-    async delete() {
+    async delete(data) {
+
+        var storeName = data._type;
+        //var storeName = data.constructor.name;
+        // if (storeName === 'Object')
+        // {
+            
+        // }
+
+        var store = this.stores.find((store) => store.type == storeName);
+
+        if (!store) {
+            throw new Error('Unable to find a store for the data type. Type name: ' + storeName);
+        }
+
+        console.log(store);
+
+        var tx = this.db.transaction(store.name, 'readwrite');
+        var store = tx.objectStore(store.name);
+
+        await store.delete(data.url);
+        await tx.complete;
+    }
+
+    async deleteDatabase() {
 
         await idb.delete(this.dbname);
 
@@ -307,12 +334,7 @@ class DbStorage {
         // var tx = db.transaction('identities', 'readwrite');
         // tx.objectStore('identities').put({}, )
 
-
-
         // await idb.delete('ume');
-
-
-
 
         // var request = indexedDB.deleteDatabase(this.dbname);
 
