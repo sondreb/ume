@@ -95,8 +95,7 @@
                 <p>
                     By using üme, you are accepting that the use of this app is entirely on your own responsbility. No guarantee is given by
                     the developers, and we advice you to review the
-                    <a href="https://github.com/sondreb/ume"
-                        target="_blank">üme source code</a> at any time.
+                    <a href="https://github.com/sondreb/ume" target="_blank">üme source code</a> at any time.
                 </p>
                 <i class="material-icons">favorite_border</i>
                 <p>
@@ -397,15 +396,54 @@
                 <h1>Identity</h1>
 
                 <p>
-                    Identities are cryptographic entities that consists of a public key used for encryption, and another key for verification (message integrity).
+                    Identities are cryptographic entities that consists of a public key used for encryption, and another key for verification
+                    (message integrity).
                 </p>
 
-                <p>There are no requirement to add additional profile information on an identity, but if you want to, you can edit your profile which is connected to your identities
-                    and those details will be shared with the others in a community.
+                <p>There are no requirement to add additional profile information on an identity, but if you want to, you can
+                    edit your profile which is connected to your identities and those details will be shared with the others
+                    in a community.
                 </p>
 
-                <span data-ume-bind="identity.id"></span>
+                <p>
+                    Public key fingerprint:
+                    <br>
+                    <span class="mono" data-ume-bind="identity.publicFingerprint"></span>
+                </p>
 
+                <p>
+                    Public verify fingerprint:
+                    <br>
+                    <span class="mono" data-ume-bind="identity.verifyFingerprint"></span>
+
+                </p>
+
+                <h2>Profile</h2>
+
+                <p>These details are shared with your community. If you want to stay entirely anonymous, do not write anything
+                    here. If you want to help community members to recognize you, enter the information you want others to see.
+                </p>
+
+                <p class="input-form">
+                    <input type="hidden" name="identity-id" data-ume-bind="identity.publicFingerprint">
+                    <span>Nickname:</span>
+                    <input type="text" name="profile-nickname" data-ume-bind="profile.nickname">
+                    <br>
+                    <span>Name:</span>
+                    <input type="text" name="profile-name" data-ume-bind="profile.name">
+                    <br>
+                    <span>E-mail:</span>
+                    <input type="text" name="profile-email" data-ume-bind="profile.email">
+                    <br>
+                    <span>Phone:</span>
+                    <input type="text" name="profile-phone" data-ume-bind="profile.phone">
+                    <br>
+                    <span>Location:</span>
+                    <input type="text" name="profile-location" data-ume-bind="profile.location">
+                    <br>
+                    <br>
+                    <button data-ume-action="onProfileSave">Save and Publish profile</button>
+                </p>
                 <!-- <div id="identity-details">
 
                 </div> -->
@@ -612,12 +650,12 @@
 
                 <p class="input-form">
                     <span>Name:</span>
-                    <input id="gateway-name" type="text" />
+                    <input name="gateway-name" type="text" />
                     <br>
                     <span>URL:</span>
-                    <input id="gateway-url" type="text" />
+                    <input name="gateway-url" type="text" />
                     <br>
-                    <button id="gateway-save" data-ume-input="gateway-url" data-ume-action="onGatewaySave">Save Gateway</button>
+                    <button data-ume-action="onGatewaySave">Save Gateway</button>
                 </p>
 
                 <h2>Gateways</h2>

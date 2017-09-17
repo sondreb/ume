@@ -6,6 +6,7 @@ class DbStorage {
 
         this.stores = [
             { "name": "identities", "keyPath": "publicKeyFingerprint", "type": Identity.name },
+            { "name": "profiles", "keyPath": "id", "type": Profile.name },
             { "name": "communities", "keyPath": "id", "type": Community.name },
             { "name": "invites" },
             { "name": "messages" }, { "name": "entries" },
@@ -272,7 +273,8 @@ class DbStorage {
         var tx = this.db.transaction(store.name, 'readwrite');
         var store = tx.objectStore(store.name);
 
-        await store.add(data);
+        await store.put(data);
+        //await store.add(data);
         await tx.complete;
 
         console.log('INSERT!!');
