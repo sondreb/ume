@@ -41,26 +41,28 @@ class Markup {
         return document.createTextNode(text);
     }
 
-    static identityListItem(id, name, icon, count, updated) {
+    static identityListItem(publicKey, verifyKey, icon, count, updated) {
         var container = document.createElement('div');
-        container.classList.add('community-item');
+        container.classList.add('identity-item');
 
-        container.appendChild(Markup.icon('vpn_key', 'community-icon'));
-
-        var openCommunityButton = Markup.icon('chevron_right', 'float-right', 'action');
-        openCommunityButton.addEventListener('click', () => {
-            page('community', id);
+        container.addEventListener('click', () => {
+            page('identity', id);
         });
+
+        container.appendChild(Markup.icon('vpn_key', 'identity-icon'));
+
+        var id = publicKey;
+        var openIdentityButton = Markup.icon('chevron_right', 'float-right', 'action');
         //openCommunityButton.setAttribute('data-ume-page', 'community');
 
-        container.appendChild(openCommunityButton);
-        container.appendChild(Markup.strong(name.join(':')));
+        container.appendChild(openIdentityButton);
+        container.appendChild(Markup.span(CryptoUtil.uint8ArrayToHex(publicKey, ':'), 'identity-item-id'));
         container.appendChild(Markup.linebreak());
-        container.appendChild(Markup.span(id, 'community-item-id'));
-        container.appendChild(Markup.linebreak());
-        container.appendChild(Markup.text('Posts: ' + count));
-        container.appendChild(Markup.linebreak());
-        container.appendChild(Markup.text('Latest post: ' + updated));
+        container.appendChild(Markup.span(CryptoUtil.uint8ArrayToHex(verifyKey, ':'), 'identity-item-id'));
+        // container.appendChild(Markup.linebreak());
+        // container.appendChild(Markup.text('Posts: ' + count));
+        // container.appendChild(Markup.linebreak());
+        // container.appendChild(Markup.text('Latest post: ' + updated));
 
         return container;
     }

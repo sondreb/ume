@@ -280,6 +280,24 @@ button {
     font-size: 0.8rem;
 }
 
+.identity-icon {
+    float: left;
+    font-size: 60px;
+    margin-right: 14px;
+}
+
+.identity-item {
+    border: 1px solid silver;
+    background-color: #F9F9F9;
+    padding: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.identity-item-id {
+    font-family: monospace;
+}
+
 .noselect {
     -webkit-touch-callout: none; /* iOS Safari */
       -webkit-user-select: none; /* Safari */

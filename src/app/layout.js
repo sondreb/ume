@@ -6,7 +6,36 @@ var UME_PRV_FOOTER = '-- END UME PRIVATE KEY BLOCK --';
 var UME_PUB_HEADER = '-- BEGIN UME PUBLIC KEY BLOCK --\n-- Ver: UME v1.0.0.0 --\n';
 var UME_PUB_FOOTER = '-- END UME PUBLIC KEY BLOCK --';
 
-function page(id, parameters) {
+function databind(element, data) {
+    var children = element.children;
+    for (var i = 0; i < children.length; i++) {
+        var child = children[i];
+
+        var bindAttribute = child.getAttribute('data-ume-bind');
+
+        if (bindAttribute !== null) {
+            child.innerHTML = findData(data, bindAttribute);
+        }
+
+        databind(child, data);
+    }
+}
+
+function findData(data, prop) {
+    if (typeof data === 'undefined') {
+        return;
+    }
+
+    var _index = prop.indexOf('.');
+
+    if (_index > -1) {
+        return findData(data[prop.substring(0, _index)], prop.substr(_index + 1));
+    }
+
+    return data[prop];
+}
+
+async function page(id, parameters) {
     var pages = document.getElementsByClassName('page-open');
 
     if (pages.length > 0) {
@@ -19,7 +48,9 @@ function page(id, parameters) {
     var openedEvent = page.getAttribute('data-ume-opened');
 
     if (openedEvent) {
-        window[openedEvent](parameters);
+        // Call the opened page and grab the return data structure used for binding.
+        var data = await window[openedEvent](parameters, page);
+        databind(page, data);
     }
 }
 
@@ -405,7 +436,7 @@ async function onGenerateCommunity() {
     document.getElementById('community-id').value = results.communityId;
 }
 
-async function onSecurityOpened() {
+async function onSecurityOpened(parameters, page) {
 
     var identities = await window.ume.storage.instance.getAll(Identity.name);
     console.log(identities);
@@ -421,6 +452,25 @@ async function onSecurityOpened() {
     //identitiesList.appendChild(Markup.communityListItem(community.id, community.name, 'free_breakfast', community.count, community.updated));
     //});
 
+}
+
+async function onIdentityOpened(parameters, page) {
+
+    var identity = await window.ume.storage.instance.get(Identity.name, parameters);
+
+    console.log(parameters);
+    console.log(identity);
+
+    var data = {
+        identity: {
+            id: CryptoUtil.uint8ArrayToHex(identity.publicKeyFingerprint, ':')
+        }
+    };
+
+    //var pageLinks = document.querySelectorAll('[data-ume-page]');
+    //data-ume-bind
+
+    return data;
 }
 
 (async function onStart() {

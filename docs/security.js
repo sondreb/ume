@@ -1,3 +1,4 @@
+/// <reference path="./crypto.js"/>
 /// <reference path="./types.js"/>
 
 class Security {
@@ -42,7 +43,7 @@ class Security {
 
         var baseKey = await this._crypto.subtle.importKey(
             "raw",
-            stringToArrayBuffer(password),
+            CryptoUtil.stringToArrayBuffer(password),
             { "name": "PBKDF2" },
             false,
             ["deriveKey"]);
@@ -50,7 +51,7 @@ class Security {
         var derivedKey = await this._crypto.subtle.deriveKey(
             {
                 "name": "PBKDF2",
-                "salt": stringToArrayBuffer(salt),
+                "salt": CryptoUtil.stringToArrayBuffer(salt),
                 "iterations": iterations,
                 "hash": "SHA-512"
             },
@@ -86,11 +87,6 @@ class Security {
     async generateKeyPair() {
         var key = await this._crypto.subtle.generateKey(this.algorithms.asymmetric, true, ["sign", "verify"]);
         return key;
-    }
-
-    stringToArrayBuffer(string) {
-        var encoder = new TextEncoder('utf-8');
-        return encoder.encode(string);
     }
 
     // convertStringToArrayBufferView(str)
@@ -174,8 +170,6 @@ class Security {
         return new Uint8Array(encrypted);
     }
 }
-
-
 
 // export default class CryptoUtil {
 //   constructor() {

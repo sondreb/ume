@@ -1,18 +1,32 @@
+class Profile {
+    constructor() {
+        this.id = null; // ID should be he publicKeyFingerprint from Identity.
+        this.nickname = null;
+        this.name = null;
+        this.email = null;
+        this.phone = null;
+        this.location = null;
+        this._type = 'Profile';
+    }
+}
+
 class Identity {
     constructor() {
         this.publicKey = null;
         this.privateKey = null;
         this.publicKeyFingerprint = null;
-
         this.signingKey = null;
         this.verifyKey = null;
         this.verifyKeyFingerprint = null;
-
         this._type = 'Identity';
     }
 
     get id() {
-        return arrayToHexString(this.publicKeyFingerprint);
+        return CryptoUtil.uint8ArrayToHex(this.publicKeyFingerprint);
+    }
+
+    get displayName() {
+        return CryptoUtil.uint8ArrayToHex(this.publicKeyFingerprint);
     }
 }
 
@@ -23,7 +37,6 @@ class Gateway {
         this._type = 'Gateway';
     }
 }
-
 
 class Community {
     constructor() {

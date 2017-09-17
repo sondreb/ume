@@ -765,40 +765,6 @@ var keyPair;    // Used by several handlers later
 //     });
 // }
 
-function stringToArrayBuffer(string) {
-    var encoder = new TextEncoder("utf-8");
-    return encoder.encode(string);
-}
-
-function arrayToHexString(byteArray) {
-    var hexString = "";
-    var nextHexByte;
-
-    for (var i = 0; i < byteArray.byteLength; i++) {
-        nextHexByte = byteArray[i].toString(16);  // Integer to base 16
-        if (nextHexByte.length < 2) {
-            nextHexByte = "0" + nextHexByte;     // Otherwise 10 becomes just a instead of 0a
-        }
-        hexString += nextHexByte;
-    }
-    return hexString;
-}
-
-function arrayBufferToHexString(arrayBuffer) {
-    var byteArray = new Uint8Array(arrayBuffer);
-    var hexString = "";
-    var nextHexByte;
-
-    for (var i = 0; i < byteArray.byteLength; i++) {
-        nextHexByte = byteArray[i].toString(16);  // Integer to base 16
-        if (nextHexByte.length < 2) {
-            nextHexByte = "0" + nextHexByte;     // Otherwise 10 becomes just a instead of 0a
-        }
-        hexString += nextHexByte;
-    }
-    return hexString;
-}
-
 async function deriveAKey(password) {
     var salt = "ume-salt-value-for-derived-key";
     var iterations = 1000;
