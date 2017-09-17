@@ -291,17 +291,18 @@ function onPublish() {
 function deleteDatabase() {
     //window.IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.msIDBTransaction;
     //window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+    window.ume.storage.instance.deleteDatabase('ume');
 
-    window.ume.storage.adapter.deleteDatabase('ume.db');
+    // window.ume.storage.adapter.deleteDatabase('ume.db');
 
-    window.ume.storage.database.deleteDatabase('ume', function () {
-        log('Database Deleted.');
-    });
+    // window.ume.storage.database.deleteDatabase('ume', function () {
+    //     log('Database Deleted.');
+    // });
 
-    window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+    // window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
 
-    // Also make sure we remove the LokiCatalog.
-    window.indexedDB.deleteDatabase('LokiCatalog');
+    // // Also make sure we remove the LokiCatalog.
+    // window.indexedDB.deleteDatabase('LokiCatalog');
 }
 
 var logOutput = document.getElementById('log-output');

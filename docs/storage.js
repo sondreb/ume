@@ -304,7 +304,7 @@ class DbStorage {
 
     async deleteDatabase() {
 
-        await idb.delete(this.dbname);
+        indexedDB.deleteDatabase(this.dbname);
 
         //var db = await idb.open('ume', 1);
 
