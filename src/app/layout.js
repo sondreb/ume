@@ -1,5 +1,6 @@
 /// <reference path="./container.js"/>
 /// <reference path="./markup.js"/>
+/// <reference path="./util.js"/>
 
 var UME_PRV_HEADER = '-- BEGIN UME PRIVATE KEY BLOCK --\n-- Ver: UME v1.0.0.0 --\n';
 var UME_PRV_FOOTER = '-- END UME PRIVATE KEY BLOCK --';
@@ -513,6 +514,35 @@ async function onIdentityOpened(parameters, page) {
     }
 
     return data;
+}
+
+async function onSaveIdentity(source, data) {
+
+    console.log('Saving identity...');
+    
+    // TODO: Add export of public and private key data.
+    var identityId = data.identity.id;
+    var identityIdHex = identityId.split(':').join('');
+    var idArray = CryptoUtil.hexToUint8Array(identityIdHex);
+
+    var identity = await window.ume.storage.instance.get(Identity.name, idArray);
+
+    console.log('Identity', identity); 
+
+    var publicKeyData = await CryptoUtil.exportPublicKey(identity.publicKey);
+    var privateKeyData = await CryptoUtil.exportPrivateKey(identity.privateKey);
+
+    var util = new Util();
+    var publicKeyDataText = util.convertArrayBufferToBase64(publicKeyData);
+    var privateKeyDataText = util.convertArrayBufferToBase64(privateKeyData);
+
+    var identityPublicKeySection = UME_PUB_HEADER + publicKeyDataText + '\n' + UME_PUB_FOOTER; //CryptoUtil.convertUint8ArrayToBase64()
+    var identityPrivateKeySection = UME_PRV_HEADER + privateKeyDataText + '\n' + UME_PRV_FOOTER;
+
+    var identity = identityPublicKeySection + '\n\n' + identityPrivateKeySection;
+
+    //var text = document.getElementById('community-private-key').value;
+    saveFile(identity, 'identity.key');
 }
 
 function findParentWithClass(element, className) {

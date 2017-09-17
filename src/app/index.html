@@ -418,10 +418,17 @@
 
                 </p>
 
+                <p class="input-form">
+                    <input type="hidden" name="identity-id" data-ume-bind="identity.publicFingerprint">
+                    <button data-ume-action="onSaveIdentity">Save Identity to disk</button>
+                    <!-- <button data-ume-action="onSaveCommunityPrivateKey" class="key-button">Save Key to local disk</button> -->
+                </p>
+
                 <h2>Profile</h2>
 
                 <p>These details are shared with your community. If you want to stay entirely anonymous, do not write anything
-                    here. If you want to help community members to recognize you, enter the information you want others to see.
+                    here. If you want to help community members to recognize you, enter the information you want others to
+                    see.
                 </p>
 
                 <p class="input-form">
@@ -713,6 +720,7 @@
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
+    <script src="util.js"></script>
     <script src="crypto.js"></script>
     <script src="storage.js"></script>
     <script src="types.js"></script>
