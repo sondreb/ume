@@ -14,6 +14,26 @@
 </head>
 
 <body>
+
+    <div id="my-app">
+
+        <button data-v-page="welcome">Open Welcome Page</button>
+
+        <div id="page-welcome" data-v-opened="onDetailsOpened">
+            <h1>Welcome page!</h1>
+            <p>This is the introduction.</p>
+            <p>
+                <button data-v-page="details">View details page</button>
+            </p>
+        </div>
+
+        <div id="page-details" data-v-opened="onDetailsOpened">
+            <h1>Details page!</h1>
+            <p>This is the details.</p>
+        </div>
+
+    </div>
+
     <div id="container" class="container">
         <div class="top-bar">
             <div class="top-bar-container">
@@ -720,6 +740,7 @@
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
+    <script src="v.js"></script>
     <script src="util.js"></script>
     <script src="crypto.js"></script>
     <script src="storage.js"></script>

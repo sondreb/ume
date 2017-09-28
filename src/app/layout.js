@@ -1,3 +1,4 @@
+/// <reference path="./v.js"/>
 /// <reference path="./container.js"/>
 /// <reference path="./markup.js"/>
 /// <reference path="./util.js"/>
@@ -519,7 +520,7 @@ async function onIdentityOpened(parameters, page) {
 async function onSaveIdentity(source, data) {
 
     console.log('Saving identity...');
-    
+
     // TODO: Add export of public and private key data.
     var identityId = data.identity.id;
     var identityIdHex = identityId.split(':').join('');
@@ -527,7 +528,7 @@ async function onSaveIdentity(source, data) {
 
     var identity = await window.ume.storage.instance.get(Identity.name, idArray);
 
-    console.log('Identity', identity); 
+    console.log('Identity', identity);
 
     var publicKeyData = await CryptoUtil.exportPublicKey(identity.publicKey);
     var privateKeyData = await CryptoUtil.exportPrivateKey(identity.privateKey);
@@ -558,7 +559,20 @@ function findParentWithClass(element, className) {
     return findParentWithClass(element.parentNode, className);
 }
 
+
+/** Event handlers are regular methods. They take a certain set of parameters */
+async function onDetailsOpened() {
+    console.log('onDetailsOpened!!!');
+}
+
+
 (async function onStart() {
+
+    var app = new V({
+        root: 'my-app',
+        namespace: 'v',
+    });
+
     // Hook up page navigations
     var pageLinks = document.querySelectorAll('[data-ume-page]');
 
