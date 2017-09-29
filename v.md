@@ -1,6 +1,6 @@
 # v.js
 
-v.js is a tiny and quick library for interactive web apps.
+v.js is a tiny (only 350 lines of uncompressed code and 10kb) and quick library for interactive web apps.
 
 If you want a full featured library, look elsewhere.
 
@@ -34,7 +34,25 @@ var app = new V({
 * root: The starting HTML element. You can use multiple V instances that are connected to different HTML elements. If you don't supply the root ID, the body element will be used. This property is the ID of the DOM element, the only selector supported for root element.
 * namespace: The namespace for data-* attributes. The default value is "v", you can specify custom values.
 * app: Creates a new instance of an class where all your event handlers and callback handlers are registered. By default, the V instance will attempt to find the handlers on the global object.
+* start: The id of the start page. If not set, will the first page be used.
+* logging: Enables verbose debug logging.
 
+## Pages
+
+All pages in v.js are simply HTML elements, nothing more and nothing less.
+
+Pages can be either in-line in the same markup as the rest of the page, or they can be dynamically loaded.
+
+
+```html
+<div id="page-welcome" data-v-page>
+    Pages must started with "v-page" (or your custom namespace override) in their IDs.
+</div>
+```
+
+```html
+<div id="page-welcome" data-v-page="page-home.html">Loading...</div>
+```
 
 ## Page Navigation
 
@@ -69,12 +87,13 @@ The parameters are supplied custom parameters to the navigation, and the page is
 
 ## Forms and input
 
-v.js supports basic forms and input. Simply create input fields either with a form element or any HTML element with the class "v-form". Everything with the form, or the element with class "v-form", will be submitted to the action handler.
+v.js supports basic forms and input. Simply create input fields either with a form element or any HTML element with the class "v-form". Everything with the form, or the element with class "v-form", will be submitted to the action handler. Having the option of using any HTML element with the class v-form, allows you to have a virtual form within a normal form. HTML specification does not allow a form within a form.
 
 ```html
-<input type="text" name="profile-nickname">
-
-<button data-v-action="onProfileSave">Save</button>
+<div class="v-form">
+    <input type="text" name="profile-nickname">
+    <button data-v-action="onProfileSave">Save</button>
+</div>
 ```
 
 The handler for actions receives the source and data. The source if the button that triggered the action, and the data contains a nicely formatted structure that maps the properties to individuals objects based on the "-" separator.
@@ -90,9 +109,10 @@ function onProfileSave(source, data) {
 On the page handlers, you can load and set the data object which is then used by the data-v-bind attributes. If we expand the previous example, it will look like this:
 
 ```html
-<input type="text" name="profile-nickname" data-v-bind="profile.nickname">
-
-<button data-ume-action="onProfileSave">Save</button>
+<form>
+    <input type="text" name="profile-nickname" data-v-bind="profile.nickname">
+    <button data-ume-action="onProfileSave">Save</button>
+</form>
 ```
 
 Within the data-v-opened page handler for this page, you must return an object containing a profile structure with a nickname value.
@@ -108,8 +128,31 @@ async function onDetailsOpened(parameters, page) {
 
     return data;
 }
-
 ```
+
+## Styling
+
+To avoid pages being shown during initial load, you can copy the following CSS and include it in the head element of your HTML page. You must replace "v" with your custom namespace if you use that.
+
+```css
+    <style>
+        [data-v-page] {
+        display: none;
+        }
+    </style>
+```
+
+You also need to add this class to all pages, except the starting page.
+
+## Lifecycle Hooks
+
+**OnStart** - called at the very beginning when V is starting up. This occurs before any view parsing.
+
+**OnStarted** - called when start initilization has completed.
+
+**OnNavigation** - global handler for page navigation, can be used as an alternative to specific handlers for each page.
+
+**OnEnd** - called when navigation away from the web app occurs or browser has been closed. You should not rely on this always being called, especially not if the browser crashes.
 
 # License
 
