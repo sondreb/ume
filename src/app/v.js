@@ -2,12 +2,7 @@
 /** v.js is a tiny and quick library for interactive web apps.
  *  v0.0.1
  * 
- * If you want a full featured library, look elsewhere.
- * 
- * v.js only supports the most modern browsers, relies on the latest JavaScript specifications.
- * 
- * It can be used in two manners: global functions or scoped functions attatched to the V instance.
- * 
+ * URL: https://github.com/sondreb/v.js
  */
 export class V {
     constructor(configuration) {
@@ -79,23 +74,49 @@ export class V {
         }
     }
 
+    /** Selects a DOM element based upon the ID if input is a string. Else the same object is returned. */
     el(id) {
-        return document.getElementById(id);
+        if (typeof id === 'string') {
+            return document.getElementById(id);
+        } else {
+            return id;
+        }
     }
 
+    /** Returns all elements using a query selector. */
+    elements(type) {
+        return this.root.querySelectorAll('[' + this.selector + type + ']');
+    }
+
+    /** Sets a style on a DOM element. */
+    style(element, key, value) {
+        element.style[key] = value;
+    }
+
+    /** Hides a DOM element. */
     hide(element) {
-        if (element) {
-            element.style.display = 'none';
+        var domElement = this.el(element);
+
+        if (domElement) {
+            this.style(domElement, 'display', 'none');
         }
     }
 
-    show(element) {
-        if (element) {
-            element.style.display = 'inline-block';
+    /** Shows a DOM element. The "type" parameter can be used to display as block, as oppose to the default "inline-block". */
+    show(element, type) {
+        var domElement = this.el(element);
+
+        if (!type) {
+            type = 'inline-block';
+        }
+
+        if (domElement) {
+            this.style(domElement, 'display', type);
         }
     }
 
-    async page(id) {
+    /** Navigates to a page. */
+    page(id) {
         var self = this;
 
         // Hide the previous active page.
@@ -123,8 +144,7 @@ export class V {
             }
         });
 
-        if (!self.activePage)
-        {
+        if (!self.activePage) {
             self.error('Unable to find a corresponding page for the action. Page name: ' + id);
             return;
         }
@@ -146,40 +166,80 @@ export class V {
         var openedEvent = self.activePage.getAttribute(this.selector + 'opened');
 
         if (openedEvent) {
-            //var data = self.call(openedEvent, parameters, page);
-            //self.bind(page, data);
+            var result = self.call(openedEvent, parameters, self.activePage);
+
+            if (result && result.constructor.name === 'Promise') {
+                result.then((data) => {
+                    self.bind(self.activePage, data);
+                });
+            }
+            else {
+                self.bind(self.activePage, result);
+            }
 
             // Call the opened page and grab the return data structure used for binding.
             //var data = await this.root[openedEvent](parameters, page);
         }
     }
 
-    bind(element, data) {
-        var children = element.children;
-        for (var i = 0; i < children.length; i++) {
-            var child = children[i];
+    sanitizeDataSelector(text) {
+        return text.split('-').join('.');
+    }
 
-            var bindAttribute = child.getAttribute(this.selector + 'bind');
+    bind(element, data) {
+        var bindingElements = element.querySelectorAll('[' + this.selector + 'bind]');
+
+        for (var i = 0; i < bindingElements.length; i++) {
+            var inputElement = bindingElements[i];
+            var bindAttribute = inputElement.getAttribute(this.selector + 'bind');
 
             if (bindAttribute !== null) {
-                var dataValue = this.getData(data, bindAttribute);
+                var dataValue = this.getData(data, this.sanitizeDataSelector(bindAttribute));
 
                 if (dataValue === undefined) {
                     // We'll force the dataValue to be null, so we won't see "undefined" text in input fields.
                     dataValue = null;
                 }
 
-                if (child.nodeName === 'INPUT') {
-                    child.value = dataValue;
+                if (inputElement.nodeName === 'INPUT') {
+                    inputElement.value = dataValue;
+                }
+                else if (inputElement.nodeName === 'SELECT') {
+                    // Clear the existing list so we don't populate with duplicates.
+                    inputElement.innerHTML = '';
+
+                    if (dataValue.constructor.name === 'Array') {
+                        for (var i = 0; i < dataValue.length; i++) {
+                            var optionData = dataValue[i];
+                            var opt = document.createElement('option');
+
+                            // If the structure binded to the list has value/label syntax, use that, if not, use same value for both value and innerText.
+                            if (optionData.label !== undefined) {
+                                opt.value = optionData.value;
+                                opt.innerText = optionData.label;
+                            }
+                            else {
+                                opt.value = optionData;
+                                opt.innerText = optionData;
+                            }
+
+                            inputElement.appendChild(opt);
+                        }
+                    }
+                    else { // If there is only a single value that is not an array, we'll support that by making a single option value.
+                        var opt = document.createElement('option');
+                        opt.value = dataValue;
+                        opt.innerText = dataValue;
+                        inputElement.appendChild(opt);
+                    }
                 } else {
-                    child.innerHTML = dataValue;
+                    inputElement.innerHTML = dataValue;
                 }
             }
-
-            this.bind(child, data);
         }
     }
 
+    /** Get's a field on an object. */
     getData(data, prop) {
         if (typeof data === 'undefined') {
             return;
@@ -194,6 +254,7 @@ export class V {
         return data[prop];
     }
 
+    /** Sets a field on an object. */
     setData(data, prop, value) {
         if (typeof data === 'undefined') {
             return;
@@ -213,7 +274,8 @@ export class V {
         data[prop] = value;
     }
 
-    call(methodName, action, data) {
+    /** Calls a method. */
+    call(methodName, event, source, data) {
         if (methodName.toLowerCase() === 'eval') { // A minor basic attempt to improve security.
             this.log('What are you trying to do?');
             return;
@@ -225,11 +287,11 @@ export class V {
             this.log('Handler not defined for: ' + methodName);
         } else {
             this.log('Calling: ' + methodName);
-            //this.error('Calling: ' + methodName);
-            func(action, data);
+            return func(this, event, source, data);
         }
     }
 
+    /** Downloads files using XMLHttpRequest. */
     download(url, callback) {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function () {
@@ -241,6 +303,28 @@ export class V {
         xhttp.send();
     }
 
+    onAction(event, data) {
+        this.call(event.srcElement.getAttribute(this.selector + 'action'), event, event.srcElement, data);
+    }
+
+    /** Attempts to find an attribute on parents if not exists on child. */
+    findAttribute(element, attributeName) {
+        var attribute = element.getAttribute(this.selector + 'open');
+
+        if (attribute) {
+            return attribute;
+        }
+        else {
+            return this.findAttribute(element.parentElement);
+        }
+    }
+
+    onPage(event) {
+        var attribute = this.findAttribute(event.srcElement);
+        this.page(attribute);
+    }
+
+    /** Initializes a page. */
     initPage(page) {
         var self = this;
 
@@ -282,52 +366,86 @@ export class V {
             var actionLinks = self.root.querySelectorAll('[' + this.selector + 'action]');
 
             actionLinks.forEach((action) => {
-                action.addEventListener('click', (source) => {
-                    // Find all input element contained within the parent element that has a class named "input-form".
-                    // var inputForm = findParentWithClass(action, 'input-form');
 
-                    // if (inputForm) {
-                    //     var inputElements = inputForm.getElementsByTagName('input');
+                // Make sure we don't initialize again.
+                if (action.getAttribute(this.selector + 'init') === 'true') {
+                    return;
+                }
 
-                    //     var data = {
-                    //     };
+                // Since we need to gain access to the scoped elements within this method inside the click handler, it
+                // must be registered with in-line method as oppose to a simple handler functions (if we want to avoid global instance reference).
+                action.addEventListener('click', (e) => {
+                    var data = null;
 
-                    //     for (var i = 0; i < inputElements.length; i++) {
-                    //         var input = inputElements[i];
+                    // If the action source has a form connected, we'll parse it and supply it's content to the action handler.
+                    if (e.srcElement.form) {
+                        var inputElements = e.srcElement.form.getElementsByTagName('input');
+                        var selectElements = e.srcElement.form.getElementsByTagName('select');
 
-                    //         var id = input.name.replace('-', '.');
-                    //         var value = input.value;
+                        data = {
+                        };
 
-                    //         setData(data, id, value);
+                        for (var i = 0; i < inputElements.length; i++) {
+                            var input = inputElements[i];
 
-                    //         // Replace the form input fields.
-                    //         input.value = null;
-                    //     }
-                    // }
+                            if (input.name === '') {
+                                continue;
+                            }
 
-                    var data = {};
+                            var id = this.sanitizeDataSelector(input.name);
+                            var value = input.value;
 
-                    self.call(action.getAttribute(this.selector + 'action'), action, data);
+                            this.setData(data, id, value);
+
+                            // Replace the form input fields.
+                            input.value = null;
+                        }
+
+                        for (var i = 0; i < selectElements.length; i++) {
+                            var select = selectElements[i];
+
+                            if (select.name === '') {
+                                continue;
+                            }
+
+                            var id = this.sanitizeDataSelector(select.name);
+                            var value = select.value;
+
+                            this.setData(data, id, value);
+
+                            // Replace the form input fields.
+                            //select.value = null;
+                        }
+                    }
+
+                    self.onAction(e, data);
                 });
+
+                action.setAttribute(this.selector + 'init', 'true');
             });
 
             // Hook up page navigations
             var pageLinks = this.root.querySelectorAll('[' + this.selector + 'open]');
 
             pageLinks.forEach((action) => {
-                action.addEventListener('click', () => {
-                    this.page(action.getAttribute(this.selector + 'open'));
+
+                // Make sure we don't initialize again.
+                if (action.getAttribute(this.selector + 'init') === 'true') {
+                    return;
+                }
+
+                action.addEventListener('click', (e) => {
+                    self.onPage(e);
                 });
+
+                action.setAttribute(this.selector + 'init', 'true');
             });
 
         }
     }
 
-    elements(type) {
-        return this.root.querySelectorAll('[' + this.selector + type + ']');
-    }
-
-    _hidePages() {
+    /** Hides all pages. */
+    hidePages() {
         var self = this;
 
         // Hide all defined pages by default.
@@ -340,13 +458,14 @@ export class V {
         return pages;
     }
 
+    /** Initialize method for v.js. */
     init() {
         var self = this;
-        
+
         this.call('onStart');
 
         // Hide all the pages initially.
-        var pages = this._hidePages();
+        var pages = this.hidePages();
 
         // Find the start page or select the first available page.
         var startPage = null;
@@ -368,48 +487,6 @@ export class V {
         }
 
         this.initPage(startPage);
-
-        return;
-
-        // Hook up page navigations
-        var pageLinks = this.root.querySelectorAll('[' + this.namespace + 'page]');
-
-        pageLinks.forEach((action) => {
-            action.addEventListener('click', () => {
-                this.page(action.getAttribute(this.namespace + 'page'));
-            });
-        });
-
-        // Hook up actions
-        var actionLinks = document.querySelectorAll('[' + this.namespace + 'action]');
-
-        actionLinks.forEach((action) => {
-            action.addEventListener('click', (source) => {
-                // Find all input element contained within the parent element that has a class named "input-form".
-                var inputForm = findParentWithClass(action, 'input-form');
-
-                if (inputForm) {
-                    var inputElements = inputForm.getElementsByTagName('input');
-
-                    var data = {
-                    };
-
-                    for (var i = 0; i < inputElements.length; i++) {
-                        var input = inputElements[i];
-
-                        var id = input.name.replace('-', '.');
-                        var value = input.value;
-
-                        setData(data, id, value);
-
-                        // Replace the form input fields.
-                        input.value = null;
-                    }
-                }
-
-                window[action.getAttribute(this.namespace + 'action')](action, data);
-            });
-        });
 
         window.onbeforeunload = function (event) {
             self.call('onEnd');

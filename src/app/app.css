@@ -20,6 +20,21 @@ h1 {
     margin: 0;
 }
 
+#loading {
+    background: #6DA5AF;
+    background: linear-gradient(to bottom right, #6DA5AF, #5d878f);
+    position: absolute;
+    z-index: 1000;
+    background-color: silver;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    padding-top: 100px;
+    font-size: 2rem;
+}
+
 .action {
     cursor: pointer;
 }

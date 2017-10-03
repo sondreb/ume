@@ -568,10 +568,10 @@ async function onDetailsOpened() {
 
 (async function onStart() {
 
-    var app = new V({
-        root: 'my-app',
-        namespace: 'v',
-    });
+    // var app = new V({
+    //     root: 'my-app',
+    //     namespace: 'v',
+    // });
 
     // Hook up page navigations
     var pageLinks = document.querySelectorAll('[data-ume-page]');

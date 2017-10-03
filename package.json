@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "watch-http-server src/app",
+    "start": "watch-http-server ./src/app",
     "start-test": "watch-http-server tests",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,19 +1,12 @@
 import { V } from './v.js';
-import { MyApp } from './v-app.js';
-
-// Sample that relies on globally defined handlers.
-var appHeader = new V({
-    root: 'header',
-    logging: true
-});
+import { ume } from './v-app.js';
 
 // Sample that relies on a class instance for handlers.
 var app = new V({
-    root: 'my-app',
     selector: 'v',
     logging: true,
     start: 'page-home',
-    app: new MyApp()
+    app: new ume()
 });
 
 // Even though these variables are not initialized within a class, they are not registered globally.

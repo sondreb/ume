@@ -1,0 +1,63 @@
+<i class="material-icons float-right">security</i>
+<i class="material-icons float-right action" data-ume-page="security">chevron_left</i>
+<h1>Identity</h1>
+
+<p>
+    Identities are cryptographic entities that consists of a public key used for encryption, and another key for verification
+    (message integrity).
+</p>
+
+<p>There are no requirement to add additional profile information on an identity, but if you want to, you can
+    edit your profile which is connected to your identities and those details will be shared with the others
+    in a community.
+</p>
+
+<p>
+    Public key fingerprint:
+    <br>
+    <span class="mono" data-ume-bind="identity.publicFingerprint"></span>
+</p>
+
+<p>
+    Public verify fingerprint:
+    <br>
+    <span class="mono" data-ume-bind="identity.verifyFingerprint"></span>
+
+</p>
+
+<p class="input-form">
+    <input type="hidden" name="identity-id" data-ume-bind="identity.publicFingerprint">
+    <button data-ume-action="onSaveIdentity">Save Identity to disk</button>
+    <!-- <button data-ume-action="onSaveCommunityPrivateKey" class="key-button">Save Key to local disk</button> -->
+</p>
+
+<h2>Profile</h2>
+
+<p>These details are shared with your community. If you want to stay entirely anonymous, do not write anything
+    here. If you want to help community members to recognize you, enter the information you want others to
+    see.
+</p>
+
+<p class="input-form">
+    <input type="hidden" name="identity-id" data-ume-bind="identity.publicFingerprint">
+    <span>Nickname:</span>
+    <input type="text" name="profile-nickname" data-ume-bind="profile.nickname">
+    <br>
+    <span>Name:</span>
+    <input type="text" name="profile-name" data-ume-bind="profile.name">
+    <br>
+    <span>E-mail:</span>
+    <input type="text" name="profile-email" data-ume-bind="profile.email">
+    <br>
+    <span>Phone:</span>
+    <input type="text" name="profile-phone" data-ume-bind="profile.phone">
+    <br>
+    <span>Location:</span>
+    <input type="text" name="profile-location" data-ume-bind="profile.location">
+    <br>
+    <br>
+    <button data-ume-action="onProfileSave">Save and Publish profile</button>
+</p>
+<!-- <div id="identity-details">
+
+</div> -->

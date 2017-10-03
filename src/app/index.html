@@ -11,331 +11,30 @@
     <meta name="theme-color" content="#6DA5AF">
     <meta name="msapplication-navbutton-color" content="#6DA5AF">
     <meta name="apple-mobile-web-app-status-bar-style" content="#6DA5AF">
+    <style>
+        [data-v-page] {
+            display: none;
+            box-sizing: border-box;
+            min-height: 400px;
+            width: 100%;
+            /*border: 4px solid gray;*/
+/*            margin-top: 10px;
+            padding: 30px;*/
+        }
+    </style>
 </head>
 
 <body>
-
-    <div id="my-app">
-
-        <button data-v-page="welcome">Open Welcome Page</button>
-
-        <div id="page-welcome" data-v-opened="onDetailsOpened">
-            <h1>Welcome page!</h1>
-            <p>This is the introduction.</p>
-            <p>
-                <button data-v-page="details">View details page</button>
-            </p>
-        </div>
-
-        <div id="page-details" data-v-opened="onDetailsOpened">
-            <h1>Details page!</h1>
-            <p>This is the details.</p>
-        </div>
-
-    </div>
+    <div id="loading">üme starting... please wait...</div>
 
     <div id="container" class="container">
         <div class="top-bar">
             <div class="top-bar-container">
                 <input type="text" />
-                <i class="material-icons action" data-ume-page="search">search</i>
-                <!-- <button>Search</button> -->
+                <i class="material-icons action" data-ume-open="search">search</i>
             </div>
         </div>
         <div id="content" class="content">
-
-            <div class="page page-open" id="page-home">
-                <h1>
-                    Hi, welcome to üme, the collaborative community!
-                </h1>
-
-                <p>
-                    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you
-                    are both the host of the community and a member.
-                </p>
-
-                <button data-ume-page="introduction">Read the introduction...</button>
-
-                <p class="warning-card">
-                    WARNING: THIS IS AN UNRELEASED SOFTWARE. DO NOT USE FOR ANYTHING. WAIT FOR THE RELEASE.
-                </p>
-
-                <!-- <p>&nbsp;</p>
-                <p>
-                    <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
-                    <div class="action-item" data-ume-page="communities"><i class="material-icons">donut_small</i> Communities</div>
-                    <div class="action-item" data-ume-page="security"><i class="material-icons">security</i> Security</div>
-                    <div class="action-item" data-ume-page="clear"><i class="material-icons">delete_forever</i> Clear Device</div>
-                    <div class="action-item" data-ume-page="settings"><i class="material-icons">settings</i> Settings</div>
-                </p> -->
-            </div>
-            <div class="page" id="page-introduction">
-
-                <h1>
-                    Hi, welcome to üme, the collaborative community!
-                </h1>
-
-                <p>
-                    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you
-                    are both the host of the community and a member.
-                </p>
-
-                <p>üme is also special in another way, and that is how it enables community members to be anonymous and secure
-                    in their communication.
-                </p>
-
-                <p>Since üme only runs in your browser, and the browser is inherently insecure, no garantue can be give in regards
-                    to your privacy. All communication is secured with encryption and digital signatures. It is important
-                    that you trust the content in your community, so every message is signed by the creator.
-                </p>
-
-                <p>
-                    It is important that at least two member is online in the community to ensure that data is sent. The community owner must
-                    be online for new members to be able to join. Only the community owner's device can verify invitations.
-                </p>
-
-                <p>üme relies on a gateway for sending messages to all community members, this ensure that individual community
-                    members cannot discover the IP address of another user. The gateway is open source, but don't use a gateway
-                    host you don't trust, as the gateway could be modified to log the members IP addresse. Even with a log
-                    of IP addresses, all messages communicated are encrypted and cannot easily be decrypted. You should combine
-                    the use of üme with Tor Project and/or Virtual Private Network (VPN).
-                </p>
-
-                <p>
-                    All the content of a community is stored in an unencrypted manner in the web browser. If your device is stolen, the information
-                    can be accessed. There is an option to entirely delete local cache and always restore a community from
-                    the other members. This is a handy feature to use if accessing a community using someone elses computer
-                    or at an internet café.
-                </p>
-
-                <p>
-                    The app have a very easy functionality to take local backup copies of your communities, make sure you use them often.
-                </p>
-
-                <p>
-                    By using üme, you are accepting that the use of this app is entirely on your own responsbility. No guarantee is given by
-                    the developers, and we advice you to review the
-                    <a href="https://github.com/sondreb/ume" target="_blank">üme source code</a> at any time.
-                </p>
-                <i class="material-icons">favorite_border</i>
-                <p>
-                    <button data-ume-page="home">Go back...</button>
-                </p>
-            </div>
-            <div class="page" id="page-create">
-                <i class="material-icons float-right">add</i>
-                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
-                <h1>Create</h1>
-
-                <p>You can create posts, communities, invites and more on this page.</p>
-                <div class="action-item" data-ume-page="create-post">
-                    <i class="material-icons">comment</i> New post</div>
-                <br>
-                <div class="action-item" data-ume-page="create-community">
-                    <i class="material-icons">donut_small</i> New community</div>
-                <br>
-                <div class="action-item" data-ume-page="create-invite">
-                    <i class="material-icons">vpn_key</i> New invite</div>
-                <br>
-                <div class="action-item" data-ume-page="restore-pass-phrase">
-                    <i class="material-icons">restore</i> Restore from pass phrase</div>
-                <br>
-                <br>
-
-                <!-- <i class="material-icons">verified_user</i>
-                <i class="material-icons">contact_mail</i>
-                <i class="material-icons">vpn_key</i>
-                <i class="material-icons">question_answer</i>
-                <i class="material-icons">restore</i>
-                <i class="material-icons">comment</i>
-                <i class="material-icons">message</i> -->
-
-            </div>
-
-            <div class="page" id="page-create-post">
-                <i class="material-icons float-right">comment</i>
-                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
-                <h1>New post</h1>
-                <p>Posts are your means of communication within a community. It allows for basic text editor and topics.</p>
-                <p>
-                    Community:
-                    <br>
-                    <select>
-                        <option>31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Friday Fun! </option>
-                        <option>52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | üme planning group</option>
-                        <option>62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</option>
-                    </select>
-                </p>
-                <p>
-                    Channel:
-                    <br>
-                    <input type="text" />
-                </p>
-                <p>
-                    <textarea class="post-text">
-
-                        </textarea>
-                </p>
-                <p>
-                    <button class="key-button">Publish</button>
-                </p>
-            </div>
-
-            <div class="page" id="page-create-community" data-ume-opened="onCreateCommunityOpened">
-                <i class="material-icons float-right">donut_small</i>
-                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
-                <h1>New community</h1>
-                <p>You can create any number of new communities. When you create a community, you become the sole owner of the
-                    community.
-                </p>
-                <p>It is important that you keep a backup of your private key and pass phrase, in case you loose your data or
-                    change device.</p>
-                <p>As the owner of a community, you can invite new members, archieve the community (make it read-only) and delete
-                    the community (members can make a decision to save backup before removing).</p>
-                <p>Running a community comes with some responsibility. You need to be online for new members to activate their
-                    invitation. For security reasons, the invites are only stored on the owner's device.</p>
-                <p>A community with no other users, will never be synchronized online and can never be restored from pass phrase.
-                    Make sure you invite someone to join your community.</p>
-                <p>In the future, it might be possible for a community owner to remove a post done by other users.</p>
-
-
-                <button data-ume-action="onGenerateCommunity">Generate Community</button>
-                <br>
-                <br>
-
-                <h2>1. Community key pair</h2>
-
-                <p>Restoring a community using the private key does not require other users to be connected, but you will not
-                    receive any existing posts until others have connected.</p>
-
-                <p>
-                    Private Key:
-                    <textarea id="community-private-key" class="key-text" readonly></textarea>
-                    <button data-ume-action="onSaveCommunityPrivateKey" class="key-button">Save Key to local disk</button>
-                </p>
-
-                <p>
-                    Public Key:
-                    <textarea id="community-public-key" class="key-text" readonly></textarea>
-                    <button data-ume-action="onSaveCommunityPublicKey" class="key-button">Save Key to local disk</button>
-                </p>
-                <br>
-
-                <h2>2. Pass phrase for community restore</h2>
-                <p>The following pass phrase must be remembered or save, to make it possible to restore a community ownership
-                    on another device. Restoring a community from the pass phrase, require at least one other member to be
-                    connected. A tip when storing the pass phrase, is to modify the words slightly, perhaps exchange one
-                    word for another that only you remember. If stolen, then it is useless unless they know what you changed.
-                </p>
-                <p>
-                    Pass phrase:
-                    <textarea id="community-pass-phrase" class="key-text" readonly></textarea>
-                    <button data-ume-action="onSaveCommunityPassPhrase" class="key-button">Save Pass phrase to local disk</button>
-                </p>
-                <br>
-
-                <h2>3. Community details</h2>
-                <p>
-                    No details for the community is required to fill out. You can leave all fields empty, you can change them later. Remember
-                    the community Id for the next screen, when you will generate invitations to this community.
-                </p>
-                <p>
-                    ID:
-                    <input id="community-id" readonly type="text" />
-                </p>
-                <p>
-                    Name:
-                    <input id="community-name" type="text" />
-                </p>
-                <p>
-                    Description:
-                    <input id="community-description" type="text" />
-                </p>
-                <p>
-                    Icon:
-
-                </p>
-                <br>
-
-                <h2>4. Gateway affinity</h2>
-                <p>
-                    A community can be locked to a specific gateway, or it can be broadcasted on all your registered gateways.
-                </p>
-                <p>
-                    Gateway:
-                    <select id="gateway-select-list">
-                    </select>
-                </p>
-                <br>
-
-                <h2>5. Save community</h2>
-                <p>The final step is to save a community. This will persist the community key pair to your currenct device.
-                    Next step will be to invite members to join your community, including yourself.</p>
-                <p>Yes, that is right. To be able to gain access to this new community, you need to invite yourself.</p>
-                <p>
-                    <button data-ume-action="onSaveCommunity">Save</button>
-                </p>
-                <br>
-
-            </div>
-
-            <div class="page" id="page-create-invite" data-ume-opened="onCreateInviteOpened">
-                <i class="material-icons float-right">vpn_key</i>
-                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
-                <h1>New invite</h1>
-                <p>You can create any number of invites to communities you own.
-                </p>
-                <p>You have to be online for members to activate their invites.</p>
-                <p>Invites are only stored locally on this device, if you run "Clear Device" and restore on another, the invites
-                    will no longer be valid.</p>
-                <p>Invites are single-use.</p>
-                <p>Invites can include information about gateway. This can be used to simplify the experience for new members,
-                    but it exposes the gateway used by the community. Do not include the gateway in the invitation for additional
-                    secure, and communicate the gateway with the member through other secure channels.</p>
-
-                <p>
-                    Community:
-                    <select id="community-invite-list"></select>
-                </p>
-
-                <p>
-                    Gateway:
-                    <select id="gateway-invite-list"></select>
-                </p>
-
-                <button data-ume-action="onGenerateInvite">Generate Invite</button>
-                <br>
-                <br>
-
-                <h2>Invite</h2>
-                <p>The generated invite is valid until you as community owner, deletes it from the invitation list (available
-                    within the community). The invite should be sent using a secure channel.</p>
-                <p>
-                    Invitation:
-                    <textarea id="invitation-text" class="key-text" readonly></textarea>
-                    <button data-ume-action="onSaveInvite" class="key-button">Save invitation to local disk</button>
-                </p>
-
-            </div>
-
-            <div class="page" id="page-restore-pass-phrase">
-                <i class="material-icons float-right">vpn_key</i>
-                <i class="material-icons float-right action" data-ume-page="create">chevron_left</i>
-                <h1>Restore from pass phrase</h1>
-                <p>You can restore both a community and your membership with a pass phrase. Simply fill out and we'll attempt
-                    to restore.
-                </p>
-                <p>If there are no members in the community online, you cannot restore. We'll let you know if there are nobody
-                    online.
-                </p>
-                <p>
-                    Pass phrase:
-                    <textarea class="key-text"></textarea>
-                    <button class="key-button">Restore</button>
-                </p>
-                <br>
-
-            </div>
 
             <div class="page" id="page-search">
                 <i class="material-icons float-right">search</i>
@@ -344,354 +43,27 @@
                 <p>Nothing found.</p>
             </div>
 
-            <div class="page" id="page-community" data-ume-opened="onCommunityOpened">
-                <i class="material-icons float-right">hot_tub</i>
-                <i class="material-icons float-right action" data-ume-page="communities">chevron_left</i>
-                <h1 id="community-view-name">NAME</h1>
-                <p id="community-view-id">ID</p>
+            <div class="page page-open" id="page-home" data-v-page="home|views/home.html" data-v-opened="onHome"></div>
+            <div class="page" id="page-introduction" data-v-page="introduction|views/home-introduction.html"></div>
+            <div class="page" id="page-create" data-v-page="create|views/create.html" data-v-opened="onCreate"></div>
+            <div class="page" id="page-create-post" data-v-page="create-post|views/create-post.html" data-v-opened="onCreatePost"></div>
+            <div class="page" id="page-create-community" data-v-page="create-community|views/create-community.html" data-v-opened="onCreateCommunity"></div>
+            <div class="page" id="page-create-invite" data-v-page="create-invite|views/create-invite.html" data-v-opened="onCreateInvite"></div>
+            <div class="page" id="page-restore-pass-phrase" data-v-page="restore-pass-phrase|views/restore.html" data-v-opened="onRestore"></div>
+            <div class="page" id="page-community" data-v-page="community|views/community.html" data-v-opened="onCommunity"></div>
+            <div class="page" id="page-communities" data-v-page="communities|views/communities.html" data-v-opened="onCommunities"></div>
+            <div class="page" id="page-identity" data-v-page="identity|views/identity.html" data-v-opened="onIdentityOpened"></div>
+            <div class="page" id="page-security" data-v-page="security|views/security.html" data-v-opened="onSecurityOpened"></div>
+            <div class="page" id="page-security-introduction" data-v-page="security-introduction|views/security-introduction.html"></div>
+            <div class="page" id="page-clear" data-v-page="clear|views/clear.html"></div>
+            <div class="page" id="page-settings" data-v-page="settings|views/settings.html" data-v-opened="onSettingsOpened"></div>
 
-                <p id="community-view-description">DESCRIPTION</p>
-
-                <h2>Topics</h2>
-                <p>
-                    Memes (20)
-                    <br> I forgot it's Friday! (4)
-                    <br> Random (325)
-                    <br>
-                </p>
-
-                <h2>Members</h2>
-                <p>
-                    22PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | John Doe
-                    <br> x2PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
-                    <br> 87PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA= | Mr. Nick (nick@gmail.com)
-                    <br>
-                </p>
-
-
-            </div>
-
-            <div class="page" id="page-communities" data-ume-opened="onCommunitiesOpened">
-                <i class="material-icons float-right">donut_small</i>
-                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
-                <h1>Communities</h1>
-
-                <p>These are the communities that you have joined or have created.</p>
-
-                <div id="communities-list">
-
-                </div>
-
-                <!-- <br><br><br><br>
-
-                <p class="community-item">
-                    <i class="material-icons community-icon">free_breakfast</i>
-                    <i class="material-icons float-right action" data-ume-page="community">chevron_right</i>
-                    <strong>Friday Fun!</strong><br>
-                    <span class="community-item-id">31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 12<br>                    Latest post: 2017-09-03 15:03<br>
-                </p>
-
-                <p class="community-item">
-                    <i class="material-icons community-icon">hot_tub</i>
-                    <i class="material-icons float-right action" data-ume-page="community">chevron_right</i>
-                    <strong>üme planning group</strong><br>
-                    <span class="community-item-id">52PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 4<br>                    Latest post: 2017-09-03 12:20<br>
-                </p>
-
-                <p class="community-item">
-                    <i class="material-icons community-icon">cake</i>
-                    <i class="material-icons float-right action" data-ume-page="community">chevron_right</i>
-                    <span class="community-item-id">62PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=</span><br> Posts: 354<br>                    Latest post: 2017-09-03 16:03<br>
-                </p> -->
-
-                <!-- <p>Apperas to be a bit empty here. Do you want to join existing community or create a new one?</p>
-                <p>
-                    <div class="action-item" data-ume-page="create"><i class="material-icons">add</i> Create</div>
-                </p> -->
-            </div>
-
-            <div class="page" id="page-identity" data-ume-opened="onIdentityOpened">
-                <i class="material-icons float-right">security</i>
-                <i class="material-icons float-right action" data-ume-page="security">chevron_left</i>
-                <h1>Identity</h1>
-
-                <p>
-                    Identities are cryptographic entities that consists of a public key used for encryption, and another key for verification
-                    (message integrity).
-                </p>
-
-                <p>There are no requirement to add additional profile information on an identity, but if you want to, you can
-                    edit your profile which is connected to your identities and those details will be shared with the others
-                    in a community.
-                </p>
-
-                <p>
-                    Public key fingerprint:
-                    <br>
-                    <span class="mono" data-ume-bind="identity.publicFingerprint"></span>
-                </p>
-
-                <p>
-                    Public verify fingerprint:
-                    <br>
-                    <span class="mono" data-ume-bind="identity.verifyFingerprint"></span>
-
-                </p>
-
-                <p class="input-form">
-                    <input type="hidden" name="identity-id" data-ume-bind="identity.publicFingerprint">
-                    <button data-ume-action="onSaveIdentity">Save Identity to disk</button>
-                    <!-- <button data-ume-action="onSaveCommunityPrivateKey" class="key-button">Save Key to local disk</button> -->
-                </p>
-
-                <h2>Profile</h2>
-
-                <p>These details are shared with your community. If you want to stay entirely anonymous, do not write anything
-                    here. If you want to help community members to recognize you, enter the information you want others to
-                    see.
-                </p>
-
-                <p class="input-form">
-                    <input type="hidden" name="identity-id" data-ume-bind="identity.publicFingerprint">
-                    <span>Nickname:</span>
-                    <input type="text" name="profile-nickname" data-ume-bind="profile.nickname">
-                    <br>
-                    <span>Name:</span>
-                    <input type="text" name="profile-name" data-ume-bind="profile.name">
-                    <br>
-                    <span>E-mail:</span>
-                    <input type="text" name="profile-email" data-ume-bind="profile.email">
-                    <br>
-                    <span>Phone:</span>
-                    <input type="text" name="profile-phone" data-ume-bind="profile.phone">
-                    <br>
-                    <span>Location:</span>
-                    <input type="text" name="profile-location" data-ume-bind="profile.location">
-                    <br>
-                    <br>
-                    <button data-ume-action="onProfileSave">Save and Publish profile</button>
-                </p>
-                <!-- <div id="identity-details">
-
-                </div> -->
-
-            </div>
-
-            <div class="page" id="page-security" data-ume-opened="onSecurityOpened">
-                <i class="material-icons float-right">security</i>
-                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
-                <h1>Security</h1>
-
-                <p>
-                    üme has security as the most importance concern. It is built to ensure your privacy and security. All details regarding security
-                    implementation details are publicly available and source code is available for review. Before you use
-                    üme, you should familiar yourself with the security introduction.
-                </p>
-
-                <p>
-                    <button data-ume-page="security-introduction">Read the security introduction...</button>
-                </p>
-
-                <h2>Your identities</h2>
-
-                <p>When you create a new community, üme will auto-generate a new identity for you. The list below are all identities
-                    that are persisted on your current device.</p>
-                <p>You can create unlimited amount of identities for any number of forums, by creating or receiving multiple
-                    community invites. When you have multiple identities available for a specific forum, you can choose which
-                    identity to use for a post.
-                </p>
-
-                <div id="identities-list">
-
-                </div>
-
-
-            </div>
-
-            <div class="page" id="page-security-introduction">
-                <i class="material-icons float-right">security</i>
-                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
-                <h1>Security introduction</h1>
-
-                <p>
-                    üme has security as the most importance concern. It is built to ensure your privacy and security. All details regarding security
-                    implementation details are publicly available and source code is available for review. Before you use
-                    üme, you should familiar yourself with the security introduction.
-                </p>
-
-                <p>
-                    <ul class="list">
-                        <li>The app and gateway does not at any time retrieve your IP address or any unique device IDs. Before
-                            though of rouge gateway hosts, which could do IP-logging. Use gateways you trust.</li>
-                        <li>The gateway receives no messages that it can decrypt in any way. The gateway have no capability to
-                            read any metadata from messages.</li>
-                        <li>All content is stored in clear-text and unencrypted within the web browser. If your device is stolen,
-                            the community information can be read from the device.</li>
-                        <li>All content in a community can at any time be exported to a text-based format (JSON) by anyone with
-                            access to the community.</li>
-                        <li>Users can stay entirely anonymous with only a unique identifier as their "nickname". Membership to
-                            different communities, will give different unique identifiers and different set of public/private
-                            keys.
-                        </li>
-                        <li>The web browser is notoriously **not a very secure** and safe environment. The possibility of XSS
-                            (Cross-Side-Scripting) attacks and other forms of attacks on üme, could leak information and
-                            your private keys. There are no way around this, as long as the app is built to run within the
-                            web browser without any plugins and installations.</li>
-                        <li>If you need privacy and safety of information on a device or computer that can be **lost or stolen**,
-                            do not rely on üme. If you still use üme and want better security, ensure you are using disk
-                            encryption on your harddrive.</li>
-                        <li>üme is based on the
-                            <a href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm">ECDSA</a> (Elliptic Curve Digital Signature Algorithm) for message signing and integrity checking
-                            and uses
-                            <a href="https://en.wikipedia.org/wiki/Elliptic_curve_Diffie%E2%80%93Hellman">ECDH</a> for sharing secret keys. And finally it relies on
-                            <a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES-GCM</a> for symmetric encryption of content.</li>
-                    </ul>
-                </p>
-
-                <h2>FAQ</h2>
-
-                <p>
-                    Q: Why was üme built?
-                </p>
-                <p>
-                    A: It was built for the challenge of building a highly secure and anonymous forum that did not require any infrastructure.
-                    Being able to create ad-hoc communities that only lasts for a project or certain amount of time, is something
-                    üme is good for.
-                </p>
-                <p>
-                    It also allows for people who don't want to use other social networks, which require a lot of personal information details
-                    and does extensive logging and analysis of user patterns and everything that we share, to still be social
-                    in a manner where the user decides how much information they want to share. The only requirement for
-                    a user is a unique identifier derived from the public key. If you don't want to share nickname, real-name
-                    or other contanct details, you don't have to.
-                </p>
-
-                <p>
-                    Q: Will there be an üme app for mobile devices?
-                </p>
-                <p>
-                    A: No, the app only supports running in the web browser.
-                </p>
-
-                <p>
-                    Q: Are the content and security keys stored safely in the web browser?
-                </p>
-                <p>
-                    A: No. There are few options to store local information in an encrypted and secure manner when only relying on the web browser.
-                    Developing a Cordova and/or Electron container could enable more secure local storage.
-                </p>
-
-                <p>
-                    Q: Can I use üme to share sensitive and secret information?
-                </p>
-                <p>
-                    A: While the app has been built for security and privacy as the main reasons for existing, you should not rely on üme for
-                    sensitive and secret information. This is an open source project with limited resources available for
-                    security review and monitoring of potential hacks, exploits, etc.
-                </p>
-
-                <h2>The future</h2>
-
-                <p>There are many ways to improve the security and the functionality, some potential ideas that will be investigated
-                    and potentially developed:</p>
-
-                <p>Time-to-life (TTL): Allowing messages to be self-destructed after a set time. This obviously won't be 100%
-                    secure, if a user takes backup of their local community using third-party code, the TTL messages can
-                    be saved to local disk and persisted. If a message has TTL, should it be part of a regular community
-                    backup?
-                    <br> TTL on message would make it possible to have time-sensitive announcements, e.g. "Concert next weekend!"
-                    and have those disappear when they are no longer of any value.
-                </p>
-
-                <p>Elektron app: Package the web app into an elektron app, allowing users to download the app for OS X, Linux
-                    and Windows.</p>
-
-                <p>Improved UX: The app is currently built with extensive informational texts, the plan is to redo the UX and
-                    make it more user friendly with wizards and walkthroughs that shows multiple screens, as oppose to single
-                    screen with lots of options.
-                </p>
-
-                <h2>Disclaimer</h2>
-
-                <p>
-                    Any operations on the file system is prone to problems. Using üme is done under no warranty. Make sure you take backups before
-                    using üme.
-
-                    <p>The developers gives no guarantee that information created and published using üme won't be lost for
-                        any reason at any time.
-                    </p>
-                    <p>While great care is taken to avoid problems, you are using the app under your own risk. If you loose
-                        your private keys, you won't be able to manage your existing content and you need a new invitation
-                        to gain access to the community. Keep your keys safe on preferably external storage (USB stick).
-                    </p>
-
-                    <i class="material-icons">favorite_border</i>
-                    <p>
-                        <button data-ume-page="security">Go back...</button>
-                    </p>
-
-            </div>
             <div class="page" id="page-backup">
                 BACKUP
             </div>
+
             <div class="page" id="page-keys">
                 KEYS
-            </div>
-            <div class="page" id="page-clear">
-                <i class="material-icons float-right">delete_forever</i>
-                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
-                <h1>Clear Device</h1>
-                <p>
-                    To protect your privacy, you can clear this device of all community data.
-                </p>
-                <p>
-                    BEWARE: If you clear the device, all your keys will be lost. Make sure you have a backup of your keys or remember your pass
-                    phrase.
-                </p>
-                <p>
-                    <div class="action-item" data-ume-page="backup">
-                        <i class="material-icons">cloud_download</i> Backup first</div>
-                </p>
-                <p>
-                    The data wipe removes data from your browser cache. If the device is stolen, the data can potentially still be retrieved
-                    by recovering deleted files on the harddrive. After you wipe all data, restart the browser, go back to
-                    üme and verify data is wiped.
-                </p>
-                <p>
-                    <div class="action-item" data-ume-action="onWipeData">
-                        <i class="material-icons">delete_forever</i> Wipe all data on device</div>
-                </p>
-                <p class="warning-card hidden" id="wipe-success">
-                    Success. All data was wiped. Close the window or tab to exit üme.
-                </p>
-            </div>
-
-            <div class="page" id="page-settings" data-ume-opened="onSettingsOpened">
-                <i class="material-icons float-right">settings</i>
-                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
-                <h1>Settings</h1>
-
-                <p>To begin using üme, you need to be connected to at least one gateway. Manage your gateway connections below.</p>
-
-                <h2>Add gateway</h2>
-
-                <p class="input-form">
-                    <span>Name:</span>
-                    <input name="gateway-name" type="text" />
-                    <br>
-                    <span>URL:</span>
-                    <input name="gateway-url" type="text" />
-                    <br>
-                    <button data-ume-action="onGatewaySave">Save Gateway</button>
-                </p>
-
-                <h2>Gateways</h2>
-
-                <p id="gateway-list">
-
-                </p>
-
-
             </div>
 
         </div>
@@ -700,13 +72,13 @@
         <div class="menu-container">
 
             <div class="opened logo">
-                <i class="material-icons action menu-button menu-item" data-ume-action="toggleMenu">chevron_left</i>
-                <h1 class="title-opened app-title" data-ume-page="home">üme</h1>
+                <i class="material-icons action menu-button menu-item" data-v-action="toggleMenu">chevron_left</i>
+                <h1 class="title-opened app-title" data-v-open="home">üme</h1>
             </div>
 
             <div class="closed logo">
-                <i class="material-icons action menu-button menu-item" data-ume-action="toggleMenu">chevron_right</i>
-                <h1 class="title-closed app-title" data-ume-page="home">üme</h1>
+                <i class="material-icons action menu-button menu-item" data-v-action="toggleMenu">chevron_right</i>
+                <h1 class="title-closed app-title" data-v-open="home">üme</h1>
             </div>
 
             <!-- <i class="material-icons action menu-button" id="menu-button">all_inclusive</i> -->
@@ -714,25 +86,25 @@
             <!-- <i class="material-icons">face</i> -->
             <!-- <i class="material-icons">check_circle</i> -->
 
-            <div class="menu-item" data-ume-page="create">
+            <div class="menu-item" data-v-open="create">
                 <i class="material-icons">add</i>
                 <span class="menu-legend opened"> Create</span>
             </div>
-            <div class="menu-item" data-ume-page="communities">
+            <div class="menu-item" data-v-open="communities">
                 <i class="material-icons">donut_small</i>
                 <span class="menu-legend opened"> Communities</span>
             </div>
             <!-- <div class="menu-item opened-device" data-ume-page="backup"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div> -->
-            <div class="menu-item" data-ume-page="security">
+            <div class="menu-item" data-v-open="security">
                 <i class="material-icons">security</i>
                 <span class="menu-legend opened"> Security</span>
             </div>
             <!-- <div class="menu-item opened-device" data-ume-page="keys"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div> -->
-            <div class="menu-item opened-device" data-ume-page="clear">
+            <div class="menu-item opened-device" data-v-open="clear">
                 <i class="material-icons">delete_forever</i>
                 <span class="menu-legend opened"> Clear Device</span>
             </div>
-            <div class="menu-item opened-device" data-ume-page="settings">
+            <div class="menu-item opened-device" data-v-open="settings">
                 <i class="material-icons">settings</i>
                 <span class="menu-legend opened"> Settings</span>
             </div>
@@ -740,7 +112,8 @@
             <!-- Community: i123120sd0d1 -->
         </div>
     </div>
-    <script src="v.js"></script>
+
+    <script type="module" src="./v-start.js"></script>
     <script src="util.js"></script>
     <script src="crypto.js"></script>
     <script src="storage.js"></script>
