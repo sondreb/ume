@@ -6,18 +6,20 @@
 
 <h2>Add gateway</h2>
 
-<p class="input-form">
+<form class="input-form">
     <span>Name:</span>
-    <input name="gateway-name" type="text" />
+    <input name="gateway-name" type="text" data-v-bind="gateway-name" />
     <br>
     <span>URL:</span>
-    <input name="gateway-url" type="text" />
+    <input name="gateway-url" type="text" data-v-bind="gateway-url" />
     <br>
-    <button data-ume-action="onGatewaySave">Save Gateway</button>
-</p>
+    <button data-v-action="onGatewaySave">Save Gateway</button>
+</form>
 
 <h2>Gateways</h2>
 
-<p id="gateway-list">
-
+<p id="gateway-list" data-v-list="gateway|gateways">
+    <span data-v-item="name"></span>
+    <span data-v-item="url"></span>
+    <i class="material-icons small-icon action" data-v-item-action="removeGateway">delete</i>
 </p>
