@@ -27,13 +27,14 @@ export class ume {
     }
 
     async onGatewaySave(v, event, source, data) {
+        debugger;
         var gateway = new Gateway();
         gateway.name = data.gateway.name;
         gateway.url = data.gateway.url;
 
         await window.ume.storage.instance.put(gateway);
 
-        this.onSettings();
+        //await this.onSettings();
     }
 
     async onSettings() {

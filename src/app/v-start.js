@@ -6,6 +6,7 @@ var app = new V({
     selector: 'v',
     logging: true,
     start: 'page-home',
+    configuration: { updateUrl: false },
     app: new ume()
 });
 

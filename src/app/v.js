@@ -47,6 +47,12 @@ export class V {
             this.log('Start page: ', this.start);
         }
 
+        if (configuration.configuration && configuration.configuration.updateUrl === false) {
+            this.updateUrl = false;
+        } else {
+            this.updateUrl = true;
+        }
+
         this.activePage = null;
 
         this.init();
@@ -422,8 +428,6 @@ export class V {
             return;
         }
 
-        self.show(page);
-
         var viewUrl = null;
         var pageAtt = self.att('page', page);
 
@@ -453,9 +457,88 @@ export class V {
             });
         }
         else {
+
+            self.show(page);
+            console.log('SHOWING', page);
+
+            if (this.updateUrl) {
+                // Remove the | from the pageAtt which should be left after loading the HTML template.
+                pageAtt = pageAtt.replace('|', '');
+
+                var stateObj = { page: pageAtt };
+                window.history.pushState(stateObj, '', pageAtt);
+            }
+
+            var formHandlers = self.elements('submit');
+
+            formHandlers.forEach((form) => {
+
+                // Make sure we don't initialize again.
+                if (self.att('init', form) === 'true') {
+                    return;
+                }
+
+                var methodName = self.att('submit', form);
+
+                form.addEventListener('submit', (e) => {
+
+                    // Prevent the default form submit.
+                    e.preventDefault();
+
+                    var data = null;
+
+                    // If the action source has a form connected, we'll parse it and supply it's content to the action handler.
+                    if (e.srcElement) {
+                        var inputElements = e.srcElement.getElementsByTagName('input');
+                        var selectElements = e.srcElement.getElementsByTagName('select');
+
+                        data = {
+                        };
+
+                        for (var i = 0; i < inputElements.length; i++) {
+                            var input = inputElements[i];
+
+                            if (input.name === '') {
+                                continue;
+                            }
+
+                            var id = this.sanitizeDataSelector(input.name);
+                            var value = input.value;
+
+                            this.setData(data, id, value);
+
+                            // Replace the form input fields.
+                            input.value = null;
+                        }
+
+                        for (var i = 0; i < selectElements.length; i++) {
+                            var select = selectElements[i];
+
+                            if (select.name === '') {
+                                continue;
+                            }
+
+                            var id = this.sanitizeDataSelector(select.name);
+                            var value = select.value;
+
+                            this.setData(data, id, value);
+
+                            // Replace the form input fields.
+                            //select.value = null;
+                        }
+                    }
+
+                    debugger;
+                    this.call(this.att('submit', e.srcElement), e, e.srcElement, data);
+                });
+            });
+
+
             var actionLinks = self.elements('action');
 
             actionLinks.forEach((action) => {
+
+                debugger;
 
                 // Make sure we don't initialize again.
                 if (self.att('init', action) === 'true') {
@@ -519,20 +602,40 @@ export class V {
 
             pageLinks.forEach((action) => {
 
+                debugger;
+
                 // Make sure we don't initialize again.
                 if (self.att('init', action) === 'true') {
                     return;
                 }
 
-                action.addEventListener('click', (e) => {
-                    self.onPage(e);
-                });
+                // action.onclick = function(e, self) {
+                //     debugger;
+                //     console.log(this);
+                //     console.log(e);
+                //     console.log(self);
+                // };
+
+                action.addEventListener('click', self.myTest);
+                //action.onclick = this.myTest;
+
+                // action.addEventListener('click', (e) => {
+                //     debugger;
+                //     console.log(this);
+                //     self.onPage(e);
+                // });
 
                 self.att('init', action, 'true');
             });
 
             cb();
         }
+    }
+
+    myTest(e) {
+        debugger;
+        console.log(this);
+        console.log(e);
     }
 
     /** Hides all pages. */
