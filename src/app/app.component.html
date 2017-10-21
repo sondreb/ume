@@ -1,0 +1,98 @@
+<div class="container">
+	<div class="box" fxLayout="column">
+		<header>
+			<mat-toolbar color="primary">
+				<button mat-icon-button (click)="sidenav.toggle()">
+					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
+					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
+				</button>
+				<span class="fill-remaining-space"></span>
+				<a routerLink="/" class="logo-text">üme</a>
+				<mat-icon class="logo-icon">verified_user</mat-icon>
+			</mat-toolbar>
+		</header>
+		<div id="main" fxLayout="row" fxLayout.xs="column" fxFlex>
+
+			<mat-sidenav-container class="ume-sidenav-fab-container">
+				<mat-sidenav #sidenav mode="side" opened="false">
+					<!-- <button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
+						<mat-icon>add</mat-icon>
+					</button> -->
+					<div class="ume-scrolling-content ume-sidenav-menu">
+						<button mat-button routerLink="/create">
+							<mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> Create</button>
+						<br>
+						<button mat-button routerLink="/communities">
+							<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon> Communities</button>
+						<br>
+						<button mat-button routerLink="/security">
+							<mat-icon aria-label="Example icon-button with a heart icon">security</mat-icon> Security</button>
+						<br>
+						<button mat-button routerLink="/wipe">
+							<mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon> Clear Device</button>
+						<br>
+						<button mat-button routerLink="/settings">
+							<mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon> Settings</button>
+					</div>
+				</mat-sidenav>
+				<button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
+					<mat-icon>add</mat-icon>
+				</button>
+				<div class="ume-scrolling-content ume-content">
+					<router-outlet></router-outlet>
+				</div>
+			</mat-sidenav-container>
+
+			<!-- <nav fxFlex="1 6 20%" fxFlexOrder fxFlexOrder.xs="2"></nav>
+			<article fxFlex="3 1 60%" fxFlexOrder fxFlexOrder.xs="1"> article</article>
+			<aside fxFlex="1 6 20%" fxFlexOrder fxFlexOrder.xs="3"> aside</aside> -->
+		</div>
+		<footer>
+			Connected to gateway.
+		</footer>
+	</div>
+</div>
+
+<!-- <div fxLayout="column" fxLayoutAlign="start stretch">
+	<mat-toolbar color="primary">
+		<button mat-icon-button>
+			<mat-icon *ngIf="menuOpened" (click)="onMenu(false)" aria-label="Hide menu">arrow_back</mat-icon>
+			<mat-icon *ngIf="!menuOpened" (click)="onMenu(true)" aria-label="Open menu">menu</mat-icon>
+		</button>
+
+		<mat-icon class="example-icon">verified_user</mat-icon>
+	</mat-toolbar>
+
+	<div class="app-content" fxFlexOffset="20px" fxFlexFill>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
+	</div>
+
+	<mat-sidenav-container fxFlexOffset="20px" fxFlexFill class="example-sidenav-fab-container">
+		<mat-sidenav #sidenav mode="side" opened="true">
+			<button mat-mini-fab class="example-fab" (click)="sidenav.toggle()">
+				<mat-icon>add</mat-icon>
+			</button>
+			<div class="example-scrolling-content">
+				Lorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.
+			</div>
+		</mat-sidenav>
+		<button mat-mini-fab class="example-fab" (click)="sidenav.toggle()">
+			<mat-icon>add</mat-icon>
+		</button>
+		<div class="example-scrolling-content">
+			Lorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.
+		</div>
+	</mat-sidenav-container>
+</div> -->

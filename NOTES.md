@@ -15,7 +15,7 @@
 
 
 ## Random Noise
-The app should generated random data noise that is indistinguishable from real messages. This to improve security a bit by obscuring the traffic and making traffic analysis more difficult.
+The app could/should generated random data noise that is indistinguishable from real messages. This to improve security a bit by obscuring the traffic and making traffic analysis more difficult.
 
 
 ## Public Key Distribution Flow
@@ -52,9 +52,31 @@ If someone loose their private key, the community owner can transfer ownership o
 
 ## Development Notes and Ideas
 
-Q: Why is ume built without jQUery or Angular?
+For security reasons, üme was initially planned to be built on a custom javascript library for UI. This framework was extracted from the repo and made into a library named [v.js](https://github.com/sondreb/v.js). Due to limited developer resources and time available for initial üme release, a decision to build on [Angular](https://angular.io/) was made. In the future, consider replacing Angular, with v.js or another library.
 
-A: For security reasons, ume should always attempt to rely on as few third party libraries as possible.
+[Angular Material](https://material.angular.io/) is additionally used for quicker initial release.
+
+üme should always attempt to rely on as few third party libraries as possible.
+
+## Development server
+
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Code scaffolding
+
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
 ## Questions and Answers
 
@@ -82,6 +104,7 @@ Crypho relies on centralized server storage of public keys, and does not support
 
 https://github.com/diafygi/webcrypto-examples
 https://webcryptoapiex.github.io/secretnote/
+
 
 
 
