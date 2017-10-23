@@ -8,6 +8,15 @@ html, body {
 	height: 100%;
 }
 
+a {
+	color: gray;
+}
+
+a:hover {
+	color: black;
+	text-decoration: underlined;
+}
+
 .unsupported {
 	padding: 50px;
 	background-color: #f44336; // mat-warn

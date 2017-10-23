@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-about',
-  templateUrl: './about.component.html',
-  styleUrls: ['./about.component.css']
+	selector: 'app-about',
+	templateUrl: './about.component.html',
+	styleUrls: ['./about.component.scss']
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+	public version: string;
 
-  ngOnInit() {
-  }
+	constructor() { }
 
+	ngOnInit() {
+		this.version = (<any> window).ume.version;
+	}
 }
