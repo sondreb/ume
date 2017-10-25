@@ -7,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-	public quota: string;
-	public usage: string;
+	public quota: string | any;
+	public usage: string | any;
+	public storageUsed: number;
 	private interval: any;
 
 	constructor() { }
@@ -28,12 +29,16 @@ export class HomeComponent implements OnInit {
 
 	private updateUsedSpace() {
 		const self = this;
-		const nav = (<any>window.navigator);
+		const nav = (<any> window.navigator);
 
 		if (nav.storage) {
 			nav.storage.estimate().then((data) => {
 				self.quota = (data.quota / 1024 / 1024).toFixed(2);
 				self.usage = (data.usage / 1024 / 1024).toFixed(2);
+
+				self.storageUsed = self.usage / self.quota * 100;
+
+				console.log(self.storageUsed);
 			});
 		}
 	}

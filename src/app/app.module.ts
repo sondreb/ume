@@ -12,6 +12,7 @@ import { SecurityModule } from './security/security.module';
 import { SettingsModule } from './settings/settings.module';
 import { WipeModule } from './wipe/wipe.module';
 import { IntroductionComponent } from './introduction/introduction.component';
+import { HttpModule } from '@angular/http';
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import { IntroductionComponent } from './introduction/introduction.component';
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
+		HttpModule,
 		FlexLayoutModule,
 		FrameworkModule,
 		AppRoutingModule,

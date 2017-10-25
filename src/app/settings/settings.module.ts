@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SettingsComponent } from './settings.component';
 import { FrameworkModule } from '../framework/framework.module';
+import { LicensesComponent } from './licenses/licenses.component';
 
 @NgModule({
 	imports: [
@@ -13,6 +14,6 @@ import { FrameworkModule } from '../framework/framework.module';
 		FrameworkModule
 	],
 	exports: [SettingsRoutingModule],
-	declarations: [HomeComponent, AboutComponent, SettingsComponent]
+	declarations: [HomeComponent, AboutComponent, SettingsComponent, LicensesComponent]
 })
 export class SettingsModule { }

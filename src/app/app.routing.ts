@@ -6,7 +6,7 @@ import { IntroductionComponent } from './introduction/introduction.component';
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
 	{ path: 'home', pathMatch: 'full', redirectTo: '' },
-	{ path: 'introduction', component: IntroductionComponent },
+	{ path: 'introduction', component: IntroductionComponent, data: { breadcrumb: 'Introduction' } },
 ];
 
 @NgModule({

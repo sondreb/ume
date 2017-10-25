@@ -3,19 +3,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SettingsComponent } from './settings.component';
+import { LicensesComponent } from './licenses/licenses.component';
 
 const routes: Routes = [
 	{
 		path: 'settings',
 		component: SettingsComponent,
 		children: [
-			{ path: '', component: HomeComponent },
-			{ path: 'about', component: AboutComponent }
+			{ path: '', component: HomeComponent, data: { breadcrumb: 'Settings' } },
+			{ path: 'about', component: AboutComponent, data: { breadcrumb: 'About' } },
+			{ path: 'licenses', component: LicensesComponent, data: { breadcrumb: 'Licenses' } }
 		],
-	},
-	{
-		path: 'about',
-		component: AboutComponent
 	}
 ];
 

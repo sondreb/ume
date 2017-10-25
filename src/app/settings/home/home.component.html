@@ -1,15 +1,20 @@
+<h1>Settings</h1>
+
 <h2>Gateways</h2>
 
 
 <h2>Storage</h2>
 
-<p *ngIf="quota">Storage quota: {{quota}} MB</p>
-
-<p *ngIf="usage">Storage usage: {{usage}} MB</p>
+<p *ngIf="quota">You're using {{usage}} MB of {{quota}} MB of storage.
+	<br>
+	<mat-progress-bar class="example-margin" color="primary" mode="determinate" [value]="storageUsed"></mat-progress-bar>
+</p>
 
 <p *ngIf="usage && usage === quota" class="alert-danger">
 	Warning:
 	<br> Your device have used up available space for the app. You must clear available disk space on your device.
 </p>
 
-<button mat-button routerLink="/about">About</button>
+<button mat-button routerLink="about">About</button>
+<button mat-button routerLink="licenses">Licenses</button>
+<a mat-button href="https://github.com/sondreb/ume/issues">Feedback</a>
