@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
+import { GatewayDialogComponent } from '../gateway-dialog/gateway-dialog.component';
+import { Gateway } from '../gateway';
 
 @Component({
 	selector: 'app-home',
@@ -12,7 +15,9 @@ export class HomeComponent implements OnInit {
 	public storageUsed: number;
 	private interval: any;
 
-	constructor() { }
+	constructor(public dialog: MatDialog) {
+
+	}
 
 	ngOnInit() {
 
@@ -24,6 +29,24 @@ export class HomeComponent implements OnInit {
 		// Trigger an initial check.
 		setTimeout(() => {
 			this.updateUsedSpace();
+		});
+	}
+
+	public onGatewayAdd() {
+		const gateway = new Gateway();
+
+		const dialogConfig = new MatDialogConfig();
+		dialogConfig.data = gateway;
+		// dialogConfig.width = '250px';
+		// dialogConfig.position = { top: '60px', left: '0' };
+
+		const dialogRef = this.dialog.open(GatewayDialogComponent, dialogConfig);
+
+		dialogRef.afterClosed().subscribe(result => {
+			if (result) {
+				// Save the gateway.
+				console.log(gateway);
+			}
 		});
 	}
 
