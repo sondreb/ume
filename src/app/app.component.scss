@@ -13,6 +13,10 @@
 	flex: 1 1 auto;
 }
 
+#sidebar {
+	box-shadow: 2px 0 10px 0 rgba(0,0,0,.5);
+}
+
 .mat-drawer {
 	background-color: transparent;
 }
@@ -22,6 +26,8 @@
 	height: 100%;
 	//box-sizing: border-box;
 	//border: 1px solid rgba(0, 0, 0, 0.5);
+
+	
   }
   
   .ume-sidenav-fab-container mat-sidenav {
@@ -57,11 +63,17 @@
 .ume-sidenav-menu {
 	box-sizing: border-box;
 	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.ume-sidenav-menu .active {
+	background-color: white;
 }
 
 .ume-sidenav-menu button {
 	width: 100%;
 	text-align: left;
+	padding: 20px;
 }
 
 .box, .container {
@@ -93,3 +105,12 @@
 	// background: #ffeebb;
   }
   
+
+  .ume-menu-button
+  {
+	  position: absolute;
+	  bottom: 10px;
+	  left: 10px;
+	  z-index: 10000;
+	  background-color: #fafafa;
+  }

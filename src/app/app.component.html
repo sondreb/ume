@@ -2,43 +2,48 @@
 	<div class="box" fxLayout="column">
 		<header>
 			<mat-toolbar color="primary">
+				<mat-icon class="logo-icon">verified_user</mat-icon>
+				<a routerLink="/" class="logo-text">üme</a>
 				<button mat-icon-button (click)="sidenav.toggle()">
 					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
 					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
 				</button>
 				<span class="fill-remaining-space"></span>
-				<a routerLink="/" class="logo-text">üme</a>
-				<mat-icon class="logo-icon">verified_user</mat-icon>
+
 			</mat-toolbar>
 		</header>
 		<div id="main" fxLayout="row" fxLayout.xs="column" fxFlex>
 
 			<mat-sidenav-container class="ume-sidenav-fab-container">
-				<mat-sidenav #sidenav mode="side" opened="false">
+				<mat-sidenav #sidenav mode="side" opened="true" id="sidebar">
 					<!-- <button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
 						<mat-icon>add</mat-icon>
 					</button> -->
-					<div class="ume-scrolling-content ume-sidenav-menu">
-						<button mat-button routerLink="/create">
+					<div class="ume-scrolling-content ume-sidenav-menu" id="sidenav-menu" app-scroll>
+						<button mat-button routerLink="/create" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> Create</button>
 						<br>
-						<button mat-button routerLink="/communities">
+						<button mat-button routerLink="/communities" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon> Communities</button>
 						<br>
-						<button mat-button routerLink="/security">
+						<button mat-button routerLink="/security" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">security</mat-icon> Security</button>
 						<br>
-						<button mat-button routerLink="/wipe">
+						<button mat-button routerLink="/wipe" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon> Clear Device</button>
 						<br>
-						<button mat-button routerLink="/settings">
+						<button mat-button routerLink="/settings" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon> Settings</button>
 					</div>
 				</mat-sidenav>
 				<button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
 					<mat-icon>add</mat-icon>
 				</button>
-				<div class="ume-scrolling-content ume-content">
+				<button mat-icon-button class="ume-menu-button" (click)="sidenav.toggle()">
+					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
+					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
+				</button>
+				<div class="ume-scrolling-content ume-content" app-scroll>
 					<app-breadcrumb></app-breadcrumb>
 					<router-outlet></router-outlet>
 				</div>

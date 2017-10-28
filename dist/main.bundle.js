@@ -20,7 +20,7 @@ webpackEmptyAsyncContext.id = "../../../../../src/$$_gendir lazy recursive";
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\r\n\t<div class=\"box\" fxLayout=\"column\">\r\n\t\t<header>\r\n\t\t\t<mat-toolbar color=\"primary\">\r\n\t\t\t\t<button mat-icon-button (click)=\"sidenav.toggle()\">\r\n\t\t\t\t\t<mat-icon *ngIf=\"sidenav.opened\" aria-label=\"Hide menu\">arrow_back</mat-icon>\r\n\t\t\t\t\t<mat-icon *ngIf=\"!sidenav.opened\" aria-label=\"Open menu\">menu</mat-icon>\r\n\t\t\t\t</button>\r\n\t\t\t\t<span class=\"fill-remaining-space\"></span>\r\n\t\t\t\t<a routerLink=\"/\" class=\"logo-text\">üme</a>\r\n\t\t\t\t<mat-icon class=\"logo-icon\">verified_user</mat-icon>\r\n\t\t\t</mat-toolbar>\r\n\t\t</header>\r\n\t\t<div id=\"main\" fxLayout=\"row\" fxLayout.xs=\"column\" fxFlex>\r\n\r\n\t\t\t<mat-sidenav-container class=\"ume-sidenav-fab-container\">\r\n\t\t\t\t<mat-sidenav #sidenav mode=\"side\" opened=\"false\">\r\n\t\t\t\t\t<!-- <button mat-mini-fab class=\"ume-fab\" (click)=\"sidenav.toggle()\">\r\n\t\t\t\t\t\t<mat-icon>add</mat-icon>\r\n\t\t\t\t\t</button> -->\r\n\t\t\t\t\t<div class=\"ume-scrolling-content ume-sidenav-menu\">\r\n\t\t\t\t\t\t<button mat-button routerLink=\"/create\">\r\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">add</mat-icon> Create</button>\r\n\t\t\t\t\t\t<br>\r\n\t\t\t\t\t\t<button mat-button routerLink=\"/communities\">\r\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">donut_small</mat-icon> Communities</button>\r\n\t\t\t\t\t\t<br>\r\n\t\t\t\t\t\t<button mat-button routerLink=\"/security\">\r\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">security</mat-icon> Security</button>\r\n\t\t\t\t\t\t<br>\r\n\t\t\t\t\t\t<button mat-button routerLink=\"/wipe\">\r\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">delete_forever</mat-icon> Clear Device</button>\r\n\t\t\t\t\t\t<br>\r\n\t\t\t\t\t\t<button mat-button routerLink=\"/settings\">\r\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">settings</mat-icon> Settings</button>\r\n\t\t\t\t\t</div>\r\n\t\t\t\t</mat-sidenav>\r\n\t\t\t\t<button mat-mini-fab class=\"ume-fab\" (click)=\"sidenav.toggle()\">\r\n\t\t\t\t\t<mat-icon>add</mat-icon>\r\n\t\t\t\t</button>\r\n\t\t\t\t<div class=\"ume-scrolling-content ume-content\">\r\n\t\t\t\t\t<app-breadcrumb></app-breadcrumb>\r\n\t\t\t\t\t<router-outlet></router-outlet>\r\n\t\t\t\t</div>\r\n\t\t\t</mat-sidenav-container>\r\n\r\n\t\t\t<!-- <nav fxFlex=\"1 6 20%\" fxFlexOrder fxFlexOrder.xs=\"2\"></nav>\r\n\t\t\t<article fxFlex=\"3 1 60%\" fxFlexOrder fxFlexOrder.xs=\"1\"> article</article>\r\n\t\t\t<aside fxFlex=\"1 6 20%\" fxFlexOrder fxFlexOrder.xs=\"3\"> aside</aside> -->\r\n\t\t</div>\r\n\t\t<footer>\r\n\t\t\tConnected to gateway.\r\n\t\t</footer>\r\n\t</div>\r\n</div>\r\n\r\n<!-- <div fxLayout=\"column\" fxLayoutAlign=\"start stretch\">\r\n\t<mat-toolbar color=\"primary\">\r\n\t\t<button mat-icon-button>\r\n\t\t\t<mat-icon *ngIf=\"menuOpened\" (click)=\"onMenu(false)\" aria-label=\"Hide menu\">arrow_back</mat-icon>\r\n\t\t\t<mat-icon *ngIf=\"!menuOpened\" (click)=\"onMenu(true)\" aria-label=\"Open menu\">menu</mat-icon>\r\n\t\t</button>\r\n\r\n\t\t<mat-icon class=\"example-icon\">verified_user</mat-icon>\r\n\t</mat-toolbar>\r\n\r\n\t<div class=\"app-content\" fxFlexOffset=\"20px\" fxFlexFill>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\r\n\t</div>\r\n\r\n\t<mat-sidenav-container fxFlexOffset=\"20px\" fxFlexFill class=\"example-sidenav-fab-container\">\r\n\t\t<mat-sidenav #sidenav mode=\"side\" opened=\"true\">\r\n\t\t\t<button mat-mini-fab class=\"example-fab\" (click)=\"sidenav.toggle()\">\r\n\t\t\t\t<mat-icon>add</mat-icon>\r\n\t\t\t</button>\r\n\t\t\t<div class=\"example-scrolling-content\">\r\n\t\t\t\tLorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.\r\n\t\t\t</div>\r\n\t\t</mat-sidenav>\r\n\t\t<button mat-mini-fab class=\"example-fab\" (click)=\"sidenav.toggle()\">\r\n\t\t\t<mat-icon>add</mat-icon>\r\n\t\t</button>\r\n\t\t<div class=\"example-scrolling-content\">\r\n\t\t\tLorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.\r\n\t\t</div>\r\n\t</mat-sidenav-container>\r\n</div> -->\r\n"
+module.exports = "<div class=\"container\">\n\t<div class=\"box\" fxLayout=\"column\">\n\t\t<header>\n\t\t\t<mat-toolbar color=\"primary\">\n\t\t\t\t<mat-icon class=\"logo-icon\">verified_user</mat-icon>\n\t\t\t\t<a routerLink=\"/\" class=\"logo-text\">üme</a>\n\t\t\t\t<button mat-icon-button (click)=\"sidenav.toggle()\">\n\t\t\t\t\t<mat-icon *ngIf=\"sidenav.opened\" aria-label=\"Hide menu\">arrow_back</mat-icon>\n\t\t\t\t\t<mat-icon *ngIf=\"!sidenav.opened\" aria-label=\"Open menu\">menu</mat-icon>\n\t\t\t\t</button>\n\t\t\t\t<span class=\"fill-remaining-space\"></span>\n\n\t\t\t</mat-toolbar>\n\t\t</header>\n\t\t<div id=\"main\" fxLayout=\"row\" fxLayout.xs=\"column\" fxFlex>\n\n\t\t\t<mat-sidenav-container class=\"ume-sidenav-fab-container\">\n\t\t\t\t<mat-sidenav #sidenav mode=\"side\" opened=\"true\" id=\"sidebar\">\n\t\t\t\t\t<!-- <button mat-mini-fab class=\"ume-fab\" (click)=\"sidenav.toggle()\">\n\t\t\t\t\t\t<mat-icon>add</mat-icon>\n\t\t\t\t\t</button> -->\n\t\t\t\t\t<div class=\"ume-scrolling-content ume-sidenav-menu\" id=\"sidenav-menu\" app-scroll>\n\t\t\t\t\t\t<button mat-button routerLink=\"/create\" routerLinkActive=\"active\">\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">add</mat-icon> Create</button>\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t<button mat-button routerLink=\"/communities\" routerLinkActive=\"active\">\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">donut_small</mat-icon> Communities</button>\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t<button mat-button routerLink=\"/security\" routerLinkActive=\"active\">\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">security</mat-icon> Security</button>\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t<button mat-button routerLink=\"/wipe\" routerLinkActive=\"active\">\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">delete_forever</mat-icon> Clear Device</button>\n\t\t\t\t\t\t<br>\n\t\t\t\t\t\t<button mat-button routerLink=\"/settings\" routerLinkActive=\"active\">\n\t\t\t\t\t\t\t<mat-icon aria-label=\"Example icon-button with a heart icon\">settings</mat-icon> Settings</button>\n\t\t\t\t\t</div>\n\t\t\t\t</mat-sidenav>\n\t\t\t\t<button mat-mini-fab class=\"ume-fab\" (click)=\"sidenav.toggle()\">\n\t\t\t\t\t<mat-icon>add</mat-icon>\n\t\t\t\t</button>\n\t\t\t\t<button mat-icon-button class=\"ume-menu-button\" (click)=\"sidenav.toggle()\">\n\t\t\t\t\t<mat-icon *ngIf=\"sidenav.opened\" aria-label=\"Hide menu\">arrow_back</mat-icon>\n\t\t\t\t\t<mat-icon *ngIf=\"!sidenav.opened\" aria-label=\"Open menu\">menu</mat-icon>\n\t\t\t\t</button>\n\t\t\t\t<div class=\"ume-scrolling-content ume-content\" app-scroll>\n\t\t\t\t\t<app-breadcrumb></app-breadcrumb>\n\t\t\t\t\t<router-outlet></router-outlet>\n\t\t\t\t</div>\n\t\t\t</mat-sidenav-container>\n\n\t\t\t<!-- <nav fxFlex=\"1 6 20%\" fxFlexOrder fxFlexOrder.xs=\"2\"></nav>\n\t\t\t<article fxFlex=\"3 1 60%\" fxFlexOrder fxFlexOrder.xs=\"1\"> article</article>\n\t\t\t<aside fxFlex=\"1 6 20%\" fxFlexOrder fxFlexOrder.xs=\"3\"> aside</aside> -->\n\t\t</div>\n\t\t<footer>\n\t\t\tConnected to gateway.\n\t\t</footer>\n\t</div>\n</div>\n\n<!-- <div fxLayout=\"column\" fxLayoutAlign=\"start stretch\">\n\t<mat-toolbar color=\"primary\">\n\t\t<button mat-icon-button>\n\t\t\t<mat-icon *ngIf=\"menuOpened\" (click)=\"onMenu(false)\" aria-label=\"Hide menu\">arrow_back</mat-icon>\n\t\t\t<mat-icon *ngIf=\"!menuOpened\" (click)=\"onMenu(true)\" aria-label=\"Open menu\">menu</mat-icon>\n\t\t</button>\n\n\t\t<mat-icon class=\"example-icon\">verified_user</mat-icon>\n\t</mat-toolbar>\n\n\t<div class=\"app-content\" fxFlexOffset=\"20px\" fxFlexFill>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>\n\t</div>\n\n\t<mat-sidenav-container fxFlexOffset=\"20px\" fxFlexFill class=\"example-sidenav-fab-container\">\n\t\t<mat-sidenav #sidenav mode=\"side\" opened=\"true\">\n\t\t\t<button mat-mini-fab class=\"example-fab\" (click)=\"sidenav.toggle()\">\n\t\t\t\t<mat-icon>add</mat-icon>\n\t\t\t</button>\n\t\t\t<div class=\"example-scrolling-content\">\n\t\t\t\tLorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.\n\t\t\t</div>\n\t\t</mat-sidenav>\n\t\t<button mat-mini-fab class=\"example-fab\" (click)=\"sidenav.toggle()\">\n\t\t\t<mat-icon>add</mat-icon>\n\t\t</button>\n\t\t<div class=\"example-scrolling-content\">\n\t\t\tLorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.\n\t\t</div>\n\t</mat-sidenav-container>\n</div> -->\n"
 
 /***/ }),
 
@@ -32,7 +32,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".logo-text {\n  font-size: 1.6rem !important;\n  margin-right: 6px;\n  text-decoration: none;\n  color: black; }\n\n.fill-remaining-space {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n.mat-drawer {\n  background-color: transparent; }\n\n.ume-sidenav-fab-container {\n  width: 100%;\n  height: 100%; }\n\n.ume-scrolling-content {\n  overflow: auto;\n  height: 100%; }\n\n.ume-content {\n  padding: 20px;\n  box-sizing: border-box; }\n\n.ume-fab.mat-mini-fab {\n  position: absolute;\n  right: 20px;\n  bottom: 10px; }\n\n.app-content {\n  overflow: auto; }\n\n.ume-sidenav-menu {\n  box-sizing: border-box;\n  padding-top: 20px; }\n\n.ume-sidenav-menu button {\n  width: 100%;\n  text-align: left; }\n\n.box, .container {\n  height: 100%; }\n\nfooter {\n  padding: 4px 10px;\n  background-color: #ffc107; }\n\n#main > article {\n  border-color: #cccc33;\n  background: #dddd88;\n  cursor: pointer; }\n\n#main > nav, #main > aside {\n  border-color: #8888bb;\n  background: #ccccff; }\n", ""]);
+exports.push([module.i, ".logo-text {\n  font-size: 1.6rem !important;\n  margin-right: 6px;\n  text-decoration: none;\n  color: black; }\n\n.fill-remaining-space {\n  -webkit-box-flex: 1;\n      -ms-flex: 1 1 auto;\n          flex: 1 1 auto; }\n\n#sidebar {\n  box-shadow: 2px 0 10px 0 rgba(0, 0, 0, 0.5); }\n\n.mat-drawer {\n  background-color: transparent; }\n\n.ume-sidenav-fab-container {\n  width: 100%;\n  height: 100%; }\n\n.ume-scrolling-content {\n  overflow: auto;\n  height: 100%; }\n\n.ume-content {\n  padding: 20px;\n  box-sizing: border-box; }\n\n.ume-fab.mat-mini-fab {\n  position: absolute;\n  right: 20px;\n  bottom: 10px; }\n\n.app-content {\n  overflow: auto; }\n\n.ume-sidenav-menu {\n  box-sizing: border-box;\n  padding-top: 20px;\n  padding-bottom: 20px; }\n\n.ume-sidenav-menu .active {\n  background-color: white; }\n\n.ume-sidenav-menu button {\n  width: 100%;\n  text-align: left;\n  padding: 20px; }\n\n.box, .container {\n  height: 100%; }\n\nfooter {\n  padding: 4px 10px;\n  background-color: #ffc107; }\n\n#main > article {\n  border-color: #cccc33;\n  background: #dddd88;\n  cursor: pointer; }\n\n#main > nav, #main > aside {\n  border-color: #8888bb;\n  background: #ccccff; }\n\n.ume-menu-button {\n  position: absolute;\n  bottom: 10px;\n  left: 10px;\n  z-index: 10000;\n  background-color: #fafafa; }\n", ""]);
 
 // exports
 
@@ -61,8 +61,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'app';
-        this.menuOpened = false;
+        this.menuOpened = true;
     }
+    AppComponent.prototype.ngOnInit = function () {
+    };
     AppComponent.prototype.onMenu = function (open) {
         if (open === void 0) { open = true; }
         console.log('onMenu!', open);
@@ -273,7 +275,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/communities/communities.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Settings</h1>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<h1>Settings</h1>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -422,7 +424,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/communities/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  Home section of settings\r\n</p>\r\n\r\n<button routerLink=\"/about\">About</button>\r\n"
+module.exports = "<p>\n  Home section of settings\n</p>\n\n<button routerLink=\"/about\">About</button>\n"
 
 /***/ }),
 
@@ -483,7 +485,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/create/create.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Settings</h1>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<h1>Settings</h1>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -632,7 +634,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/create/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  Home section of settings\r\n</p>\r\n\r\n<button routerLink=\"/about\">About</button>\r\n"
+module.exports = "<p>\n  Home section of settings\n</p>\n\n<button routerLink=\"/about\">About</button>\n"
 
 /***/ }),
 
@@ -787,12 +789,14 @@ var _a, _b;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__breadcrumb_breadcrumb_component__ = __webpack_require__("../../../../../src/app/framework/breadcrumb/breadcrumb.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_forms__ = __webpack_require__("../../../forms/@angular/forms.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__scroll_directive__ = __webpack_require__("../../../../../src/app/framework/scroll.directive.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -812,8 +816,8 @@ FrameworkModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_1__angular_common__["b" /* CommonModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_forms__["c" /* FormsModule */]
         ],
-        exports: [__WEBPACK_IMPORTED_MODULE_2__material_module__["a" /* MaterialModule */], __WEBPACK_IMPORTED_MODULE_5__angular_forms__["c" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_3__breadcrumb_breadcrumb_component__["a" /* BreadcrumbComponent */]],
-        declarations: [__WEBPACK_IMPORTED_MODULE_3__breadcrumb_breadcrumb_component__["a" /* BreadcrumbComponent */]]
+        exports: [__WEBPACK_IMPORTED_MODULE_2__material_module__["a" /* MaterialModule */], __WEBPACK_IMPORTED_MODULE_5__angular_forms__["c" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_3__breadcrumb_breadcrumb_component__["a" /* BreadcrumbComponent */], __WEBPACK_IMPORTED_MODULE_6__scroll_directive__["a" /* ScrollDirective */]],
+        declarations: [__WEBPACK_IMPORTED_MODULE_3__breadcrumb_breadcrumb_component__["a" /* BreadcrumbComponent */], __WEBPACK_IMPORTED_MODULE_6__scroll_directive__["a" /* ScrollDirective */]]
     })
 ], FrameworkModule);
 
@@ -892,6 +896,44 @@ MaterialModule = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/framework/scroll.directive.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ScrollDirective; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ScrollDirective = (function () {
+    function ScrollDirective(el) {
+        var element = el.nativeElement;
+        element.addEventListener('mouseenter', function () {
+            element.classList.add('scroll');
+        });
+        element.addEventListener('mouseleave', function () {
+            element.classList.remove('scroll');
+        });
+    }
+    return ScrollDirective;
+}());
+ScrollDirective = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* Directive */])({ selector: '[app-scroll]' }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* ElementRef */]) === "function" && _a || Object])
+], ScrollDirective);
+
+var _a;
+//# sourceMappingURL=scroll.directive.js.map
+
+/***/ }),
+
 /***/ "../../../../../src/app/home/home.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -913,7 +955,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\r\n    Hi, welcome to üme, the collaborative community!\r\n</h1>\r\n\r\n<p>\r\n    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you\r\n    are both the host of the community and a member.\r\n</p>\r\n\r\n<button mat-button routerLink=\"introduction\">Read the introduction...</button>\r\n<br>\r\n<br>\r\n\r\n<p class=\"warning-card\">\r\n    WARNING: THIS IS AN UNRELEASED SOFTWARE. DO NOT USE FOR ANYTHING. WAIT FOR THE RELEASE.\r\n</p>\r\n"
+module.exports = "<h1>\n    Hi, welcome to üme, the collaborative community!\n</h1>\n\n<p>\n    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you\n    are both the host of the community and a member.\n</p>\n\n<button mat-button routerLink=\"introduction\">Read the introduction...</button>\n<br>\n<br>\n\n<p class=\"warning-card\">\n    WARNING: THIS IS AN UNRELEASED SOFTWARE. DO NOT USE FOR ANYTHING. WAIT FOR THE RELEASE.\n</p>\n"
 
 /***/ }),
 
@@ -974,7 +1016,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/introduction/introduction.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>\r\n    Hi, welcome to üme, the collaborative community!\r\n</h1>\r\n\r\n<p>\r\n    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you\r\n    are both the host of the community and a member.\r\n</p>\r\n\r\n<p>üme is also special in another way, and that is how it enables community members to be anonymous and secure in their communication.\r\n</p>\r\n\r\n<p>Since üme only runs in your browser, and the browser is inherently insecure, no garantue can be give in regards to your privacy.\r\n    All communication is secured with encryption and digital signatures. It is important that you trust the content in your\r\n    community, so every message is signed by the creator.\r\n</p>\r\n\r\n<p>\r\n    It is important that at least two member is online in the community to ensure that data is sent. The community owner must\r\n    be online for new members to be able to join. Only the community owner's device can verify invitations.\r\n</p>\r\n\r\n<p>üme relies on a gateway for sending messages to all community members, this ensure that individual community members cannot\r\n    discover the IP address of another user. The gateway is open source, but don't use a gateway host you don't trust, as\r\n    the gateway could be modified to log the members IP addresse. Even with a log of IP addresses, all messages communicated\r\n    are encrypted and cannot easily be decrypted. You should combine the use of üme with Tor Project and/or Virtual Private\r\n    Network (VPN).\r\n</p>\r\n\r\n<p>\r\n    All the content of a community is stored in an unencrypted manner in the web browser. If your device is stolen, the information\r\n    can be accessed. There is an option to entirely delete local cache and always restore a community from the other members.\r\n    This is a handy feature to use if accessing a community using someone elses computer or at an internet café.\r\n</p>\r\n\r\n<p>\r\n    The app have a very easy functionality to take local backup copies of your communities, make sure you use them often.\r\n</p>\r\n\r\n<p>\r\n    By using üme, you are accepting that the use of this app is entirely on your own responsbility. No guarantee is given by\r\n    the developers, and we advice you to review the\r\n    <a href=\"https://github.com/sondreb/ume\" target=\"_blank\">üme source code</a> at any time.\r\n</p>\r\n<i class=\"material-icons\">favorite_border</i>\r\n<p>\r\n    <button mat-button routerLink=\"/\">Go back...</button>\r\n</p>\r\n"
+module.exports = "<h1>\n    Hi, welcome to üme, the collaborative community!\n</h1>\n\n<p>\n    üme is a bit special, it is decentralized and does not require any servers or installations. It runs in your browser, you\n    are both the host of the community and a member.\n</p>\n\n<p>üme is also special in another way, and that is how it enables community members to be anonymous and secure in their communication.\n</p>\n\n<p>Since üme only runs in your browser, and the browser is inherently insecure, no garantue can be give in regards to your privacy.\n    All communication is secured with encryption and digital signatures. It is important that you trust the content in your\n    community, so every message is signed by the creator.\n</p>\n\n<p>\n    It is important that at least two member is online in the community to ensure that data is sent. The community owner must\n    be online for new members to be able to join. Only the community owner's device can verify invitations.\n</p>\n\n<p>üme relies on a gateway for sending messages to all community members, this ensure that individual community members cannot\n    discover the IP address of another user. The gateway is open source, but don't use a gateway host you don't trust, as\n    the gateway could be modified to log the members IP addresse. Even with a log of IP addresses, all messages communicated\n    are encrypted and cannot easily be decrypted. You should combine the use of üme with Tor Project and/or Virtual Private\n    Network (VPN).\n</p>\n\n<p>\n    All the content of a community is stored in an unencrypted manner in the web browser. If your device is stolen, the information\n    can be accessed. There is an option to entirely delete local cache and always restore a community from the other members.\n    This is a handy feature to use if accessing a community using someone elses computer or at an internet café.\n</p>\n\n<p>\n    The app have a very easy functionality to take local backup copies of your communities, make sure you use them often.\n</p>\n\n<p>\n    By using üme, you are accepting that the use of this app is entirely on your own responsbility. No guarantee is given by\n    the developers, and we advice you to review the\n    <a href=\"https://github.com/sondreb/ume\" target=\"_blank\">üme source code</a> at any time.\n</p>\n<i class=\"material-icons\">favorite_border</i>\n<p>\n    <button mat-button routerLink=\"/\">Go back...</button>\n</p>\n"
 
 /***/ }),
 
@@ -1035,7 +1077,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/security/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  Home section of settings\r\n</p>\r\n\r\n<button routerLink=\"/about\">About</button>\r\n"
+module.exports = "<p>\n  Home section of settings\n</p>\n\n<button routerLink=\"/about\">About</button>\n"
 
 /***/ }),
 
@@ -1096,7 +1138,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/security/security.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Settings</h1>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<h1>Settings</h1>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -1227,7 +1269,7 @@ SecurityRoutingModule = __decorate([
 /***/ "../../../../../src/app/settings/about/about.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>About üme</h1>\r\n\r\n<!-- <button mat-button>Click me!</button>\r\n\r\n<mat-chip-list>\r\n\t<mat-chip>One fish</mat-chip>\r\n\t<mat-chip>Two fish</mat-chip>\r\n\t<mat-chip color=\"primary\" selected=\"true\">Primary fish</mat-chip>\r\n\t<mat-chip color=\"accent\" selected=\"true\">Accent fish</mat-chip>\r\n</mat-chip-list> -->\r\n\r\n<mat-card class=\"about-card\">\r\n\t<mat-card-header>\r\n\t\t<img mat-card-avatar src=\"assets/images/favicon-96x96.png\">\r\n\t\t<mat-card-title>üme</mat-card-title>\r\n\t\t<mat-card-subtitle>Version: {{version}}</mat-card-subtitle>\r\n\t</mat-card-header>\r\n\t<img mat-card-image src=\"assets/images/about.jpg\">\r\n\t<mat-card-content>\r\n\t\t<p>Release photo by\r\n\t\t\t<a href=\"https://unsplash.com/photos/KgjcndVr7tU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText\">Nik MacMillan</a> on\r\n\t\t\t<a href=\"https://unsplash.com/\">Unsplash</a>\r\n\t\t</p>\r\n\t</mat-card-content>\r\n\t<mat-card-actions>\r\n\t\t<button mat-button>DONATE</button>\r\n\t\t<a href=\"https://github.com/sondreb/ume\" target=\"_blank\" mat-button>SOURCE CODE</a>\r\n\t</mat-card-actions>\r\n\r\n\t<mat-card-footer class=\"about-card-footer\">\r\n\t\t<mat-icon>favorite</mat-icon>\r\n\t</mat-card-footer>\r\n</mat-card>\r\n\r\n<!-- <div class=\"about-box\">\r\n\t<img src=\"assets/images/favicon-256x256.png\">\r\n\t<h1>üme</h1>\r\n\t<p>Version: {{version}}</p>\r\n\r\n\t<p>üme is open source:</p><a href=\"https://github.com/sondreb/ume\" target=\"_blank\">https://github.com/sondreb/ume</a>\r\n\r\n</div> -->\r\n"
+module.exports = "<h1>About üme</h1>\n\n<!-- <button mat-button>Click me!</button>\n\n<mat-chip-list>\n\t<mat-chip>One fish</mat-chip>\n\t<mat-chip>Two fish</mat-chip>\n\t<mat-chip color=\"primary\" selected=\"true\">Primary fish</mat-chip>\n\t<mat-chip color=\"accent\" selected=\"true\">Accent fish</mat-chip>\n</mat-chip-list> -->\n\n<mat-card class=\"about-card\">\n\t<mat-card-header>\n\t\t<img mat-card-avatar src=\"assets/images/favicon-96x96.png\">\n\t\t<mat-card-title>üme</mat-card-title>\n\t\t<mat-card-subtitle>Version: {{version}}</mat-card-subtitle>\n\t</mat-card-header>\n\t<img mat-card-image src=\"assets/images/about.jpg\">\n\t<mat-card-content>\n\t\t<p>Release photo by\n\t\t\t<a href=\"https://unsplash.com/photos/KgjcndVr7tU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText\">Nik MacMillan</a> on\n\t\t\t<a href=\"https://unsplash.com/\">Unsplash</a>\n\t\t</p>\n\t</mat-card-content>\n\t<mat-card-actions>\n\t\t<button mat-button>DONATE</button>\n\t\t<a href=\"https://github.com/sondreb/ume\" target=\"_blank\" mat-button>SOURCE CODE</a>\n\t</mat-card-actions>\n\n\t<mat-card-footer class=\"about-card-footer\">\n\t\t<mat-icon>favorite</mat-icon>\n\t</mat-card-footer>\n</mat-card>\n\n<!-- <div class=\"about-box\">\n\t<img src=\"assets/images/favicon-256x256.png\">\n\t<h1>üme</h1>\n\t<p>Version: {{version}}</p>\n\n\t<p>üme is open source:</p><a href=\"https://github.com/sondreb/ume\" target=\"_blank\">https://github.com/sondreb/ume</a>\n\n</div> -->\n"
 
 /***/ }),
 
@@ -1460,7 +1502,7 @@ var _a;
 /***/ "../../../../../src/app/settings/licenses/licenses.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Open Source Licenses</h1>\r\n\r\n<!-- <button mat-button>Click me!</button>\r\n\r\n<mat-chip-list>\r\n\t<mat-chip>One fish</mat-chip>\r\n\t<mat-chip>Two fish</mat-chip>\r\n\t<mat-chip color=\"primary\" selected=\"true\">Primary fish</mat-chip>\r\n\t<mat-chip color=\"accent\" selected=\"true\">Accent fish</mat-chip>\r\n</mat-chip-list> -->\r\n\r\n<pre>\r\n{{licenses}}\r\n</pre>\r\n\r\n<!-- <mat-card class=\"about-card\">\r\n\t<mat-card-header>\r\n\t\t<img mat-card-avatar src=\"assets/images/favicon-96x96.png\">\r\n\t\t<mat-card-title>üme</mat-card-title>\r\n\t\t<mat-card-subtitle>Version: {{version}}</mat-card-subtitle>\r\n\t</mat-card-header>\r\n\t<img mat-card-image src=\"assets/images/about.jpg\">\r\n\t<mat-card-content>\r\n\t\t<p>Release photo by\r\n\t\t\t<a href=\"https://unsplash.com/photos/KgjcndVr7tU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText\">Nik MacMillan</a> on\r\n\t\t\t<a href=\"https://unsplash.com/\">Unsplash</a>\r\n\t\t</p>\r\n\t</mat-card-content>\r\n\t<mat-card-actions>\r\n\t\t<button mat-button>DONATE</button>\r\n\t\t<a href=\"https://github.com/sondreb/ume\" target=\"_blank\" mat-button>SOURCE CODE</a>\r\n\t</mat-card-actions>\r\n\r\n\t<mat-card-footer class=\"about-card-footer\">\r\n\t\t<mat-icon>favorite</mat-icon>\r\n\t</mat-card-footer>\r\n</mat-card> -->\r\n\r\n<!-- <div class=\"about-box\">\r\n\t<img src=\"assets/images/favicon-256x256.png\">\r\n\t<h1>üme</h1>\r\n\t<p>Version: {{version}}</p>\r\n\r\n\t<p>üme is open source:</p><a href=\"https://github.com/sondreb/ume\" target=\"_blank\">https://github.com/sondreb/ume</a>\r\n\r\n</div> -->\r\n"
+module.exports = "<h1>Open Source Licenses</h1>\n\n<!-- <button mat-button>Click me!</button>\n\n<mat-chip-list>\n\t<mat-chip>One fish</mat-chip>\n\t<mat-chip>Two fish</mat-chip>\n\t<mat-chip color=\"primary\" selected=\"true\">Primary fish</mat-chip>\n\t<mat-chip color=\"accent\" selected=\"true\">Accent fish</mat-chip>\n</mat-chip-list> -->\n\n<pre>\n{{licenses}}\n</pre>\n\n<!-- <mat-card class=\"about-card\">\n\t<mat-card-header>\n\t\t<img mat-card-avatar src=\"assets/images/favicon-96x96.png\">\n\t\t<mat-card-title>üme</mat-card-title>\n\t\t<mat-card-subtitle>Version: {{version}}</mat-card-subtitle>\n\t</mat-card-header>\n\t<img mat-card-image src=\"assets/images/about.jpg\">\n\t<mat-card-content>\n\t\t<p>Release photo by\n\t\t\t<a href=\"https://unsplash.com/photos/KgjcndVr7tU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText\">Nik MacMillan</a> on\n\t\t\t<a href=\"https://unsplash.com/\">Unsplash</a>\n\t\t</p>\n\t</mat-card-content>\n\t<mat-card-actions>\n\t\t<button mat-button>DONATE</button>\n\t\t<a href=\"https://github.com/sondreb/ume\" target=\"_blank\" mat-button>SOURCE CODE</a>\n\t</mat-card-actions>\n\n\t<mat-card-footer class=\"about-card-footer\">\n\t\t<mat-icon>favorite</mat-icon>\n\t</mat-card-footer>\n</mat-card> -->\n\n<!-- <div class=\"about-box\">\n\t<img src=\"assets/images/favicon-256x256.png\">\n\t<h1>üme</h1>\n\t<p>Version: {{version}}</p>\n\n\t<p>üme is open source:</p><a href=\"https://github.com/sondreb/ume\" target=\"_blank\">https://github.com/sondreb/ume</a>\n\n</div> -->\n"
 
 /***/ }),
 
@@ -1546,7 +1588,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/settings/settings.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<router-outlet></router-outlet>\r\n"
+module.exports = "<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -1710,7 +1752,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/wipe/home/home.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<i class=\"material-icons float-right\">delete_forever</i>\r\n<i class=\"material-icons float-right action\" data-ume-page=\"home\">chevron_left</i>\r\n<h1>Clear Device</h1>\r\n<p>\r\n\tTo protect your privacy, you can clear this device of all community data.\r\n</p>\r\n<p>\r\n\tBEWARE: If you clear the device, all your keys will be lost. Make sure you have a backup of your keys or remember your pass phrase.\r\n</p>\r\n<p>\r\n\t<i class=\"material-icons\">cloud_download</i> Backup first\r\n</p>\r\n<p>\r\n\tThe data wipe removes data from your browser cache. If the device is stolen, the data can potentially still be retrieved by recovering deleted files on the harddrive. After you wipe all data, restart the browser, go back to üme and verify data is wiped.\r\n</p>\r\n<p>\r\n\t<i class=\"material-icons\">delete_forever</i> Wipe all data on device\r\n</p>\r\n<p class=\"warning-card hidden\" id=\"wipe-success\">\r\n\tSuccess. All data was wiped. Close the window or tab to exit üme.\r\n</p>\r\n"
+module.exports = "<i class=\"material-icons float-right\">delete_forever</i>\n<i class=\"material-icons float-right action\" data-ume-page=\"home\">chevron_left</i>\n<h1>Clear Device</h1>\n<p>\n\tTo protect your privacy, you can clear this device of all community data.\n</p>\n<p>\n\tBEWARE: If you clear the device, all your keys will be lost. Make sure you have a backup of your keys or remember your pass phrase.\n</p>\n<p>\n\t<i class=\"material-icons\">cloud_download</i> Backup first\n</p>\n<p>\n\tThe data wipe removes data from your browser cache. If the device is stolen, the data can potentially still be retrieved by recovering deleted files on the harddrive. After you wipe all data, restart the browser, go back to üme and verify data is wiped.\n</p>\n<p>\n\t<i class=\"material-icons\">delete_forever</i> Wipe all data on device\n</p>\n<p class=\"warning-card hidden\" id=\"wipe-success\">\n\tSuccess. All data was wiped. Close the window or tab to exit üme.\n</p>\n"
 
 /***/ }),
 
@@ -1771,7 +1813,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/wipe/wipe.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<h1>Settings</h1>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<h1>Settings</h1>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 

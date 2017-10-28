@@ -25,9 +25,55 @@ a:hover {
 	box-sizing: border-box;
 }
 
+::-webkit-scrollbar
+{
+  width: 8px;  /* for vertical scrollbars */
+  height: 8px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.0);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.0);
+}
+
 // .app-container {
 // 	display: flex; 
 // 	box-sizing: border-box; 
 // 	flex-direction: column;
 // }
 
+// @keyframes scrollbars {
+//     from {width: 8px;}
+//     to {width: 16px;}
+// }
+
+.scroll {
+	//background-color: red !important;
+
+	//animation-name: scrollbars;
+    //animation-duration: 4s;
+}
+
+.scroll::-webkit-scrollbar
+{
+  width: 8px;  /* for vertical scrollbars */
+  height: 8px; /* for horizontal scrollbars */
+
+  //animation-name: scrollbars;
+  //animation-duration: 4s;
+}
+
+.scroll::-webkit-scrollbar-track
+{
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.scroll::-webkit-scrollbar-thumb
+{
+  background: rgba(0, 0, 0, 0.5);
+}
