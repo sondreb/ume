@@ -1,5 +1,9 @@
 {
  "name": "üme",
+ "display": "standalone",
+ "start_url": "/",
+ "theme_color": "#ffc107",
+ "background_color": "#fafafa",
  "icons": [
   {
    "src": "\/assets/images/android-icon-36x36.png",

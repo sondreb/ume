@@ -26,9 +26,7 @@
 							<mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon> Settings</button>
 					</div>
 				</mat-sidenav>
-				<button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
-					<mat-icon>add</mat-icon>
-				</button>
+
 				<!-- <button mat-icon-button class="ume-menu-button" (click)="sidenav.toggle()">
 					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
 					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
@@ -48,7 +46,7 @@
 				<mat-icon>cloud_off</mat-icon>
 			</button>
 
-			<button mat-icon-button>
+			<!-- <button mat-icon-button>
 				<mat-icon>cloud_queue</mat-icon>
 			</button>
 
@@ -62,9 +60,36 @@
 
 			<button mat-icon-button>
 				<mat-icon>cloud_done</mat-icon>
+			</button> -->
+
+			<button mat-mini-fab class="ume-fab" [matMenuTriggerFor]="addmenu">
+				<mat-icon>add</mat-icon>
 			</button>
 
-			Connected to gateway.
+			<mat-menu #addmenu="matMenu" [overlapTrigger]="false" yPosition="above" xPosition="before">
+				<!-- <button mat-menu-item>
+					<mat-icon>dialpad</mat-icon>
+					<span>Redial</span>
+				</button>
+				<button mat-menu-item disabled>
+					<mat-icon>voicemail</mat-icon>
+					<span>Check voicemail</span>
+				</button>
+				<button mat-menu-item>
+					<mat-icon>notifications_off</mat-icon>
+					<span>Disable alerts</span>
+				</button> -->
+
+				<button mat-menu-item routerLink="/wipe" routerLinkActive="active">
+					<mat-icon aria-label="Clear device">delete_forever</mat-icon> Clear Device</button>
+
+				<button mat-menu-item routerLink="/settings" routerLinkActive="active">
+					<mat-icon aria-label="Go offline">cloud_off</mat-icon>Go offline</button>
+				<button mat-menu-item routerLink="/settings" routerLinkActive="active">
+					<mat-icon aria-label="Settings">settings</mat-icon>Settings</button>
+
+			</mat-menu>
+
 		</footer>
 	</div>
 </div>
