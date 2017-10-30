@@ -13,7 +13,7 @@
 				"manifest.json",
 				"web.config",
 				"3rdpartylicenses.txt",
-				".well-known/acme-challenge/LggHb3mzip_xRrjqndCH6PEHIewQOfqK1UolIwjIJ7E"
+				".well-known/acme-challenge/LggHb3mzip_xRrjqndCH6PEHIewQOfqK1UolIwjIJ7E/index.html"
 			],
 			"index": "index.html",
 			"main": "main.ts",
