@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 import { GatewayDialogComponent } from '../gateway-dialog/gateway-dialog.component';
 import { Gateway } from '../gateway';
@@ -8,7 +8,7 @@ import { Gateway } from '../gateway';
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
 	public quota: string | any;
 	public usage: string | any;
@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		// Calculate storage every 10 seconds.
 		this.interval = setInterval(() => {
 			this.updateUsedSpace();
@@ -30,6 +29,10 @@ export class HomeComponent implements OnInit {
 		setTimeout(() => {
 			this.updateUsedSpace();
 		});
+	}
+
+	public ngOnDestroy() {
+		clearInterval(this.interval);
 	}
 
 	public onGatewayAdd() {

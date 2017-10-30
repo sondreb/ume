@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationState } from '../../framework/application-state';
 
 @Component({
 	selector: 'app-about',
@@ -9,7 +10,11 @@ export class AboutComponent implements OnInit {
 
 	public version: string;
 
-	constructor() { }
+	constructor(public appState: ApplicationState) {
+
+		//this.appState.title = 'About üme';
+
+	}
 
 	ngOnInit() {
 		this.version = (<any> window).ume.version;

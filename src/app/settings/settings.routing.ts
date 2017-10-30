@@ -9,6 +9,7 @@ const routes: Routes = [
 	{
 		path: 'settings',
 		component: SettingsComponent,
+		data: { breadcrumb: 'Settings' },
 		children: [
 			{ path: '', component: HomeComponent, data: { breadcrumb: 'Settings' } },
 			{ path: 'about', component: AboutComponent, data: { breadcrumb: 'About' } },

@@ -1,21 +1,11 @@
 <div class="container">
 	<div class="box" fxLayout="column">
-		<header>
-			<mat-toolbar color="primary">
-				<mat-icon class="logo-icon">verified_user</mat-icon>
-				<a routerLink="/" class="logo-text">üme</a>
-				<button mat-icon-button (click)="sidenav.toggle()">
-					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
-					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
-				</button>
-				<span class="fill-remaining-space"></span>
-
-			</mat-toolbar>
-		</header>
+		<header app-toolbar></header>
 		<div id="main" fxLayout="row" fxLayout.xs="column" fxFlex>
 
-			<mat-sidenav-container class="ume-sidenav-fab-container">
-				<mat-sidenav #sidenav mode="side" opened="true" id="sidebar">
+			<mat-sidenav-container class="ume-sidenav-fab-container" (backdropClick)="onBackdrop()">
+				<!-- <mat-sidenav #sidenav mode="side" [opened]="appState.sidenav" id="sidebar" mode="{{appState.ismobile?'over':'side'}}" opened="{{!appState.ismobile}}" disableClose="{{!appState.ismobile}}"> -->
+				<mat-sidenav #sidenav id="sidebar" mode="{{appState.ismobile?'over':'side'}}" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}">
 					<!-- <button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
 						<mat-icon>add</mat-icon>
 					</button> -->
@@ -39,10 +29,10 @@
 				<button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
 					<mat-icon>add</mat-icon>
 				</button>
-				<button mat-icon-button class="ume-menu-button" (click)="sidenav.toggle()">
+				<!-- <button mat-icon-button class="ume-menu-button" (click)="sidenav.toggle()">
 					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
 					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
-				</button>
+				</button> -->
 				<div class="ume-scrolling-content ume-content" app-scroll>
 					<app-breadcrumb></app-breadcrumb>
 					<router-outlet></router-outlet>
@@ -54,6 +44,26 @@
 			<aside fxFlex="1 6 20%" fxFlexOrder fxFlexOrder.xs="3"> aside</aside> -->
 		</div>
 		<footer>
+			<button mat-icon-button>
+				<mat-icon>cloud_off</mat-icon>
+			</button>
+
+			<button mat-icon-button>
+				<mat-icon>cloud_queue</mat-icon>
+			</button>
+
+			<button mat-icon-button>
+				<mat-icon>cloud_upload</mat-icon>
+			</button>
+
+			<button mat-icon-button>
+				<mat-icon>cloud_download</mat-icon>
+			</button>
+
+			<button mat-icon-button>
+				<mat-icon>cloud_done</mat-icon>
+			</button>
+
 			Connected to gateway.
 		</footer>
 	</div>

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FrameworkModule } from './framework/framework.module';
 import { AppComponent } from './app.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app.routing';
 import { CommunitiesModule } from './communities/communities.module';
@@ -24,7 +23,6 @@ import { HttpModule } from '@angular/http';
 		BrowserModule,
 		BrowserAnimationsModule,
 		HttpModule,
-		FlexLayoutModule,
 		FrameworkModule,
 		AppRoutingModule,
 		CommunitiesModule,

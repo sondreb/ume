@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/theming';
 
-
 html, body {
 	margin: 0;
 	padding: 0;
@@ -76,4 +75,19 @@ a:hover {
 .scroll::-webkit-scrollbar-thumb
 {
   background: rgba(0, 0, 0, 0.5);
+}
+
+.fill-remaining-space {
+	flex: 1 1 auto;
+}
+
+.logo-icon {
+	
+}
+
+.logo-text {
+	font-size: 1.6rem !important;
+	margin-right: 6px;
+	text-decoration: none;
+	color: black;
 }
