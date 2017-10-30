@@ -9,6 +9,7 @@ import { ScrollDirective } from './scroll.directive';
 import { ApplicationState } from './application-state';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { StorageService } from './storage';
 
 @NgModule({
 	imports: [
@@ -20,7 +21,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 	],
 	exports: [FlexLayoutModule, MaterialModule, FormsModule, BreadcrumbComponent, ScrollDirective, ToolbarComponent],
-	providers: [ApplicationState],
+	providers: [ApplicationState, StorageService],
 	declarations: [BreadcrumbComponent, ScrollDirective, ToolbarComponent]
 })
 export class FrameworkModule { }

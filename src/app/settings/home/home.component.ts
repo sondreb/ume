@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 import { GatewayDialogComponent } from '../gateway-dialog/gateway-dialog.component';
 import { Gateway } from '../gateway';
+import { ApplicationState } from '../../framework/application-state';
+import { StorageService } from '../../framework/storage';
 
 @Component({
 	selector: 'app-home',
@@ -14,8 +16,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 	public usage: string | any;
 	public storageUsed: number;
 	private interval: any;
+	public gateways: Array<any>;
 
-	constructor(public dialog: MatDialog) {
+	constructor(public dialog: MatDialog, public appState: ApplicationState, public storage: StorageService) {
 
 	}
 
@@ -29,6 +32,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 		setTimeout(() => {
 			this.updateUsedSpace();
 		});
+
+		this.gateways = this.storage.get('gateways');
+
+		if (!this.gateways) {
+			this.gateways = [{name: 'localhost', url: 'http://localhost:8081'}];
+		}
 	}
 
 	public ngOnDestroy() {
@@ -49,8 +58,29 @@ export class HomeComponent implements OnInit, OnDestroy {
 			if (result) {
 				// Save the gateway.
 				console.log(gateway);
+
+				this.gateways.push(gateway);
+				this.persistGateways();
+
+				// let gateways = this.storage.get('gateways');
+
+				// if (!gateways) {
+				// 	gateways = [];
+				// }
+
+				// gateways.push(gateway);
 			}
 		});
+	}
+
+	public onGatewayDelete(gateway) {
+		const index = this.gateways.indexOf(gateway);
+		this.gateways.splice(index, 1);
+		this.persistGateways();
+	}
+
+	private persistGateways() {
+		this.storage.set('gateways', this.gateways);
 	}
 
 	private updateUsedSpace() {

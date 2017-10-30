@@ -1,6 +1,45 @@
+<h2>Persistence</h2>
+
+<p>Do you want to persist settings and data on this device?</p>
+
+<p>
+	<mat-slide-toggle [checked]="appState.persist">
+		Persist data
+	</mat-slide-toggle>
+</p>
+<p>
+	<em>This option will decide whether to use local storage or in-memory storage for all data. If this is turned on, the wipe operation is unnecessary.</em>
+</p>
+
+<br>
+
 <h2>Gateways</h2>
 
-<button mat-button (click)="onGatewayAdd()"><mat-icon>add</mat-icon>Add a gateway</button>
+<p>
+	<button mat-button (click)="onGatewayAdd()">
+		<mat-icon>add</mat-icon>Add a gateway</button>
+</p>
+
+<mat-list>
+	<mat-list-item *ngFor="let gateway of gateways">
+		<mat-icon matListIcon>cloud</mat-icon>
+		<h3 matLine>{{gateway.name}}</h3>
+		<p matLine>
+			<span>{{gateway.url}}</span>
+		</p>
+		<button mat-icon-button (click)="onGatewayDelete(gateway)">
+			<mat-icon>delete</mat-icon>
+		</button>
+	</mat-list-item>
+</mat-list>
+
+
+<!-- 
+<div *ngFor="let gateway of gateways">{{gateway.name}} ({{gateway.url}})
+	<mat-icon (click)="onGatewayDelete(gateway)">delete</mat-icon>
+</div> -->
+
+<br>
 
 <h2>Storage</h2>
 
@@ -14,8 +53,10 @@
 	<br> Your device have used up available space for the app. You must clear available disk space on your device.
 </p>
 
-<hr>
+<br>
 
-<button mat-button routerLink="about">About</button>
-<button mat-button routerLink="licenses">Licenses</button>
-<a mat-button href="https://github.com/sondreb/ume/issues" target="_blank">Feedback</a>
+<p>
+	<button mat-button routerLink="about">About</button>
+	<button mat-button routerLink="licenses">Licenses</button>
+	<a mat-button href="https://github.com/sondreb/ume/issues" target="_blank">Feedback</a>
+</p>

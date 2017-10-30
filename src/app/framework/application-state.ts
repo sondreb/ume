@@ -7,6 +7,7 @@ export class ApplicationState {
 	public sidenav = true;
 	public ismobile: boolean;
 	public backUrl: string;
+	public persist = true;
 
 	constructor() {
 
