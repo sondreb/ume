@@ -12,7 +12,8 @@
 				"favicon.ico",
 				"manifest.json",
 				"web.config",
-				"3rdpartylicenses.txt"
+				"3rdpartylicenses.txt",
+				".well-known/acme-challenge/LggHb3mzip_xRrjqndCH6PEHIewQOfqK1UolIwjIJ7E"
 			],
 			"index": "index.html",
 			"main": "main.ts",
