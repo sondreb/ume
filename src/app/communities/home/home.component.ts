@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationState } from '../../framework/application-state';
 
 @Component({
 	selector: 'app-communities-home',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-	constructor() { }
+	constructor(public appState: ApplicationState) {
+
+		appState.main = false;
+		appState.title = 'Communities';
+		appState.icon = 'hot_tub';
+
+	}
 
 	ngOnInit() {
 	}

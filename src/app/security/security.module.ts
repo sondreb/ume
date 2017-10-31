@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SecurityRoutingModule } from './security.routing';
+import { SecurityRoutingModule, routingComponents } from './security.routing';
 import { HomeComponent } from './home/home.component';
 import { SecurityComponent } from './security.component';
 import { FrameworkModule } from '../framework/framework.module';
@@ -12,6 +12,6 @@ import { FrameworkModule } from '../framework/framework.module';
 		FrameworkModule
 	],
 	exports: [SecurityRoutingModule],
-	declarations: [HomeComponent, SecurityComponent]
+	declarations: [routingComponents]
 })
 export class SecurityModule { }

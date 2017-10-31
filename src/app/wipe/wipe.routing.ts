@@ -7,8 +7,9 @@ const routes: Routes = [
 	{
 		path: 'wipe',
 		component: WipeComponent,
+		data: { breadcrumb: 'Clear Device' },
 		children: [
-			{ path: '', component: HomeComponent }
+			{ path: '', component: HomeComponent, data: { breadcrumb: 'Clear Device' } }
 		],
 	}
 ];

@@ -36,6 +36,9 @@
 			<span>Disable alerts</span>
 		</button> -->
 
+			<button mat-menu-item routerLink="/security/restore" routerLinkActive="active">
+				<mat-icon aria-label="Clear device">restore</mat-icon> Restore from pass phrase</button>
+
 		<button mat-menu-item routerLink="/wipe" routerLinkActive="active">
 			<mat-icon aria-label="Clear device">delete_forever</mat-icon> Clear Device</button>
 
@@ -53,6 +56,7 @@
 	</button>
 	<span>{{appState.title}}</span>
 	<span class="fill-remaining-space"></span>
+	<mat-icon *ngIf="appState.icon">{{appState.icon}}</mat-icon>
 </mat-toolbar>
 
 <!-- <mat-toolbar color="primary" class="mobile-toolbar">

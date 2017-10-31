@@ -10,20 +10,61 @@
 						<mat-icon>add</mat-icon>
 					</button> -->
 					<div class="ume-scrolling-content ume-sidenav-menu" id="sidenav-menu" app-scroll>
-						<button mat-button routerLink="/create" routerLinkActive="active">
+						<!-- <button mat-button routerLink="/create" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> Create</button>
-						<br>
-						<button mat-button routerLink="/communities" routerLinkActive="active">
+						<br> -->
+						<!-- <button mat-button routerLink="/communities" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon> Communities</button>
-						<br>
-						<button mat-button routerLink="/security" routerLinkActive="active">
+						<br> -->
+
+						<mat-expansion-panel>
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon>&nbsp; Communities
+								</mat-panel-title>
+								<!-- <mat-panel-description>
+									Type your name and age
+								</mat-panel-description> -->
+
+							</mat-expansion-panel-header>
+
+							<button mat-button routerLink="/communities">
+								<mat-icon>face</mat-icon> Friday Hangout!
+							</button>
+
+							<button mat-button routerLink="/communities">
+								<mat-icon>favorite</mat-icon> Freedom :-)
+							</button>
+
+						</mat-expansion-panel>
+
+						<mat-expansion-panel>
+							<mat-expansion-panel-header>
+								<mat-panel-title>
+									<mat-icon aria-label="Example icon-button with a heart icon">security</mat-icon>&nbsp; Identities
+								</mat-panel-title>
+								<!-- <mat-panel-description>
+										Type your name and age
+									</mat-panel-description> -->
+
+							</mat-expansion-panel-header>
+
+							<button mat-button routerLink="/security/identities/123">
+								<mat-icon>account_box</mat-icon> 31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
+							</button>
+
+							<button mat-button routerLink="/security/identities/444">
+								<mat-icon>account_box</mat-icon> 31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
+							</button>
+
+						</mat-expansion-panel>
+
+
+						<!-- <button mat-button routerLink="/security" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">security</mat-icon> Security</button>
-						<br>
-						<button mat-button routerLink="/wipe" routerLinkActive="active">
-							<mat-icon aria-label="Example icon-button with a heart icon">delete_forever</mat-icon> Clear Device</button>
-						<br>
-						<button mat-button routerLink="/settings" routerLinkActive="active">
-							<mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon> Settings</button>
+						 -->
+						<!-- <button mat-button routerLink="/settings" routerLinkActive="active">
+							<mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon> Settings</button> -->
 					</div>
 				</mat-sidenav>
 
@@ -80,13 +121,17 @@
 					<span>Disable alerts</span>
 				</button> -->
 
-				<button mat-menu-item routerLink="/wipe" routerLinkActive="active">
-					<mat-icon aria-label="Clear device">delete_forever</mat-icon> Clear Device</button>
+				<button mat-menu-item routerLink="/create/post">
+					<mat-icon>comment</mat-icon>New post</button>
+				<button mat-menu-item routerLink="/create/post">
+					<mat-icon>donut_small</mat-icon>New community</button>
+				<button mat-menu-item routerLink="/create/post">
+					<mat-icon>vpn_key</mat-icon>New invite</button>
 
-				<button mat-menu-item routerLink="/settings" routerLinkActive="active">
+				<!-- <button mat-menu-item routerLink="/settings" routerLinkActive="active">
 					<mat-icon aria-label="Go offline">cloud_off</mat-icon>Go offline</button>
 				<button mat-menu-item routerLink="/settings" routerLinkActive="active">
-					<mat-icon aria-label="Settings">settings</mat-icon>Settings</button>
+					<mat-icon aria-label="Settings">settings</mat-icon>Settings</button> -->
 
 			</mat-menu>
 

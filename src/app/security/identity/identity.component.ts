@@ -1,21 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ApplicationState } from '../../framework/application-state';
 
-
 @Component({
-	selector: 'app-wipe-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.css']
+	selector: 'app-security-identity',
+	templateUrl: './identity.component.html',
+	styleUrls: ['./identity.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class IdentityComponent implements OnInit {
 
 	constructor(public appState: ApplicationState) {
 
 		this.appState.main = false;
-		this.appState.title = 'Clear Device';
-		this.appState.icon = 'delete_forever';
+		this.appState.title = 'Identity';
 
-	 }
+	}
 
 	ngOnInit() {
 	}

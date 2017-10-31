@@ -41,6 +41,9 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 					this.appState.sidenav = false;
 				}
 
+				// Reset icon on navigation change.
+				this.appState.icon = null;
+
 				const currentRoute = this.getRoute(event.url);
 
 				if (currentRoute.route && currentRoute.route.data) {

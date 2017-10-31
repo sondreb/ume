@@ -1,10 +1,10 @@
 <h2>Persistence</h2>
 
 <p>Do you want to persist settings and data on this device?</p>
-
 <p>
-	<mat-slide-toggle [checked]="appState.persist">
-		Persist data
+	<mat-slide-toggle [(ngModel)]="appState.persist">
+		<span *ngIf="appState.persist">Data persisted</span>
+		<span *ngIf="!appState.persist">Data not persisted</span>
 	</mat-slide-toggle>
 </p>
 <p>
@@ -14,6 +14,8 @@
 <br>
 
 <h2>Gateways</h2>
+
+<p>To begin using üme, you need to be connected to at least one gateway. Manage your gateway connections below.</p>
 
 <p>
 	<button mat-button (click)="onGatewayAdd()">

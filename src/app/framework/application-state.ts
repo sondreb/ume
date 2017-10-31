@@ -8,6 +8,7 @@ export class ApplicationState {
 	public ismobile: boolean;
 	public backUrl: string;
 	public persist = true;
+	public icon: string;
 
 	constructor() {
 

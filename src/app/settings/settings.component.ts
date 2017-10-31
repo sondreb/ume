@@ -11,6 +11,7 @@ export class SettingsComponent implements OnInit {
 	constructor(public appState: ApplicationState) {
 		appState.main = false;
 		appState.title = 'Settings';
+		appState.icon = 'settings';
 	}
 
 	ngOnInit() {

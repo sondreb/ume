@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApplicationState } from '../framework/application-state';
 
 @Component({
 	selector: 'app-introduction',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroductionComponent implements OnInit {
 
-	constructor() { }
+	constructor(public appState: ApplicationState) {
+		this.appState.main = false;
+		this.appState.title = 'Introduction';
+	}
 
 	ngOnInit() {
 	}

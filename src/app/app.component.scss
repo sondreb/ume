@@ -51,10 +51,15 @@
 	overflow: auto;
 }
 
+.mat-sidenav {
+	width: 250px;
+}
+
+
 .ume-sidenav-menu {
 	box-sizing: border-box;
-	padding-top: 20px;
-	padding-bottom: 20px;
+	//padding-top: 20px;
+	//padding-bottom: 20px;
 }
 
 .ume-sidenav-menu .active {
@@ -64,7 +69,7 @@
 .ume-sidenav-menu button {
 	width: 100%;
 	text-align: left;
-	padding: 20px;
+	//padding: 20px;
 }
 
 .box, .container {
