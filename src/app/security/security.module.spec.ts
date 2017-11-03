@@ -1,13 +1,13 @@
 import { SecurityModule } from './security.module';
 
-describe('SettingsModule', () => {
-	let settingsModule: SettingsModule;
+describe('SecurityModule', () => {
+	let securityModule: SecurityModule;
 
 	beforeEach(() => {
-		settingsModule = new SettingsModule();
+		securityModule = new SecurityModule();
 	});
 
 	it('should create an instance', () => {
-		expect(settingsModule).toBeTruthy();
+		expect(securityModule).toBeTruthy();
 	});
 });

@@ -4,12 +4,11 @@
 		<div id="main" fxLayout="row" fxLayout.xs="column" fxFlex>
 
 			<mat-sidenav-container class="ume-sidenav-fab-container" (backdropClick)="onBackdrop()">
-				<!-- <mat-sidenav #sidenav mode="side" [opened]="appState.sidenav" id="sidebar" mode="{{appState.ismobile?'over':'side'}}" opened="{{!appState.ismobile}}" disableClose="{{!appState.ismobile}}"> -->
-				<mat-sidenav #sidenav id="sidebar" mode="{{appState.ismobile?'over':'side'}}" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}">
+				<mat-sidenav #sidenav id="sidebar" [mode]="appState.ismobile?'over':'side'" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}">
 					<!-- <button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
 						<mat-icon>add</mat-icon>
 					</button> -->
-					<div class="ume-scrolling-content ume-sidenav-menu" id="sidenav-menu" app-scroll>
+					<div class="ume-scrolling-content ume-sidenav-menu" id="sidenav-menu" umeScroll>
 						<!-- <button mat-button routerLink="/create" routerLinkActive="active">
 							<mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> Create</button>
 						<br> -->
@@ -72,7 +71,7 @@
 					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
 					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
 				</button> -->
-				<div class="ume-scrolling-content ume-content" app-scroll>
+				<div class="ume-scrolling-content ume-content" umeScroll>
 					<app-breadcrumb></app-breadcrumb>
 					<router-outlet></router-outlet>
 				</div>

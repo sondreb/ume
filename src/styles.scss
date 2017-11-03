@@ -95,3 +95,8 @@ a:hover {
 .centered {
 	text-align: center;
 }
+
+/* Fixes a bug with the latest release of flex/material. */
+.mat-toolbar {
+	display: flex;
+}

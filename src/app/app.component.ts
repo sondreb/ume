@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
-import { ApplicationState } from './framework/application-state';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ApplicationState } from './framework';
 import { Subscription } from 'rxjs/Subscription';
 import { MediaChange, ObservableMedia } from '@angular/flex-layout';
 
 @Component({
-	selector: 'app-root',
+	selector: 'ume-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
 	public title = 'app';
 	watcher: Subscription;
 	activeMediaQuery = '';
@@ -17,7 +17,6 @@ export class AppComponent {
 
 	constructor(public appState: ApplicationState, public media: ObservableMedia) {
 		appState.main = true;
-
 
 		// Initial load on mobile devices, we'll hide the menu.
 

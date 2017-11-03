@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationState } from '../../framework/application-state';
+import { ApplicationState } from '../../framework';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 		this.appState.title = 'Clear Device';
 		this.appState.icon = 'delete_forever';
 
-	 }
+	}
 
 	ngOnInit() {
 	}

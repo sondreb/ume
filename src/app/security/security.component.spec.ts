@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+// import { SecurityComponent } from './security.component';
 
-import { SettingsComponent } from './settings.component';
+// describe('SecurityComponent', () => {
+// 	let component: SecurityComponent;
+// 	let fixture: ComponentFixture<SecurityComponent>;
 
-describe('SettingsComponent', () => {
-  let component: SettingsComponent;
-  let fixture: ComponentFixture<SettingsComponent>;
+// 	beforeEach(async(() => {
+// 		TestBed.configureTestingModule({
+// 			declarations: [SecurityComponent]
+// 		})
+// 			.compileComponents();
+// 	}));
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SettingsComponent ]
-    })
-    .compileComponents();
-  }));
+// 	beforeEach(() => {
+// 		fixture = TestBed.createComponent(SecurityComponent);
+// 		component = fixture.componentInstance;
+// 		fixture.detectChanges();
+// 	});
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SettingsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+// 	it('should create', () => {
+// 		expect(component).toBeTruthy();
+// 	});
+// });

@@ -4,7 +4,7 @@ import { SettingsRoutingModule } from './settings.routing';
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { SettingsComponent } from './settings.component';
-import { FrameworkModule } from '../framework/framework.module';
+import { FrameworkModule } from '../framework';
 import { LicensesComponent } from './licenses/licenses.component';
 import { GatewayDialogComponent } from './gateway-dialog/gateway-dialog.component';
 

@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angular/material';
 import { GatewayDialogComponent } from '../gateway-dialog/gateway-dialog.component';
 import { Gateway } from '../gateway';
-import { ApplicationState } from '../../framework/application-state';
-import { StorageService } from '../../framework/storage';
+import { ApplicationState } from '../../framework';
+import { StorageService } from '../../framework';
 
 @Component({
 	selector: 'app-home',

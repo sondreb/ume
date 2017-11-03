@@ -1,13 +1,13 @@
-import { SettingsModule } from './settings.module';
+// import { CreateModule } from './create.module';
 
-describe('SettingsModule', () => {
-	let settingsModule: SettingsModule;
+// describe('CreateModule', () => {
+// 	let createModule: CreateModule;
 
-	beforeEach(() => {
-		settingsModule = new SettingsModule();
-	});
+// 	beforeEach(() => {
+// 		createModule = new CreateModule();
+// 	});
 
-	it('should create an instance', () => {
-		expect(settingsModule).toBeTruthy();
-	});
-});
+// 	it('should create an instance', () => {
+// 		expect(createModule).toBeTruthy();
+// 	});
+// });

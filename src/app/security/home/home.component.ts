@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationState } from '../../framework/application-state';
+import { ApplicationState } from '../../framework';
 
 @Component({
 	selector: 'app-security-home',

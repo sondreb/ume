@@ -1,10 +1,10 @@
-import { SettingsModule } from './settings.module';
+import { WipeModule } from './wipe.module';
 
-describe('SettingsModule', () => {
-	let settingsModule: SettingsModule;
+describe('WipeModule', () => {
+	let settingsModule: WipeModule;
 
 	beforeEach(() => {
-		settingsModule = new SettingsModule();
+		settingsModule = new WipeModule();
 	});
 
 	it('should create an instance', () => {

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationState } from '../framework/application-state';
-import { StorageService } from '../framework/storage';
+import { ApplicationState, StorageService } from '../framework';
 
 @Component({
 	selector: 'app-network',

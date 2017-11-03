@@ -16,7 +16,7 @@ const ume = {
 	version: environment.version
 };
 
-(<any>window).ume = ume;
+(<any> window).ume = ume;
 
 platformBrowserDynamic().bootstrapModule(AppModule)
 	.catch(err => console.log(err));

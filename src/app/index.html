@@ -2,132 +2,134 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <title>üme - collaborative community</title>
-    <link rel="stylesheet" href="fonts/Material_Design_Icons/material-icons.css">
-    <link rel="stylesheet" href="fonts/Open_Sans/OpenSans.css">
-    <link rel="stylesheet" href="app.css">
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <meta name="theme-color" content="#ffc107">
-    <meta name="msapplication-navbutton-color" content="#ffc107">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#ffc107">
-    <style>
-        [data-v-page] {
-            display: none;
-            box-sizing: border-box;
-            min-height: 400px;
-            width: 100%;
-            /*border: 4px solid gray;*/
-            /*            margin-top: 10px;
+	<meta charset="utf-8">
+	<title>üme - collaborative community</title>
+	<base href="/">
+	<link rel="stylesheet" href="fonts/Material_Design_Icons/material-icons.css">
+	<link rel="stylesheet" href="fonts/Open_Sans/OpenSans.css">
+	<link rel="stylesheet" href="app.css">
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="theme-color" content="#ffc107">
+	<meta name="msapplication-navbutton-color" content="#ffc107">
+	<meta name="apple-mobile-web-app-status-bar-style" content="#ffc107">
+	<style>
+		[data-v-page] {
+			display: none;
+			box-sizing: border-box;
+			min-height: 400px;
+			width: 100%;
+			/*border: 4px solid gray;*/
+			/*            margin-top: 10px;
             padding: 30px;*/
-        }
-    </style>
+		}
+
+	</style>
 </head>
 
 <body>
-    <div id="loading">üme starting... please wait...</div>
+	<div id="loading">üme starting... please wait...</div>
 
-    <div id="container" class="container">
-        <div class="top-bar">
-            <div class="top-bar-container">
-                <input type="text" />
-                <i class="material-icons action" data-ume-open="search">search</i>
-            </div>
-        </div>
-        <div id="content" class="content">
+	<div id="container" class="container">
+		<div class="top-bar">
+			<div class="top-bar-container">
+				<input type="text" />
+				<i class="material-icons action" data-ume-open="search">search</i>
+			</div>
+		</div>
+		<div id="content" class="content">
 
-            <div class="page" id="page-search">
-                <i class="material-icons float-right">search</i>
-                <i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
-                <h1>Search results</h1>
-                <p>Nothing found.</p>
-            </div>
+			<div class="page" id="page-search">
+				<i class="material-icons float-right">search</i>
+				<i class="material-icons float-right action" data-ume-page="home">chevron_left</i>
+				<h1>Search results</h1>
+				<p>Nothing found.</p>
+			</div>
 
-            <div class="page page-open" id="page-home" data-v-page="home|views/home.html" data-v-opened="onHome"></div>
-            <div class="page" id="page-introduction" data-v-page="introduction|views/home-introduction.html"></div>
-            <div class="page" id="page-create" data-v-page="create|views/create.html" data-v-opened="onCreate"></div>
-            <div class="page" id="page-create-post" data-v-page="create-post|views/create-post.html" data-v-opened="onCreatePost"></div>
-            <div class="page" id="page-create-community" data-v-page="create-community|views/create-community.html" data-v-opened="onCreateCommunity"></div>
-            <div class="page" id="page-create-invite" data-v-page="create-invite|views/create-invite.html" data-v-opened="onCreateInvite"></div>
-            <div class="page" id="page-restore-pass-phrase" data-v-page="restore-pass-phrase|views/restore.html" data-v-opened="onRestore"></div>
-            <div class="page" id="page-community" data-v-page="community|views/community.html" data-v-opened="onCommunity"></div>
-            <div class="page" id="page-communities" data-v-page="communities|views/communities.html" data-v-opened="onCommunities"></div>
-            <div class="page" id="page-identity" data-v-page="identity|views/identity.html" data-v-opened="onIdentityOpened"></div>
-            <div class="page" id="page-security" data-v-page="security|views/security.html" data-v-opened="onSecurityOpened"></div>
-            <div class="page" id="page-security-introduction" data-v-page="security-introduction|views/security-introduction.html"></div>
-            <div class="page" id="page-clear" data-v-page="clear|views/clear.html"></div>
-            <div class="page" id="page-settings" data-v-page="settings|views/settings.html" data-v-opened="onSettings"></div>
+			<div class="page page-open" id="page-home" data-v-page="home|views/home.html" data-v-opened="onHome"></div>
+			<div class="page" id="page-introduction" data-v-page="introduction|views/home-introduction.html"></div>
+			<div class="page" id="page-create" data-v-page="create|views/create.html" data-v-opened="onCreate"></div>
+			<div class="page" id="page-create-post" data-v-page="create-post|views/create-post.html" data-v-opened="onCreatePost"></div>
+			<div class="page" id="page-create-community" data-v-page="create-community|views/create-community.html" data-v-opened="onCreateCommunity"></div>
+			<div class="page" id="page-create-invite" data-v-page="create-invite|views/create-invite.html" data-v-opened="onCreateInvite"></div>
+			<div class="page" id="page-restore-pass-phrase" data-v-page="restore-pass-phrase|views/restore.html" data-v-opened="onRestore"></div>
+			<div class="page" id="page-community" data-v-page="community|views/community.html" data-v-opened="onCommunity"></div>
+			<div class="page" id="page-communities" data-v-page="communities|views/communities.html" data-v-opened="onCommunities"></div>
+			<div class="page" id="page-identity" data-v-page="identity|views/identity.html" data-v-opened="onIdentityOpened"></div>
+			<div class="page" id="page-security" data-v-page="security|views/security.html" data-v-opened="onSecurityOpened"></div>
+			<div class="page" id="page-security-introduction" data-v-page="security-introduction|views/security-introduction.html"></div>
+			<div class="page" id="page-clear" data-v-page="clear|views/clear.html"></div>
+			<div class="page" id="page-settings" data-v-page="settings|views/settings.html" data-v-opened="onSettings"></div>
 
-            <div class="page" id="page-backup">
-                BACKUP
-            </div>
+			<div class="page" id="page-backup">
+				BACKUP
+			</div>
 
-            <div class="page" id="page-keys">
-                KEYS
-            </div>
+			<div class="page" id="page-keys">
+				KEYS
+			</div>
 
-        </div>
-    </div>
-    <div id="menu" class="menu noselect">
-        <div class="menu-container">
+		</div>
+	</div>
+	<div id="menu" class="menu noselect">
+		<div class="menu-container">
 
-            <div class="opened logo">
-                <i class="material-icons action menu-button menu-item" data-v-action="toggleMenu">chevron_left</i>
-                <h1 class="title-opened app-title" data-v-open="home">üme</h1>
-            </div>
+			<div class="opened logo">
+				<i class="material-icons action menu-button menu-item" data-v-action="toggleMenu">chevron_left</i>
+				<h1 class="title-opened app-title" data-v-open="home">üme</h1>
+			</div>
 
-            <div class="closed logo">
-                <i class="material-icons action menu-button menu-item" data-v-action="toggleMenu">chevron_right</i>
-                <h1 class="title-closed app-title" data-v-open="home">üme</h1>
-            </div>
+			<div class="closed logo">
+				<i class="material-icons action menu-button menu-item" data-v-action="toggleMenu">chevron_right</i>
+				<h1 class="title-closed app-title" data-v-open="home">üme</h1>
+			</div>
 
-            <!-- <i class="material-icons action menu-button" id="menu-button">all_inclusive</i> -->
-            <!-- <i class="material-icons">home</i> -->
-            <!-- <i class="material-icons">face</i> -->
-            <!-- <i class="material-icons">check_circle</i> -->
+			<!-- <i class="material-icons action menu-button" id="menu-button">all_inclusive</i> -->
+			<!-- <i class="material-icons">home</i> -->
+			<!-- <i class="material-icons">face</i> -->
+			<!-- <i class="material-icons">check_circle</i> -->
 
-            <div class="menu-item" data-v-open="create">
-                <i class="material-icons">add</i>
-                <span class="menu-legend opened"> Create</span>
-            </div>
-            <div class="menu-item" data-v-open="communities">
-                <i class="material-icons">donut_small</i>
-                <span class="menu-legend opened"> Communities</span>
-            </div>
-            <!-- <div class="menu-item opened-device" data-ume-page="backup"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div> -->
-            <div class="menu-item" data-v-open="security">
-                <i class="material-icons">security</i>
-                <span class="menu-legend opened"> Security</span>
-            </div>
-            <!-- <div class="menu-item opened-device" data-ume-page="keys"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div> -->
-            <div class="menu-item opened-device" data-v-open="clear">
-                <i class="material-icons">delete_forever</i>
-                <span class="menu-legend opened"> Clear Device</span>
-            </div>
-            <div class="menu-item opened-device" data-v-open="settings">
-                <i class="material-icons">settings</i>
-                <span class="menu-legend opened"> Settings</span>
-            </div>
+			<div class="menu-item" data-v-open="create">
+				<i class="material-icons">add</i>
+				<span class="menu-legend opened"> Create</span>
+			</div>
+			<div class="menu-item" data-v-open="communities">
+				<i class="material-icons">donut_small</i>
+				<span class="menu-legend opened"> Communities</span>
+			</div>
+			<!-- <div class="menu-item opened-device" data-ume-page="backup"><i class="material-icons">cloud_download</i><span class="menu-legend opened">  Backup</span></div> -->
+			<div class="menu-item" data-v-open="security">
+				<i class="material-icons">security</i>
+				<span class="menu-legend opened"> Security</span>
+			</div>
+			<!-- <div class="menu-item opened-device" data-ume-page="keys"><i class="material-icons">vpn_key</i><span class="menu-legend opened">  Keys</span></div> -->
+			<div class="menu-item opened-device" data-v-open="clear">
+				<i class="material-icons">delete_forever</i>
+				<span class="menu-legend opened"> Clear Device</span>
+			</div>
+			<div class="menu-item opened-device" data-v-open="settings">
+				<i class="material-icons">settings</i>
+				<span class="menu-legend opened"> Settings</span>
+			</div>
 
-            <!-- Community: i123120sd0d1 -->
-        </div>
-    </div>
+			<!-- Community: i123120sd0d1 -->
+		</div>
+	</div>
 
-    <script type="module" src="./v-start.js"></script>
-    <script src="util.js"></script>
-    <script src="crypto.js"></script>
-    <script src="storage.js"></script>
-    <script src="types.js"></script>
-    <script src="security.js"></script>
-    <script src="container.js"></script>
-    <script src="markup.js"></script>
-    <script src="layout.js"></script>
-    <script src="OpenCrypto.js"></script>
-    <script src="FileSaver.min.js"></script>
-    <script src="lokijs.min.js"></script>
-    <script src="loki-indexed-adapter.min.js"></script>
-    <script src="socket.io.js"></script>
-    <script src="app.js"></script>
+	<script type="module" src="./v-start.js"></script>
+	<script src="util.js"></script>
+	<script src="crypto.js"></script>
+	<script src="storage.js"></script>
+	<script src="types.js"></script>
+	<script src="security.js"></script>
+	<script src="container.js"></script>
+	<script src="markup.js"></script>
+	<script src="layout.js"></script>
+	<script src="OpenCrypto.js"></script>
+	<script src="FileSaver.min.js"></script>
+	<script src="lokijs.min.js"></script>
+	<script src="loki-indexed-adapter.min.js"></script>
+	<script src="socket.io.js"></script>
+	<script src="app.js"></script>
 </body>
 
 </html>

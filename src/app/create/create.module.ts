@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CreateRoutingModule } from './create.routing';
 import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create.component';
-import { FrameworkModule } from '../framework/framework.module';
+import { FrameworkModule } from '../framework';
 
 @NgModule({
 	imports: [

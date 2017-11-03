@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FrameworkModule } from './framework/framework.module';
+import { FrameworkModule } from './framework';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule, routingComponents } from './app.routing';
@@ -12,7 +12,7 @@ import { SettingsModule } from './settings/settings.module';
 import { WipeModule } from './wipe/wipe.module';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { HttpModule } from '@angular/http';
-
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
 	declarations: [
@@ -31,7 +31,7 @@ import { HttpModule } from '@angular/http';
 		SettingsModule,
 		WipeModule
 	],
-	providers: [],
+	providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

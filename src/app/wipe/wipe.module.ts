@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { WipeRoutingModule } from './wipe.routing';
 import { HomeComponent } from './home/home.component';
 import { WipeComponent } from './wipe.component';
-import { FrameworkModule } from '../framework/framework.module';
+import { FrameworkModule } from '../framework';
 
 @NgModule({
 	imports: [

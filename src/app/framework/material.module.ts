@@ -37,7 +37,6 @@ import {
 	MatTableModule,
 	MatToolbarModule,
 	MatTooltipModule,
-	CompatibilityModule,
 	NativeDateAdapter,
 	DateAdapter,
 	MAT_DATE_FORMATS,
@@ -81,7 +80,6 @@ export const materialModules = [
 	MatTableModule,
 	MatToolbarModule,
 	MatTooltipModule,
-	CompatibilityModule,
 ];
 
 @NgModule({
