@@ -89,6 +89,24 @@ A: No, there are few options to store local information in an encrypted and secu
 Q: Can I use **ume** to share sensitive and secret information?   
 A: While the app has been built for security and privacy as the main reasons for existing, you should not rely on **ume** for sensitive and secret information. This is an open source project with limited resources available for security review and monitoring of potential hacks, exploits, etc.
 
+# Algorithms
+
+Here is a decent description of some of the algorithms in WebCrypto, published by the WebKit team:
+
+* AES-CFB: CFB stands for cipher feedback. Unlike CBC, CFB does not require the plain text be padded to the block size of the cipher.
+* AES-CTR: CTR stands for counter mode. CTR is best known for its parallelizability on both encryption and decryption.
+* AES-GCM: GCM stands for Galois/Counter Mode. GCM is an authenticated encryption algorithm designed to provide both data authenticity (integrity) and confidentiality.
+* ECDH: ECDH stands for Elliptic Curve Diffie–Hellman. Elliptic curve cryptography (ECC) is an approach to public-key cryptography based on the algebraic structure of elliptic curves over finite fields. ECC requires smaller keys compared to RSA to provide equivalent security. ECDH is one among many ECC schemes. It allows two parties each of whom owns an ECC key pair to establish a shared secret over an insecure channel.
+* ECDSA: ECDSA stands for Elliptic Curve Digital Signature Algorithm. It is another ECC scheme.
+* HKDF: HKDF stands for HMAC-based Key Derivation Function. It transforms secrets into key, allowing to combine additional non-secret inputs when needed.
+* PBKDF2：PBKDF2 stands for Password-Based Key Derivation Function 2. It takes a password or a passphrase along with a salt value to derive a cryptographic symmetric key.
+* RSA-PSS: PSS stands for Probabilistic Signature Scheme. It is an improved digital signature algorithm for RSA.
+
+https://webkit.org/blog/7790/update-on-web-cryptography/
+
+https://webkit.org/demos/webcrypto/ecdh.html
+
+https://www.boxcryptor.com/en/blog/post/building-an-app-with-webcrypto-in-2016/
 
 # Alternative Services
 

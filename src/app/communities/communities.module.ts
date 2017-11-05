@@ -4,6 +4,7 @@ import { CommunitiesRoutingModule } from './communities.routing';
 import { HomeComponent } from './home/home.component';
 import { CommunitiesComponent } from './communities.component';
 import { FrameworkModule } from '../framework';
+import { CreateCommunityComponent } from './create/create.component';
 
 @NgModule({
 	imports: [
@@ -12,6 +13,6 @@ import { FrameworkModule } from '../framework';
 		FrameworkModule
 	],
 	exports: [CommunitiesRoutingModule],
-	declarations: [HomeComponent, CommunitiesComponent]
+	declarations: [HomeComponent, CommunitiesComponent, CreateCommunityComponent]
 })
 export class CommunitiesModule { }

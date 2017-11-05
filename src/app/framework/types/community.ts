@@ -1,4 +1,5 @@
 export class Community {
+
 	public name: string;
 	public id: string;
 	public description: string;
@@ -9,5 +10,6 @@ export class Community {
 	public passPhraseKey;
 	public passPhraseCipher;
 	public gateway;
+	public icon: string;
 	public type = 'Community';
 }

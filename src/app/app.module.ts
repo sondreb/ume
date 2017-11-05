@@ -13,6 +13,7 @@ import { WipeModule } from './wipe/wipe.module';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
 	declarations: [
@@ -22,6 +23,7 @@ import { APP_BASE_HREF } from '@angular/common';
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
+		FormsModule,
 		HttpModule,
 		FrameworkModule,
 		AppRoutingModule,
