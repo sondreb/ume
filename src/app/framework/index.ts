@@ -1,5 +1,6 @@
 export * from './application-state';
 export * from './scroll.directive';
+export * from './local-storage';
 export * from './storage';
 export * from './breadcrumb/breadcrumb.component';
 export * from './toolbar/toolbar.component';
@@ -7,3 +8,4 @@ export * from './framework.module';
 export * from './utilities/conversions';
 export * from './utilities/cryptology';
 export * from './types';
+export * from './guid';

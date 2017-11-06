@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { ApplicationState, StorageService } from '../framework';
+import { ApplicationState, LocalStorageService } from '../framework';
 
 @Component({
-	selector: 'app-network',
+	selector: 'ume-network',
 	templateUrl: './network.component.html',
 	styleUrls: ['./network.component.scss']
 })
 export class NetworkComponent implements OnInit {
 
-	constructor(public appState: ApplicationState, public storage: StorageService) { }
+	constructor(public appState: ApplicationState, public storage: LocalStorageService) { }
 
 	ngOnInit() {
 		this.appState.main = false;

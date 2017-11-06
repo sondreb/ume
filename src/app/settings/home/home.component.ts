@@ -3,7 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig } from '@angu
 import { GatewayDialogComponent } from '../gateway-dialog/gateway-dialog.component';
 import { Gateway } from '../gateway';
 import { ApplicationState } from '../../framework';
-import { StorageService } from '../../framework';
+import { LocalStorageService } from '../../framework';
 
 @Component({
 	selector: 'app-home',
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	private interval: any;
 	public gateways: Array<any>;
 
-	constructor(public dialog: MatDialog, public appState: ApplicationState, public storage: StorageService) {
+	constructor(public dialog: MatDialog, public appState: ApplicationState, public storage: LocalStorageService) {
 
 	}
 
