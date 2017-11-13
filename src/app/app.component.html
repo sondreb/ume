@@ -16,15 +16,68 @@
 							<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon> Communities</button>
 						<br> -->
 
-						<mat-expansion-panel>
+
+						<!-- 
+						<mat-form-field class="community-selection">
+							<mat-select placeholder="Community" #select="matSelect" name="icon">
+								<mat-select-trigger>
+									<mat-icon>{{ select.value }}</mat-icon>
+								</mat-select-trigger>
+								<mat-option value="1">
+									<mat-icon>face</mat-icon> Friday Hangout!
+								</mat-option>
+								<mat-option value="1">
+									<mat-icon>favorite</mat-icon> Freedom :-)
+								</mat-option>
+							
+							</mat-select>
+						</mat-form-field> -->
+
+						<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
+									{{ food.viewValue }}
+								</mat-option> -->
+
+						<div class="sidebar-items">
+
+							<div class="sidebar-items-headline">
+								<span>COMMUNITY</span>
+							</div>
+
+							<button mat-button [matMenuTriggerFor]="menu">Friday Hangout</button>
+							<mat-menu #menu="matMenu">
+								<button mat-menu-item>
+									<mat-icon>face</mat-icon>
+									<span>Friday Hangout!</span>
+								</button>
+								<button mat-menu-item>
+									<mat-icon>favorite</mat-icon>
+									<span>Freedom :-)</span>
+								</button>
+							</mat-menu>
+
+							<div class="sidebar-items-headline">
+								<span>TOPICS</span>
+							</div>
+
+							<a class="sidebar-items-item icon-face active">announcements</a>
+							<a class="sidebar-items-item icon-heart">general</a>
+
+							<div class="sidebar-items-headline">
+								<span>DIRECT MESSAGES</span>
+							</div>
+
+							<a class="sidebar-items-item icon-face">532334234</a>
+							<a class="sidebar-items-item icon-heart">Mr. Right</a>
+							<a class="sidebar-items-item icon-heart">Mr. Grey</a>
+
+						</div>
+
+						<!-- <mat-expansion-panel>
 							<mat-expansion-panel-header>
 								<mat-panel-title>
 									<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon>&nbsp; Communities
 								</mat-panel-title>
-								<!-- <mat-panel-description>
-									Type your name and age
-								</mat-panel-description> -->
-
+						
 							</mat-expansion-panel-header>
 
 							<button mat-button routerLink="/communities">
@@ -42,10 +95,7 @@
 								<mat-panel-title>
 									<mat-icon aria-label="Example icon-button with a heart icon">security</mat-icon>&nbsp; Identities
 								</mat-panel-title>
-								<!-- <mat-panel-description>
-										Type your name and age
-									</mat-panel-description> -->
-
+					
 							</mat-expansion-panel-header>
 
 							<button mat-button routerLink="/security/identities/123">
@@ -56,7 +106,7 @@
 								<mat-icon>account_box</mat-icon> 31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
 							</button>
 
-						</mat-expansion-panel>
+						</mat-expansion-panel> -->
 
 
 						<!-- <button mat-button routerLink="/security" routerLinkActive="active">

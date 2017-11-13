@@ -1,3 +1,4 @@
+@import '../variables.scss';
 
 #sidebar {
 	//box-shadow: 2px 0 10px 0 rgba(0,0,0,.5);
@@ -59,6 +60,7 @@
 	box-sizing: border-box;
 	//padding-top: 20px;
 	//padding-bottom: 20px;
+	background-color: #616161;
 }
 
 .ume-sidenav-menu .active {
@@ -81,7 +83,7 @@
 
   footer {
 	  padding: 4px 10px;
-	  background-color: #ffc107;
+	  background-color: $main-color;
   }
   
   #main > article {
@@ -107,4 +109,60 @@
 	  left: 10px;
 	  z-index: 10000;
 	  background-color: #fafafa;
+  }
+
+  .community-selection {
+	  margin: 10px;
+	  width: 230px;
+  }
+
+  .sidebar-items {
+	  background-color:#616161;
+
+	  &-item {
+		  //background-color: $main-color;
+		  padding: 10px;
+		  display: block;
+		  cursor: pointer;
+		  color: #E0E0E0;
+	  }
+
+	  &-item:hover {
+		background-color: #424242;
+		color: #F5F5F5;
+	  }
+
+	  &-item::before {
+		font-family: 'Material Icons';
+		font-weight: bold;
+		vertical-align: middle;
+		margin-right: 10px;
+	}
+  }
+
+  .sidebar-items-headline {
+	  color: silver;
+	  font-size: 0.8rem;
+	  border-bottom: 1px solid rgb(100, 100, 100);
+
+	  & span {
+		  margin-left: 10px;
+		  margin-right: 10px;
+		  margin-top: 10px;
+		  margin-bottom: 10px;
+		  display: inline-block;
+	  }
+  }
+
+  .icon-face::before {
+	content: "\E87C";
+  }
+
+  .icon-heart::before {
+	content: "\E87D";
+  }
+
+  .sidebar-items .active {
+	background-color: $main-color;
+	color: #FAFAFA;
   }
