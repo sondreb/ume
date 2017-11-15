@@ -14,6 +14,8 @@ import { IntroductionComponent } from './introduction/introduction.component';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ChatModule } from './chat/chat.module';
+import { TopicModule } from './topic/topic.module';
 
 @NgModule({
 	declarations: [
@@ -31,7 +33,9 @@ import { FormsModule } from '@angular/forms';
 		CreateModule,
 		SecurityModule,
 		SettingsModule,
-		WipeModule
+		WipeModule,
+		ChatModule,
+		TopicModule
 	],
 	providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
 	bootstrap: [AppComponent]

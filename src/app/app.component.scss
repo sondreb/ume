@@ -121,10 +121,17 @@
 
 	  &-item {
 		  //background-color: $main-color;
-		  padding: 10px;
+		  //padding: 10px;
 		  display: block;
 		  cursor: pointer;
 		  color: #E0E0E0;
+
+		  & .mat-icon {
+			  width: 16px;
+			  height: 16px;
+			  font-size: 16px;
+			  margin-right: 4px;
+		  }
 	  }
 
 	  &-item:hover {
@@ -132,12 +139,12 @@
 		color: #F5F5F5;
 	  }
 
-	  &-item::before {
-		font-family: 'Material Icons';
-		font-weight: bold;
-		vertical-align: middle;
-		margin-right: 10px;
-	}
+	//   &-item::before {
+	// 	font-family: 'Material Icons';
+	// 	font-weight: bold;
+	// 	vertical-align: middle;
+	// 	margin-right: 10px;
+	// }
   }
 
   .sidebar-items-headline {
@@ -152,15 +159,24 @@
 		  margin-bottom: 10px;
 		  display: inline-block;
 	  }
+
+	  & .mat-icon {
+		width: 16px;
+		height: 16px;
+		font-size: 16px;
+		margin-right: 6px;
+		margin-top: 10px;
+		float: right;
+	}
   }
 
-  .icon-face::before {
-	content: "\E87C";
-  }
+//   .icon-face::before {
+// 	content: "\E87C";
+//   }
 
-  .icon-heart::before {
-	content: "\E87D";
-  }
+//   .icon-heart::before {
+// 	content: "\E87D";
+//   }
 
   .sidebar-items .active {
 	background-color: $main-color;
