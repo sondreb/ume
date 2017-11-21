@@ -4,6 +4,7 @@ import { CreateRoutingModule } from './create.routing';
 import { HomeComponent } from './home/home.component';
 import { CreateComponent } from './create.component';
 import { FrameworkModule } from '../framework';
+import { CreateInviteComponent } from './invite/invite.component';
 
 @NgModule({
 	imports: [
@@ -12,6 +13,6 @@ import { FrameworkModule } from '../framework';
 		FrameworkModule
 	],
 	exports: [CreateRoutingModule],
-	declarations: [HomeComponent, CreateComponent]
+	declarations: [HomeComponent, CreateComponent, CreateInviteComponent]
 })
 export class CreateModule { }
