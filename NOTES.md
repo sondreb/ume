@@ -14,6 +14,33 @@
 4. Message is sent to gateway and forwarded to all users of the community which is currently using the app.
 
 
+## State Management Flow
+
+Each node (user) in the network needs to keep track of what messages they have received, and be able to push messages that are requested by participating nodes (users).
+
+Flow:
+USER1 and USER3 has the same 99 of 100 messages available. Each message have a unique hash or identifier that identifies them. Those messages have already been verified to decrypt properly and be signed properly.
+
+USER2 has 10 of 100 messages available, including the message (new) that is missing from USER1.
+
+USER2 connects to a gateway and upon connecting, announces what hashes the user has.
+
+For future scaling perspective: One SHA256 hash is 32-bytes (64-byte HEX), so 1000 messages should equal 3.2 kB. 3.2 million hashes equals only 3.2 MB.
+
+Now the question of orchestration begins:
+
+Should all (USER1 and USER3) connected nodes, send a copy of their additional copies that USER2 is missing? Meaning that USER2 would have do receive the whole message twice, and then decrypt and validate the message twice. This calculation requirement increase N exponent (message * nodes). With a large community, this would greatly increase the bandwidth and CPU usage and requirement.
+
+Another solution could be that USER1 iterates through all connected nodes, establishes exchange keys and transfers both it's own extra messages, and receives it's own missing messages. This would be beneficial in two ways: Additional layer of encryption, ensuring that the same cipher is never transfered to the gateway, even when it's the actual same encrypted (cipher) message being transfered. The keys generated and exchange can be discarded when a node moves on to the next node. Second, the amount of processing would increase a bit (additional encrypt and decrypt), but bandwidth reduced.
+
+A third option, and one that can be combined with the second solution, is for a new node to announce itself and then receive list of hashes from all nodes. Then doing a distinct sort, connect to the nodes that has messages available (random selection somehow?) and sync those across. If one of the nodes goes down during an sync, a re-calculation of node selection can be made by the newly connected node.
+
+
+## Pass Phrase (BIP39) Restore
+
+The private keys seed for a user is a BIP39 derived pass phrase. This is used to generate distinct private keys for every single identity, that belongs to different communities. 
+
+
 ## Random Noise
 The app could/should generated random data noise that is indistinguishable from real messages. This to improve security a bit by obscuring the traffic and making traffic analysis more difficult.
 
@@ -51,6 +78,8 @@ The community owner can transfer ownership of entries. The history of ownership 
 If someone loose their private key, the community owner can transfer ownership of all entries from one user, to another.
 
 ## Development Notes and Ideas
+
+For all app dialogs, developer discussions and documentation, the standard (International System of Units, SI) for bits and bytes are used. Meaning that 1 kilobyte (kB) is 1000 bytes.
 
 For security reasons, üme was initially planned to be built on a custom javascript library for UI. This framework was extracted from the repo and made into a library named [v.js](https://github.com/sondreb/v.js). Due to limited developer resources and time available for initial üme release, a decision to build on [Angular](https://angular.io/) was made. In the future, consider replacing Angular, with v.js or another library.
 
