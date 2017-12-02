@@ -4,9 +4,10 @@ import { LocalStorageService } from '../local-storage';
 import { TestBed, async, getTestBed } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ApplicationStateMock } from '../application-state.spec';
-import { HDNode, Transaction } from 'bitcoinjs-lib';
+import { HDNode, Transaction, ECPair } from 'bitcoinjs-lib';
 
 const bip39 = require('bip39');
+const bitcoin = require('bitcoinjs-lib');
 
 describe('Utilities: Cryptology', () => {
 
@@ -23,12 +24,39 @@ describe('Utilities: Cryptology', () => {
 	}));
 
 	it('generate mnemonic and verify length', () => {
+
+
+
+
+		// ECPair.fromWIF
+
+		// const mnemonic = bip39.generateMnemonic();
+		// expect(mnemonic.trim().split(/\s+/g).length).toBeGreaterThanOrEqual(12);
+
+		// According to BIP39 specification, when user does not specify a password/passphrase, an empty string should be used.
+		// const seed = bip39.mnemonicToSeedHex(mnemonic, '');
+		// expect(seed).toBeDefined();
+	});
+
+	it('generate mnemonic and verify length', () => {
 		const mnemonic = bip39.generateMnemonic();
 		expect(mnemonic.trim().split(/\s+/g).length).toBeGreaterThanOrEqual(12);
 
 		// According to BIP39 specification, when user does not specify a password/passphrase, an empty string should be used.
 		const seed = bip39.mnemonicToSeedHex(mnemonic, '');
 		expect(seed).toBeDefined();
+
+		const node1 = HDNode.fromSeedHex(seed);
+		console.log(node1.toBase58());
+
+		const node2 = node1.derive(0);
+		console.log(node2.toBase58());
+
+		const node3 = node1.derive(0);
+		console.log(node3.toBase58());
+
+		const node4 = node1.derive(1);
+		console.log(node4.toBase58());
 	});
 
 	it('generate mnemonic with passphrase', () => {

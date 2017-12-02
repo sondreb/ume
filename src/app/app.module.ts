@@ -16,6 +16,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ChatModule } from './chat/chat.module';
 import { TopicModule } from './topic/topic.module';
+import { AppDatabase } from './storage';
 
 @NgModule({
 	declarations: [
@@ -37,7 +38,7 @@ import { TopicModule } from './topic/topic.module';
 		ChatModule,
 		TopicModule
 	],
-	providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
+	providers: [{ provide: APP_BASE_HREF, useValue: '/' }, AppDatabase],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,21 @@
+<div class="container">
+	<form (ngSubmit)="onSubmit()" #form="ngForm">
+
+		<p>
+			Identities is how you are recognized in communities. You can create as many identities as you want, and even use multiple identities in the same community.
+		</p>
+		<p>
+			If you want to, you can populate your identity with any kind of personal information details you want to share with the other users. You can stay entirely anonyumous by simply using a nickname, or none at all and simply be recognized by your signature.
+		</p>
+		<p>
+			You can put label names on your identities. These labes are not shared on the network, so if you wipe the currenct device and restore another time using your pass phrase, these labels cannot be recovered.
+		</p>
+
+		<mat-form-field class="input-full-width">
+			<input matInput placeholder="Label" value="" name="label" maxlength="100" [(ngModel)]="model.label" #name="ngModel">
+		</mat-form-field>
+		<br>
+
+		<button type="submit" mat-raised-button color="primary" [disabled]="!form.form.valid">Create</button>
+	</form>
+</div>

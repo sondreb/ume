@@ -15,10 +15,12 @@ export class Identity {
 	public verifyKey;
 	public verifyKeyFingerprint;
 	public type = 'Identity';
+	public label: string;
+	public id: string;
 
-	get id() {
-		return this.cryptology.uint8ArrayToHex(this.publicKeyFingerprint);
-	}
+	// get id() {
+	// 	return this.cryptology.uint8ArrayToHex(this.publicKeyFingerprint);
+	// }
 
 	get displayName() {
 		return this.cryptology.uint8ArrayToHex(this.publicKeyFingerprint);

@@ -1,17 +1,34 @@
-<div class="centered">
+<div style="text-align: center;" *ngIf="!appState.authenticated">
 	<h1> üme - collaborative community</h1>
+	<p>You have two options to continue:</p>
+	<button mat-raised-button color="primary" routerLink="/security/generate">New user</button>
+	<button mat-raised-button color="primary" routerLink="/security/restore">Returning user</button>
+	<br>
+	<br>
 	<img src="assets/images/favicon-256x256.png">
-	<br><br>
-	<button mat-button routerLink="introduction">Read the introduction</button> <button mat-button routerLink="security/introduction">Read the security brief</button>
 </div>
 
-<br><br>
-<p class="warning-card">
+<div class="centered" *ngIf="appState.authenticated">
+	<h1> üme - collaborative community</h1>
+	<img src="assets/images/favicon-256x256.png">
+	<br>
+	<br>
+	<button mat-button routerLink="introduction">Read the introduction</button>
+	<button mat-button routerLink="security/introduction">Read the security brief</button>
+
+	<h2>Activity Feed</h2>
+
+	<p>
+		<strong>Mr. Grey</strong> added a new post in #general</p>
+	<p>
+		<strong>Mr. Grey</strong> joined #general</p>
+	<p>
+		<strong>Mr. Grey</strong> joined #announcements</p>
+
+</div>
+
+<br>
+<br>
+<p class="warning-card" style="text-align: center;">
 	WARNING: THIS IS AN UNRELEASED SOFTWARE. DO NOT USE FOR ANYTHING. WAIT FOR THE RELEASE.
 </p>
-
-<h2>Activity Feed</h2>
-
-<p><strong>Mr. Grey</strong> added a new post in #general</p>
-<p><strong>Mr. Grey</strong> joined #general</p>
-<p><strong>Mr. Grey</strong> joined #announcements</p>

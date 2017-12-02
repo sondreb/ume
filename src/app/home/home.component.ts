@@ -8,7 +8,11 @@ import { ApplicationState } from '../framework';
 })
 export class HomeComponent implements OnInit {
 
-	constructor(public appState: ApplicationState) { }
+	constructor(public appState: ApplicationState) {
+
+		console.log('HGOME!');
+
+	 }
 
 	ngOnInit() {
 		this.appState.main = true;

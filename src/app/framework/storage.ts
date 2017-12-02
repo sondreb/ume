@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApplicationState } from './application-state';
+import Dexie from 'dexie';
+
 
 // class TableInfo {
 // 	TableName: string;
@@ -15,6 +17,8 @@ export default class TableInfo {
 
 @Injectable()
 export class StorageService {
+
+
 	private storage: any;
 	private stores: any;
 	private dbname = 'ume.db';
@@ -26,20 +30,14 @@ export class StorageService {
 		this.IndxDb = window.indexedDB;
 
 		this.stores = [
-			{ 'name': 'identities', 'keyPath': 'publicKeyFingerprint', 'type': 'Identity' },
+			{ 'name': 'identities', 'keyPath': 'id', 'type': 'Identity' },
 			{ 'name': 'profiles', 'keyPath': 'id', 'type': 'Profile' },
 			{ 'name': 'communities', 'keyPath': 'id', 'type': 'Community' },
 			{ 'name': 'invites' },
 			{ 'name': 'messages' }, { 'name': 'entries' },
 			{ 'name': 'gateways', 'keyPath': 'url', 'type': 'Gateway' }];
 
-		this.deleteDatabase().then(() => {
 
-			this.OpenInitDB().then((db) => {
-				console.log('DB OPENED', db);
-			});
-
-		});
 
 		// if (window.localStorage && appState.persist) {
 		// 	this.storage = window.localStorage;
@@ -59,13 +57,17 @@ export class StorageService {
 		// }
 	}
 
-	OpenInitDB(): Promise<IDBDatabase> {
+	initialize(): Promise<IDBDatabase> {
 
 		const self = this;
 
 		const promise = new Promise<IDBDatabase>((resolve, reject) => {
 			let req: IDBOpenDBRequest;
 			req = this.IndxDb.open(this.dbname);
+
+			req.onblocked = (e: any) => {
+				console.log('BLOCKED!');
+			};
 
 			req.onupgradeneeded = (e: any) => {
 
@@ -139,7 +141,7 @@ export class StorageService {
 	// }
 
 	// Article on using idb.js: https://developers.google.com/web/ilt/pwa/working-with-indexeddb
-	async initialize() {
+	async initialize2() {
 		const self = this;
 
 		// window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
@@ -279,27 +281,54 @@ export class StorageService {
 		// });
 	}
 
-	async getAll(storeName) {
-		// var self = this;
-		// return new Promise((resolve, reject) => {
+	async getAll(dataType) {
 
-		// 	var store = this.stores.find((store) => store.type == storeName);
+		try {
+			debugger;
+			const storeName = dataType;
+			const storeDescription = this.stores.find((s) => s.type === storeName);
 
-		// 	if (!store) {
-		// 		reject('Unable to find a store for the data type. Type name: ' + storeName);
-		// 	}
+			if (!storeDescription) {
+				throw new Error('Unable to find a store for the data type. Type name: ' + storeName);
+			}
 
-		// 	var tx = this.db.transaction(store.name, 'readwrite');
-		// 	let store = tx.objectStore(store.name);
+			const tx = this.db.transaction(storeDescription.name, 'readwrite');
+			const store = tx.objectStore(storeDescription.name);
 
-		// 	const request = store.getAll();
+			const query = await (<any> store).getAll() as IDBRequest;
 
-		// 	request.onsuccess = () => resolve(request.result);
-		// 	request.onerror = () => reject(request.error);
-		// });
+			await tx.oncomplete;
+
+			return query.result;
+		} catch (err) {
+			console.error(err);
+			debugger;
+
+		}
 	}
 
-	async get(storeName, key) {
+	async get(dataType, key) {
+
+		const storeName = dataType;
+		const storeDescription = this.stores.find((s) => s.type === storeName);
+
+		if (!storeDescription) {
+			throw new Error('Unable to find a store for the data type. Type name: ' + storeName);
+		}
+
+		console.log(storeDescription);
+
+		const tx = this.db.transaction(storeDescription.name, 'readwrite');
+		const store = tx.objectStore(storeDescription.name);
+
+		const query = await store.get(key);
+		await tx.oncomplete;
+
+		return query.result;
+
+		// console.log('INSERT!!');
+
+
 		// const self = this;
 		// return new Promise((resolve, reject) => {
 

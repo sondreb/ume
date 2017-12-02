@@ -1,0 +1,34 @@
+<div class="container">
+	<form (ngSubmit)="onSubmit()" #form="ngForm">
+
+		<p>
+			Make sure nobody is watching your screen.
+		</p>
+		<p>
+			I'll generate a random 12 word sentence for you. It is very important that you remember this and keep it safe.
+		</p>
+		<p>
+			The 12 word sentence can be used to restore and access all your identities, all your messages and content in communities you are a member of.
+		</p>
+
+		<!-- <mat-form-field class="input-full-width">
+			<input matInput placeholder="Label" value="" name="label" maxlength="100" [(ngModel)]="model.label" #name="ngModel">
+		</mat-form-field> -->
+
+		<br>
+
+		<mat-form-field class="input-full-width">
+			<textarea matInput [(ngModel)]="mnemonic" name="mnemonic" readonly="true" placeholder="Pass Phrase..."></textarea>
+		</mat-form-field>
+
+		<br>
+		<br>
+
+		<button type="submit" mat-raised-button color="primary" [disabled]="!form.form.valid">Generate Pass Phrase</button>
+
+		<button type="button" (click)="onSave()" mat-raised-button *ngIf="mnemonic">Save to disk</button>
+
+		<button type="button" (click)="onLaunch()" color="primary" mat-raised-button *ngIf="mnemonic">Launch üme!</button>
+
+	</form>
+</div>

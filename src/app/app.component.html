@@ -1,10 +1,11 @@
 <div class="container">
+
 	<div class="box" fxLayout="column">
 		<header app-toolbar></header>
 		<div id="main" fxLayout="row" fxLayout.xs="column" fxFlex>
 
 			<mat-sidenav-container class="ume-sidenav-fab-container" (backdropClick)="onBackdrop()">
-				<mat-sidenav #sidenav id="sidebar" [mode]="appState.ismobile?'over':'side'" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}">
+				<mat-sidenav *ngIf="appState.authenticated"  #sidenav id="sidebar" [mode]="appState.ismobile?'over':'side'" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}">
 					<!-- <button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
 						<mat-icon>add</mat-icon>
 					</button> -->
@@ -150,7 +151,7 @@
 					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
 				</button> -->
 				<div class="ume-scrolling-content ume-content" umeScroll>
-					<app-breadcrumb></app-breadcrumb>
+					<app-breadcrumb *ngIf="appState.authenticated"></app-breadcrumb>
 					<router-outlet></router-outlet>
 				</div>
 			</mat-sidenav-container>
@@ -159,10 +160,17 @@
 			<article fxFlex="3 1 60%" fxFlexOrder fxFlexOrder.xs="1"> article</article>
 			<aside fxFlex="1 6 20%" fxFlexOrder fxFlexOrder.xs="3"> aside</aside> -->
 		</div>
-		<footer>
-			<button mat-icon-button routerLink="/network">
+		<footer *ngIf="appState.authenticated">
+			<!-- <button mat-icon-button routerLink="/network">
 				<mat-icon>cloud_off</mat-icon>
+			</button> -->
+
+			<button mat-icon-button routerLink="/network">
+				<mat-icon>{{statusIcon}}</mat-icon>
 			</button>
+
+			{{statusText}}
+
 
 			<!-- <button mat-icon-button>
 				<mat-icon>cloud_queue</mat-icon>
@@ -204,6 +212,8 @@
 					<mat-icon>donut_small</mat-icon>New community</button>
 				<button mat-menu-item routerLink="/create/invite">
 					<mat-icon>vpn_key</mat-icon>New invite</button>
+				<button mat-menu-item routerLink="/security/create">
+					<mat-icon>account_box</mat-icon>New identity</button>
 
 				<!-- <button mat-menu-item routerLink="/settings" routerLinkActive="active">
 					<mat-icon aria-label="Go offline">cloud_off</mat-icon>Go offline</button>

@@ -25,52 +25,15 @@
 
 	<mat-card-footer class="identity-card-footer">
 
-		<em>Identity names are only locally stored and never sent across the network. If you restore an identity on another computer, you need to rename your identity. All other details are shared securely and encrypted on the network with community members.</em>
+		<em>Identity labels are only locally stored and never sent across the network. If you restore an identity on another computer, you need to rename your identity. All other details are shared securely and encrypted on the network with community members.</em>
 
 		<!-- <mat-icon>favorite</mat-icon> -->
 	</mat-card-footer>
 </mat-card>
-
-
-
-<i class="material-icons float-right">security</i>
-<i class="material-icons float-right action" data-ume-page="security">chevron_left</i>
-<h1>Identity</h1>
-
+<br>
 <p>
     Identities are cryptographic entities that consists of a public key used for encryption, and another key for verification
     (message integrity).
-</p>
-
-<p>There are no requirement to add additional profile information on an identity, but if you want to, you can
-    edit your profile which is connected to your identities and those details will be shared with the others
-    in a community.
-</p>
-
-<p>
-    Public key fingerprint:
-    <br>
-    <span class="mono" data-ume-bind="identity.publicFingerprint"></span>
-</p>
-
-<p>
-    Public verify fingerprint:
-    <br>
-    <span class="mono" data-ume-bind="identity.verifyFingerprint"></span>
-
-</p>
-
-<p class="input-form">
-    <input type="hidden" name="identity-id" data-ume-bind="identity.publicFingerprint">
-    <button data-ume-action="onSaveIdentity">Save Identity to disk</button>
-    <!-- <button data-ume-action="onSaveCommunityPrivateKey" class="key-button">Save Key to local disk</button> -->
-</p>
-
-<h2>Profile</h2>
-
-<p>These details are shared with your community. If you want to stay entirely anonymous, do not write anything
-    here. If you want to help community members to recognize you, enter the information you want others to
-    see.
 </p>
 
 <p class="input-form">

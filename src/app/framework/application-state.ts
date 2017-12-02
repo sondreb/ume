@@ -9,6 +9,7 @@ export class ApplicationState {
 	public backUrl: string;
 	public persist = true;
 	public icon: string;
+	public authenticated = false;
 
 	constructor() {
 

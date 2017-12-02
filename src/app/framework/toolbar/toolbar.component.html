@@ -1,6 +1,6 @@
 <mat-toolbar color="primary" fxHide.xs="{{!appState.main}}">
 
-	<button *ngIf="!showSearch" mat-icon-button (click)="appState.toggleNavigation()">
+	<button *ngIf="appState.authenticated && !showSearch" mat-icon-button (click)="appState.toggleNavigation()">
 		<mat-icon *ngIf="appState.sidenav" aria-label="Hide menu">arrow_back</mat-icon>
 		<mat-icon *ngIf="!appState.sidenav" aria-label="Open menu">menu</mat-icon>
 	</button>
@@ -14,11 +14,11 @@
 		<input matInput placeholder="Fill out search term" required>
 	</mat-form-field>
 
-	<button mat-icon-button (click)="onSearch()">
+	<button *ngIf="appState.authenticated"  mat-icon-button (click)="onSearch()">
 		<mat-icon>search</mat-icon>
 	</button>
 	
-	<button mat-icon-button [matMenuTriggerFor]="menu">
+	<button *ngIf="appState.authenticated"  mat-icon-button [matMenuTriggerFor]="menu">
 		<mat-icon>more_vert</mat-icon>
 	</button>
 

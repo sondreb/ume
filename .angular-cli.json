@@ -27,7 +27,9 @@
 				"styles.scss",
 				"fonts/Open_Sans/OpenSans.css"
 			],
-			"scripts": [],
+			"scripts": [
+				"assets/scripts/FileSaver.js"
+			],
 			"environmentSource": "environments/environment.ts",
 			"environments": {
 				"dev": "environments/environment.ts",

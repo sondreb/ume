@@ -5,6 +5,8 @@ import { SecurityComponent } from './security.component';
 import { IdentityComponent } from './identity/identity.component';
 import { SecurityIntroductionComponent } from './introduction/introduction.component';
 import { RestoreComponent } from './restore/restore.component';
+import { CreateIdentityComponent } from './create/create.component';
+import { GenerateComponent } from './generate/generate.component';
 
 const routes: Routes = [
 	{
@@ -14,7 +16,9 @@ const routes: Routes = [
 			{ path: '', component: HomeComponent },
 			{ path: 'introduction', component: SecurityIntroductionComponent },
 			{ path: 'restore', component: RestoreComponent },
-			{ path: 'identities/:id', component: IdentityComponent }
+			{ path: 'identities/:id', component: IdentityComponent },
+			{ path: 'create', component: CreateIdentityComponent },
+			{ path: 'generate', component: GenerateComponent }
 		],
 	}
 ];
@@ -29,4 +33,6 @@ export const routingComponents = [HomeComponent,
 	SecurityComponent,
 	SecurityIntroductionComponent,
 	RestoreComponent,
+	CreateIdentityComponent,
+	GenerateComponent,
 	IdentityComponent];
