@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { MaterialModule } from './material.module';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { Routes, RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { ScrollDirective } from './scroll.directive';
 import { ApplicationState } from './application-state';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LocalStorageService } from './local-storage';
 import { StorageService } from './storage';
+import { EqualValidator } from './equal-validator.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
 	imports: [
@@ -21,8 +22,8 @@ import { StorageService } from './storage';
 		FormsModule,
 
 	],
-	exports: [FlexLayoutModule, MaterialModule, FormsModule, BreadcrumbComponent, ScrollDirective, ToolbarComponent],
+	exports: [FlexLayoutModule, MaterialModule, FormsModule, ReactiveFormsModule, BreadcrumbComponent, ScrollDirective, ToolbarComponent],
 	providers: [ApplicationState, LocalStorageService, StorageService],
-	declarations: [BreadcrumbComponent, ScrollDirective, ToolbarComponent]
+	declarations: [BreadcrumbComponent, ScrollDirective, ToolbarComponent, EqualValidator]
 })
 export class FrameworkModule { }

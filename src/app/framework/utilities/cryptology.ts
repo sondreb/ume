@@ -59,6 +59,68 @@ export class Cryptology {
 		return encoder.encode(string);
 	}
 
+	// public async performanceTest(mnemonic, passphrase) {
+
+	// 	const startTime2 = new Date();
+
+	// 	for (let i = 0; i < 100; i++) {
+	// 		await this.performanceTestInternal(mnemonic, passphrase);
+	// 	}
+
+	// 	const endTime2 = new Date();
+	// 	const timeDiff2 = endTime2 - startTime2;
+	// 	console.log('DIFF2: ' + timeDiff2);
+	// }
+
+	// public async performanceTestInternal(mnemonic, passphrase) {
+
+	// 	const buffer = this.stringToArrayBuffer(mnemonic);
+	// 	const bufferSalt = this.stringToArrayBuffer('mnemonic' + passphrase);
+
+	// 	// This could be used with async/await pattern, to simplify the code.
+	// 	const importedKey = await window.crypto.subtle.importKey(
+	// 		'raw',
+	// 		buffer,
+	// 		{
+	// 			name: 'PBKDF2',
+	// 		},
+	// 		false,
+	// 		['deriveKey']
+	// 	);
+
+	// 	const derivedKey = await window.crypto.subtle.deriveKey(
+	// 		{
+	// 			'name': 'PBKDF2',
+	// 			salt: bufferSalt,
+	// 			iterations: 2048,
+	// 			hash: { name: 'SHA-512' },
+	// 		},
+	// 		importedKey,
+	// 		{
+	// 			name: 'HMAC',
+	// 			hash: 'SHA-512',
+	// 			length: 512
+	// 		},
+	// 		true,
+	// 		['sign']
+	// 	);
+
+	// 	const exportedKeyHex = window.crypto.subtle.exportKey('raw', derivedKey);
+
+	// 	// .then((exportedKey) => {
+	// 	// 	const exportedKeyHex = util.arrayBufferToHexString(exportedKey); // seed == exportedKeyHex - both values should be same.
+	// 	// 	const root2 = HDNode.fromSeedHex(exportedKeyHex);
+	// 	// });
+
+	// 	// 	.then(function (derivedKey) {
+	// 	// 	// derivedKey can be stored to IndexedDB for persistance across browser sessions.
+	// 	// 	// This is less secure, but more user friendly, not requiring user to supply their salt (password) on every use.
+
+
+	// 	// });
+	// 	// });
+	// }
+
 	public arrayToHexString(byteArray) {
 		let hexString = '';
 		let nextHexByte;

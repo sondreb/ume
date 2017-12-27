@@ -1,34 +1,40 @@
 <div class="container">
-	<form (ngSubmit)="onSubmit()" #form="ngForm">
-
+	<form [formGroup]="form" (ngSubmit)="onSubmit()">
 		<p>
 			Make sure nobody is watching your screen.
 		</p>
 		<p>
-			I'll generate a random 12 word sentence for you. It is very important that you remember this and keep it safe.
+			I'll generate a random 12 word sentence for you. It is very important that you remember this and keep it safe. You will not be able to find this sentence inside the app, so make a backup after generating here.
 		</p>
 		<p>
 			The 12 word sentence can be used to restore and access all your identities, all your messages and content in communities you are a member of.
 		</p>
-
-		<!-- <mat-form-field class="input-full-width">
-			<input matInput placeholder="Label" value="" name="label" maxlength="100" [(ngModel)]="model.label" #name="ngModel">
-		</mat-form-field> -->
-
-		<br>
-
-		<mat-form-field class="input-full-width">
-			<textarea matInput [(ngModel)]="mnemonic" name="mnemonic" readonly="true" placeholder="Pass Phrase..."></textarea>
-		</mat-form-field>
-
-		<br>
-		<br>
-
-		<button type="submit" mat-raised-button color="primary" [disabled]="!form.form.valid">Generate Pass Phrase</button>
-
-		<button type="button" (click)="onSave()" mat-raised-button *ngIf="mnemonic">Save to disk</button>
-
-		<button type="button" (click)="onLaunch()" color="primary" mat-raised-button *ngIf="mnemonic">Launch üme!</button>
-
+		<div *ngIf="!mnemonic">
+			<button type="submit" mat-raised-button color="primary">Generate Pass Phrase</button>
+		</div>
+		<div *ngIf="mnemonic">
+			<strong>Your personal pass phrase:</strong>
+			<div class="mnemonic">{{mnemonic}}</div>
+			<strong>Your personal password:</strong>
+			<p>You can protect your pass phrase with a personal password. It is strongly adviced that you use a password to protect your pass phrase. This will greatly improve your safety. It is not required to use a password. You will be prompted to enter this passord every time your start üme.</p>
+			<p>
+				<mat-form-field class="input-full-width">
+					<input matInput type="password" [formGroup]="form" [(ngModel)]="password1" placeholder="Password" name="password" formControlName="password" autocomplete="new-password">
+					<mat-hint>If you fill out password, you must remember both pass phrase and password to restore.</mat-hint>
+				</mat-form-field>
+			</p>
+			<p>
+				<mat-form-field class="input-full-width">
+					<input matInput type="password" [formGroup]="form" [(ngModel)]="password2" placeholder="Password" name="confirmPassword" formControlName="confirmPassword" autocomplete="new-password">
+					<mat-error *ngIf="form.get('confirmPassword').hasError('password') || form.get('password').hasError('password')">
+						Passwords must match. Please verify that you don't have caps-lock enabled.
+					</mat-error>
+				</mat-form-field>
+			</p>
+			<p>
+				<button type="button" (click)="onSave()" [disabled]="!form.valid" mat-raised-button *ngIf="mnemonic">Save to disk</button>
+				<button type="button" (click)="onLaunch()" [disabled]="!form.valid" color="primary" mat-raised-button *ngIf="mnemonic">Launch üme!</button>
+			</p>
+		</div>
 	</form>
 </div>

@@ -13,7 +13,7 @@ import { WipeModule } from './wipe/wipe.module';
 import { IntroductionComponent } from './introduction/introduction.component';
 import { HttpModule } from '@angular/http';
 import { APP_BASE_HREF } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChatModule } from './chat/chat.module';
 import { TopicModule } from './topic/topic.module';
 import { AppDatabase } from './storage';
@@ -36,7 +36,8 @@ import { AppDatabase } from './storage';
 		SettingsModule,
 		WipeModule,
 		ChatModule,
-		TopicModule
+		TopicModule,
+		ReactiveFormsModule
 	],
 	providers: [{ provide: APP_BASE_HREF, useValue: '/' }, AppDatabase],
 	bootstrap: [AppComponent]

@@ -4,7 +4,8 @@ import { LocalStorageService } from '../local-storage';
 import { TestBed, async, getTestBed } from '@angular/core/testing';
 import { DebugElement, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ApplicationStateMock } from '../application-state.spec';
-import { HDNode, Transaction, ECPair } from 'bitcoinjs-lib';
+import { HDNode, Transaction, ECPair, networks } from 'bitcoinjs-lib';
+import { Cryptology } from './cryptology';
 
 const bip39 = require('bip39');
 const bitcoin = require('bitcoinjs-lib');
@@ -23,41 +24,68 @@ describe('Utilities: Cryptology', () => {
 		// storage = testbed.get(StorageService);
 	}));
 
-	it('generate mnemonic and verify length', () => {
+	it('generate key pair', () => {
+
+		// const passphrase = 'My Pass Phrase';
+		// const mnemonic = 'situate bid venue strategy chase bird split pact spatial romance mobile furnace';
+
+		// const startTime = new Date();
+
+		// for (let i = 0; i < 100; i++) {
+		// 	const seed = bip39.mnemonicToSeedHex(mnemonic, passphrase); // undefined/null passphrase/password defaults to a salt value of 'mnemonic'.
+		// }
+
+		// const endTime = new Date();
+		// const timeDiff = endTime - startTime;
+		// console.log('DIFF1: ' + timeDiff);
+
+		// const util = new Cryptology();
+		// util.performanceTest();
+
+		// const stringToArrayBuffer = function (string) {
+		// 	const encoder = new TextEncoder('utf-8');
+		// 	return encoder.encode(string);
+		// };
+
+		// const arrayBufferToHexString = function (arrayBuffer) {
+		// 	const byteArray = new Uint8Array(arrayBuffer);
+		// 	let hexString = '';
+		// 	let nextHexByte;
+
+		// 	for (let i = 0; i < byteArray.byteLength; i++) {
+		// 		nextHexByte = byteArray[i].toString(16);
+		// 		if (nextHexByte.length < 2) {
+		// 			nextHexByte = '0' + nextHexByte;
+		// 		}
+		// 		hexString += nextHexByte;
+		// 	}
+		// 	return hexString;
+		// };
 
 
-
-
-		// ECPair.fromWIF
-
-		// const mnemonic = bip39.generateMnemonic();
-		// expect(mnemonic.trim().split(/\s+/g).length).toBeGreaterThanOrEqual(12);
-
-		// According to BIP39 specification, when user does not specify a password/passphrase, an empty string should be used.
-		// const seed = bip39.mnemonicToSeedHex(mnemonic, '');
-		// expect(seed).toBeDefined();
 	});
 
-	it('generate mnemonic and verify length', () => {
-		const mnemonic = bip39.generateMnemonic();
-		expect(mnemonic.trim().split(/\s+/g).length).toBeGreaterThanOrEqual(12);
+	// it('generate mnemonic and verify length', () => {
+	// 	const mnemonic = bip39.generateMnemonic();
+	// 	expect(mnemonic.trim().split(/\s+/g).length).toBeGreaterThanOrEqual(12);
 
-		// According to BIP39 specification, when user does not specify a password/passphrase, an empty string should be used.
-		const seed = bip39.mnemonicToSeedHex(mnemonic, '');
-		expect(seed).toBeDefined();
+	// 	// According to BIP39 specification, when user does not specify a password/passphrase, an empty string should be used.
+	// 	const seed = bip39.mnemonicToSeedHex(mnemonic, '');
+	// 	expect(seed).toBeDefined();
 
-		const node1 = HDNode.fromSeedHex(seed);
-		console.log(node1.toBase58());
+	// 	const node1 = HDNode.fromSeedHex(seed);
 
-		const node2 = node1.derive(0);
-		console.log(node2.toBase58());
+	// 	// console.log(node1.toBase58());
 
-		const node3 = node1.derive(0);
-		console.log(node3.toBase58());
+	// 	const node2 = node1.derive(0);
+	// 	// console.log(node2.toBase58());
 
-		const node4 = node1.derive(1);
-		console.log(node4.toBase58());
-	});
+	// 	const node3 = node1.derive(0);
+	// 	// console.log(node3.toBase58());
+
+	// 	const node4 = node1.derive(1);
+	// 	// console.log(node4.toBase58());
+	// });
 
 	it('generate mnemonic with passphrase', () => {
 

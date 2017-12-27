@@ -152,3 +152,4 @@ Crypho relies on centralized server storage of public keys, and does not support
 https://github.com/diafygi/webcrypto-examples
 https://webcryptoapiex.github.io/secretnote/
 https://material.io/guidelines/style/color.html#color-color-palette
+https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki

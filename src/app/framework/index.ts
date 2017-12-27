@@ -9,3 +9,5 @@ export * from './utilities/conversions';
 export * from './utilities/cryptology';
 export * from './types';
 export * from './guid';
+export * from './equal-validator.directive';
+export * from './validators';
