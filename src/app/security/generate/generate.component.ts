@@ -48,10 +48,14 @@ export class GenerateComponent implements OnInit {
 		confirmPassword: new FormControl('', { updateOn: 'blur', validators: InputValidators.equal('password', false) })
 	});
 
+	firstFormGroup: FormGroup;
+	secondFormGroup: FormGroup;
+	thirdFormGroup: FormGroup;
+
 	// new FormControl(value, {updateOn: 'blur', asyncValidators: [myValidator]})
 	// public matcher = new PasswordErrorStateMatcher();
 
-	constructor(public appState: ApplicationState, public storage: StorageService, public router: Router, public db: AppDatabase) {
+	constructor(public appState: ApplicationState, public storage: StorageService, public router: Router, public db: AppDatabase, private fb: FormBuilder) {
 		appState.main = false;
 		appState.title = 'New user';
 		appState.icon = 'hot_tub';
@@ -69,9 +73,20 @@ export class GenerateComponent implements OnInit {
 		// });
 
 		console.log(this.form);
+
+		this.onGenerate();
 	}
 
 	ngOnInit() {
+		this.firstFormGroup = this.fb.group({
+			firstCtrl: ['']
+		});
+		this.secondFormGroup = this.fb.group({
+			secondCtrl: ['']
+		});
+		this.thirdFormGroup = this.fb.group({
+			secondCtrl: ['']
+		});
 	}
 
 	public saveFile(content, filename) {
@@ -100,7 +115,7 @@ export class GenerateComponent implements OnInit {
 		await this.savePrivateKey();
 
 		// this.appState.authenticated = true;
-		// this.router.navigateByUrl('/');
+		this.router.navigateByUrl('/');
 	}
 
 	public stringToArrayBuffer(string) {
