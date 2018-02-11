@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 export class ApplicationState {
 	public title: string;
 	public main = true;
-	public sidenav = true;
+	public sidenav = false;
 	public ismobile: boolean;
 	public backUrl: string;
 	public persist = true;

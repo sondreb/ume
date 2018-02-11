@@ -4,6 +4,7 @@
 	"tslint.enable": true,
 	"tslint.run": "onType",
 	"tslint.autoFixOnSave": true,
+	"editor.formatOnSave": true,
 	"editor.tabSize": 4,
 	"editor.detectIndentation": false,
 	"editor.useTabStops": true,

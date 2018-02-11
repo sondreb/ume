@@ -1,12 +1,22 @@
 <mat-toolbar color="primary" fxHide.xs="{{!appState.main}}">
 
-	<button *ngIf="appState.authenticated && !showSearch" mat-icon-button (click)="appState.toggleNavigation()">
-		<mat-icon *ngIf="appState.sidenav" aria-label="Hide menu">arrow_back</mat-icon>
-		<mat-icon *ngIf="!appState.sidenav" aria-label="Open menu">menu</mat-icon>
+	<button *ngIf="appState.authenticated" mat-icon-button (click)="appState.toggleNavigation()">
+		<mat-icon aria-label="Open menu">menu</mat-icon>
 	</button>
 
-	<mat-icon *ngIf="!showSearch" class="logo-icon">verified_user</mat-icon>
-	<a *ngIf="!showSearch" routerLink="/" class="logo-text">üme</a>
+	<!-- <button fxHide fxShow.xs *ngIf="appState.authenticated && !showSearch" mat-icon-button (click)="appState.toggleNavigation()">
+		<mat-icon *ngIf="appState.sidenav" aria-label="Hide menu">arrow_back</mat-icon>
+		<mat-icon *ngIf="!appState.sidenav" aria-label="Open menu">menu</mat-icon>
+	</button> -->
+
+	<!-- <mat-icon *ngIf="!showSearch" class="logo-icon">verified_user</mat-icon>
+	<a *ngIf="!showSearch" routerLink="/" class="logo-text">üme</a> -->
+
+	<span class="ume-toolbar-title">{{appState.title}}</span>
+
+	<!-- <button mat-icon-button (click)="onGoBack()">
+		<mat-icon aria-label="Go back">arrow_back</mat-icon>
+	</button> -->
 
 	<span *ngIf="!showSearch" class="fill-remaining-space"></span>
 
@@ -14,11 +24,11 @@
 		<input matInput placeholder="Fill out search term" required>
 	</mat-form-field>
 
-	<button *ngIf="appState.authenticated"  mat-icon-button (click)="onSearch()">
+	<button *ngIf="appState.authenticated" mat-icon-button (click)="onSearch()">
 		<mat-icon>search</mat-icon>
 	</button>
-	
-	<button *ngIf="appState.authenticated"  mat-icon-button [matMenuTriggerFor]="menu">
+
+	<button *ngIf="appState.authenticated" mat-icon-button [matMenuTriggerFor]="menu">
 		<mat-icon>more_vert</mat-icon>
 	</button>
 
@@ -36,8 +46,8 @@
 			<span>Disable alerts</span>
 		</button> -->
 
-			<button mat-menu-item routerLink="/security/restore" routerLinkActive="active">
-				<mat-icon aria-label="Clear device">restore</mat-icon> Restore from pass phrase</button>
+		<button mat-menu-item routerLink="/security/restore" routerLinkActive="active">
+			<mat-icon aria-label="Clear device">restore</mat-icon> Restore from pass phrase</button>
 
 		<button mat-menu-item routerLink="/wipe" routerLinkActive="active">
 			<mat-icon aria-label="Clear device">delete_forever</mat-icon> Clear Device</button>
@@ -54,7 +64,7 @@
 	<button mat-icon-button (click)="onGoBack()">
 		<mat-icon aria-label="Go back">arrow_back</mat-icon>
 	</button>
-	<span>{{appState.title}}</span>
+	<span class="ume-toolbar-title">{{appState.title}}</span>
 	<span class="fill-remaining-space"></span>
 	<mat-icon *ngIf="appState.icon">{{appState.icon}}</mat-icon>
 </mat-toolbar>

@@ -1,4 +1,4 @@
-<ol *ngIf="show" fxHide.xs class="breadcrumb">
+<!-- <ol *ngIf="show" fxHide.xs class="breadcrumb">
 	<button mat-icon-button (click)="onNavigateBack()">
 		<mat-icon aria-label="Hide menu">arrow_back</mat-icon>
 	</button>
@@ -6,6 +6,10 @@
 		<a [routerLink]="[crumb.url]" *ngIf="!crumb.last">{{ crumb.name }}</a>
 		<span *ngIf="crumb.last">{{ crumb.name }}</span>
 	</li>
-</ol>
+</ol> -->
+
+<button fxHide.xs *ngIf="show" mat-icon-button (click)="onNavigateBack()" style="float:left;">
+	<mat-icon aria-label="Hide menu">arrow_back</mat-icon>
+</button>
 
 <h1 fxHide.xs *ngIf="appState.title">{{appState.title}}</h1>

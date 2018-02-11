@@ -6,8 +6,10 @@ import { Identity, Community, Gateway, Message, Profile } from './framework/type
 @Injectable()
 export class AppDatabase extends Dexie {
 
-	identities: Dexie.Table<Identity, string>;
-	communities: Dexie.Table<Community, string>;
+	// Learn more: http://dexie.org/docs/Tutorial/Understanding-the-basics
+
+	identity: Dexie.Table<Identity, number>;
+	community: Dexie.Table<Community, string>;
 	gateway: Dexie.Table<Gateway, string>;
 
 	constructor() {
@@ -16,13 +18,16 @@ export class AppDatabase extends Dexie {
 		const db = this;
 
 		db.version(1).stores({
-			identities: '++id, label',
-			communities: '++id, name, icon, description',
-			gateway: 'name, url',
+			identity: 'id',
+			community: 'id, name, icon, description'
 		});
 
-		db.identities.mapToClass(Identity);
-		db.communities.mapToClass(Community);
+		db.version(2).stores({
+			gateway: 'name, url'
+		});
+
+		db.identity.mapToClass(Identity);
+		db.community.mapToClass(Community);
 		db.gateway.mapToClass(Gateway);
 
 		// this.version(1).stores({

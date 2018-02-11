@@ -1,61 +1,36 @@
-<div class="container">
+<ng-container class="container">
+	<mat-sidenav-container class="ume-sidenav-container">
 
-	<div class="box" fxLayout="column">
-		<header app-toolbar></header>
-		<div id="main" fxLayout="row" fxLayout.xs="column" fxFlex>
+		<mat-sidenav #sidenav class="ume-sidenav" [mode]="appState.ismobile?'over':'side'" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}" fixedInViewport="true" fixedTopGap="0" fixedBottomGap="0">
 
-			<mat-sidenav-container class="ume-sidenav-fab-container" (backdropClick)="onBackdrop()">
-				<mat-sidenav *ngIf="appState.authenticated"  #sidenav id="sidebar" [mode]="appState.ismobile?'over':'side'" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}">
-					<!-- <button mat-mini-fab class="ume-fab" (click)="sidenav.toggle()">
-						<mat-icon>add</mat-icon>
-					</button> -->
-					<div class="ume-scrolling-content ume-sidenav-menu" id="sidenav-menu" umeScroll>
-						<!-- <button mat-button routerLink="/create" routerLinkActive="active">
-							<mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> Create</button>
-						<br> -->
-						<!-- <button mat-button routerLink="/communities" routerLinkActive="active">
-							<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon> Communities</button>
-						<br> -->
+			<div fxLayout="column" fxLayoutAlign="stretch" class="ume-sidenav-menu">
 
+				<!-- <div class="ume-sidenav-logo">
+					<mat-icon *ngIf="!showSearch" class="logo-icon">verified_user</mat-icon>
+					<a class="logo-text">üme</a>
+				</div> -->
 
-						<!-- 
-						<mat-form-field class="community-selection">
-							<mat-select placeholder="Community" #select="matSelect" name="icon">
-								<mat-select-trigger>
-									<mat-icon>{{ select.value }}</mat-icon>
-								</mat-select-trigger>
-								<mat-option value="1">
-									<mat-icon>face</mat-icon> Friday Hangout!
-								</mat-option>
-								<mat-option value="1">
-									<mat-icon>favorite</mat-icon> Freedom :-)
-								</mat-option>
-							
-							</mat-select>
-						</mat-form-field> -->
+				<div class="ume-sidenav-logo">
+					<mat-icon class="logo-icon">verified_user</mat-icon>
+					<a routerLink="/" class="logo-text">üme</a>
+					<br> Avengers
+				</div>
 
-						<!-- <mat-option *ngFor="let food of foods" [value]="food.value">
-									{{ food.viewValue }}
-								</mat-option> -->
+				<div fxLayout="row" class="ume-sidenav-options">
+					<!-- <div class="ume-scrolling-content ume-sidenav-communities" id="sidenav-menu2" umeScroll> -->
+
+					<div class="ume-scrolling-content ume-sidenav-communities" umeScroll>
+						<a class="ume-sidenav-community ume-sidenav-community-active">A</a>
+						<a class="ume-sidenav-community">L</a>
+						<a class="ume-sidenav-community">C</a>
+						<a class="ume-sidenav-community-add" href="#">
+							<mat-icon>add_circle_outline</mat-icon>
+						</a>
+					</div>
+
+					<div class="ume-scrolling-content ume-sidenav-menu" fxFlex="grow" umeScroll>
 
 						<div class="sidebar-items">
-
-							<div class="sidebar-items-headline">
-								<span>COMMUNITY</span>
-								<mat-icon>add_circle_outline</mat-icon>
-							</div>
-
-							<button mat-button [matMenuTriggerFor]="menu">Friday Hangout</button>
-							<mat-menu #menu="matMenu">
-								<button mat-menu-item>
-									<mat-icon>face</mat-icon>
-									<span>Friday Hangout!</span>
-								</button>
-								<button mat-menu-item>
-									<mat-icon>favorite</mat-icon>
-									<span>Freedom :-)</span>
-								</button>
-							</mat-menu>
 
 							<div class="sidebar-items-headline">
 								<span>TOPICS</span>
@@ -69,9 +44,7 @@
 
 							<div class="sidebar-items-headline">
 								<span>DIRECT MESSAGES</span>
-								<!-- <button mat-icon-button> -->
 								<mat-icon>add_circle_outline</mat-icon>
-								<!-- </button> -->
 							</div>
 
 							<button mat-button routerLink="/chat/me" routerLinkActive="active" class="sidebar-items-item">
@@ -86,9 +59,7 @@
 
 							<div class="sidebar-items-headline">
 								<span>IDENTITIES</span>
-								<!-- <button mat-icon-button> -->
 								<mat-icon>add_circle_outline</mat-icon>
-								<!-- </button> -->
 							</div>
 
 							<button mat-button routerLink="/security/identities/62PByUXB" routerLinkActive="active" class="sidebar-items-item">
@@ -101,69 +72,114 @@
 
 						</div>
 
-						<!-- <mat-expansion-panel>
-							<mat-expansion-panel-header>
-								<mat-panel-title>
-									<mat-icon aria-label="Example icon-button with a heart icon">donut_small</mat-icon>&nbsp; Communities
-								</mat-panel-title>
-						
-							</mat-expansion-panel-header>
+					</div>
 
-							<button mat-button routerLink="/communities">
-								<mat-icon>face</mat-icon> Friday Hangout!
-							</button>
+				</div>
 
-							<button mat-button routerLink="/communities">
-								<mat-icon>favorite</mat-icon> Freedom :-)
-							</button>
+			</div>
 
-						</mat-expansion-panel>
+		</mat-sidenav>
 
-						<mat-expansion-panel>
-							<mat-expansion-panel-header>
-								<mat-panel-title>
-									<mat-icon aria-label="Example icon-button with a heart icon">security</mat-icon>&nbsp; Identities
-								</mat-panel-title>
-					
-							</mat-expansion-panel-header>
+		<mat-sidenav-content fxLayout="column">
 
-							<button mat-button routerLink="/security/identities/123">
-								<mat-icon>account_box</mat-icon> 31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
-							</button>
+			<header app-toolbar></header>
 
-							<button mat-button routerLink="/security/identities/444">
-								<mat-icon>account_box</mat-icon> 31PByUXB/ZrMg5x19Fz5K8Qk6345auYSRGuqk6dz0FA=
-							</button>
+			<!-- <mat-toolbar class="example-header">
+				<button fxHide fxShow.xs *ngIf="appState.authenticated" mat-icon-button (click)="sidenav.toggle()">
+					<mat-icon aria-label="Open menu">menu</mat-icon>
+				</button>
+			</mat-toolbar> -->
 
-						</mat-expansion-panel> -->
+			<div class="ume-content ume-scrolling-content" umeScroll>
+				<!-- <app-breadcrumb></app-breadcrumb> -->
+				<router-outlet></router-outlet>
+			</div>
+
+			<!-- <p>
+				<button mat-button (click)="sidenav.toggle()">Toggle</button>
+			</p>
+
+			<mat-toolbar class="example-footer">Footer</mat-toolbar> -->
+		</mat-sidenav-content>
+	</mat-sidenav-container>
+</ng-container>
+
+<!-- 	  
+
+<div class="container">
+
+	<div class="box" fxLayout="column">
+		<header app-toolbar></header>
+		<div id="main" fxLayout="row" fxLayout.xs="column" fxFlex>
+
+			<mat-sidenav-container class="ume-sidenav-fab-container" (backdropClick)="onBackdrop()" fixedInViewport="true" fixedTopGap="0" fixedBottomGap="0">
+
+				<mat-sidenav *ngIf="appState.authenticated" #sidenav id="sidebar" [mode]="appState.ismobile?'over':'side'" [(opened)]="appState.sidenav" disableClose="{{!appState.ismobile}}">
+
+					<div class="ume-scrolling-content ume-sidenav-communities" id="sidenav-menu2" umeScroll>
+						<a class="ume-sidenav-community ume-sidenav-community-active">A</a>
+						<a class="ume-sidenav-community">L</a>
+						<a class="ume-sidenav-community">C</a>
+
+						<a class="ume-sidenav-community-add" href="#">
+							<mat-icon>add_circle_outline</mat-icon>
+						</a>
+					</div>
+					||
+					<div class="ume-scrolling-content ume-sidenav-menu" id="sidenav-menu" umeScroll>
+
+						<div class="sidebar-items">
+
+							<div class="sidebar-items-headline">
+								<span>TOPICS</span>
+								<mat-icon>add_circle_outline</mat-icon>
+							</div>
+
+							<button mat-button routerLink="/topic/1" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>forum</mat-icon> announcements</button>
+							<button mat-button routerLink="/topic/2" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>forum</mat-icon> general</button>
+
+							<div class="sidebar-items-headline">
+								<span>DIRECT MESSAGES</span>
+								<mat-icon>add_circle_outline</mat-icon>
+							</div>
+
+							<button mat-button routerLink="/chat/me" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>favorite</mat-icon> You (Me)</button>
+							<button mat-button routerLink="/chat/1" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>chat</mat-icon> 532334234</button>
+							<button mat-button routerLink="/chat/2" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>chat</mat-icon> Mr. Right</button>
+							<button mat-button routerLink="/chat/3" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>chat</mat-icon> Mr. Grey</button>
 
 
-						<!-- <button mat-button routerLink="/security" routerLinkActive="active">
-							<mat-icon aria-label="Example icon-button with a heart icon">security</mat-icon> Security</button>
-						 -->
-						<!-- <button mat-button routerLink="/settings" routerLinkActive="active">
-							<mat-icon aria-label="Example icon-button with a heart icon">settings</mat-icon> Settings</button> -->
+							<div class="sidebar-items-headline">
+								<span>IDENTITIES</span>
+								<mat-icon>add_circle_outline</mat-icon>
+							</div>
+
+							<button mat-button routerLink="/security/identities/62PByUXB" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>account_box</mat-icon>62PByUXB</button>
+							<button mat-button routerLink="/security/identities/52PByUXB" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>account_box</mat-icon>52PByUXB</button>
+							<button mat-button routerLink="/security/identities/31PByUXB" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>account_box</mat-icon>31PByUXB</button>
+
+
+						</div>
+
 					</div>
 				</mat-sidenav>
 
-				<!-- <button mat-icon-button class="ume-menu-button" (click)="sidenav.toggle()">
-					<mat-icon *ngIf="sidenav.opened" aria-label="Hide menu">arrow_back</mat-icon>
-					<mat-icon *ngIf="!sidenav.opened" aria-label="Open menu">menu</mat-icon>
-				</button> -->
 				<div class="ume-scrolling-content ume-content" umeScroll>
-					<app-breadcrumb *ngIf="appState.authenticated"></app-breadcrumb>
+					<app-breadcrumb></app-breadcrumb>
 					<router-outlet></router-outlet>
 				</div>
 			</mat-sidenav-container>
-
-			<!-- <nav fxFlex="1 6 20%" fxFlexOrder fxFlexOrder.xs="2"></nav>
-			<article fxFlex="3 1 60%" fxFlexOrder fxFlexOrder.xs="1"> article</article>
-			<aside fxFlex="1 6 20%" fxFlexOrder fxFlexOrder.xs="3"> aside</aside> -->
 		</div>
 		<footer *ngIf="appState.authenticated">
-			<!-- <button mat-icon-button routerLink="/network">
-				<mat-icon>cloud_off</mat-icon>
-			</button> -->
 
 			<button mat-icon-button routerLink="/network">
 				<mat-icon>{{statusIcon}}</mat-icon>
@@ -171,40 +187,11 @@
 
 			{{statusText}}
 
-
-			<!-- <button mat-icon-button>
-				<mat-icon>cloud_queue</mat-icon>
-			</button>
-
-			<button mat-icon-button>
-				<mat-icon>cloud_upload</mat-icon>
-			</button>
-
-			<button mat-icon-button>
-				<mat-icon>cloud_download</mat-icon>
-			</button>
-
-			<button mat-icon-button>
-				<mat-icon>cloud_done</mat-icon>
-			</button> -->
-
-			<button mat-mini-fab class="ume-fab" [matMenuTriggerFor]="addmenu">
+			<button [hidden]="appState.authenticated" mat-mini-fab class="ume-fab" [matMenuTriggerFor]="addmenu">
 				<mat-icon>add</mat-icon>
 			</button>
 
-			<mat-menu #addmenu="matMenu" [overlapTrigger]="false" yPosition="above" xPosition="before">
-				<!-- <button mat-menu-item>
-					<mat-icon>dialpad</mat-icon>
-					<span>Redial</span>
-				</button>
-				<button mat-menu-item disabled>
-					<mat-icon>voicemail</mat-icon>
-					<span>Check voicemail</span>
-				</button>
-				<button mat-menu-item>
-					<mat-icon>notifications_off</mat-icon>
-					<span>Disable alerts</span>
-				</button> -->
+			<mat-menu [hidden]="appState.authenticated" #addmenu="matMenu" [overlapTrigger]="false" yPosition="above" xPosition="before">
 
 				<button mat-menu-item routerLink="/create/post">
 					<mat-icon>comment</mat-icon>New post</button>
@@ -215,57 +202,8 @@
 				<button mat-menu-item routerLink="/security/create">
 					<mat-icon>account_box</mat-icon>New identity</button>
 
-				<!-- <button mat-menu-item routerLink="/settings" routerLinkActive="active">
-					<mat-icon aria-label="Go offline">cloud_off</mat-icon>Go offline</button>
-				<button mat-menu-item routerLink="/settings" routerLinkActive="active">
-					<mat-icon aria-label="Settings">settings</mat-icon>Settings</button> -->
-
 			</mat-menu>
 
 		</footer>
 	</div>
-</div>
-
-<!-- <div fxLayout="column" fxLayoutAlign="start stretch">
-	<mat-toolbar color="primary">
-		<button mat-icon-button>
-			<mat-icon *ngIf="menuOpened" (click)="onMenu(false)" aria-label="Hide menu">arrow_back</mat-icon>
-			<mat-icon *ngIf="!menuOpened" (click)="onMenu(true)" aria-label="Open menu">menu</mat-icon>
-		</button>
-
-		<mat-icon class="example-icon">verified_user</mat-icon>
-	</mat-toolbar>
-
-	<div class="app-content" fxFlexOffset="20px" fxFlexFill>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-<p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p><p>hello world!</p>
-	</div>
-
-	<mat-sidenav-container fxFlexOffset="20px" fxFlexFill class="example-sidenav-fab-container">
-		<mat-sidenav #sidenav mode="side" opened="true">
-			<button mat-mini-fab class="example-fab" (click)="sidenav.toggle()">
-				<mat-icon>add</mat-icon>
-			</button>
-			<div class="example-scrolling-content">
-				Lorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.
-			</div>
-		</mat-sidenav>
-		<button mat-mini-fab class="example-fab" (click)="sidenav.toggle()">
-			<mat-icon>add</mat-icon>
-		</button>
-		<div class="example-scrolling-content">
-			Lorem ipsum dolor sit amet, pede a libero aenean phasellus, lectus metus sint ut risus, fusce vel in pellentesque. Nisl rutrum etiam morbi consectetuer tempor magna, aenean nullam nunc id, neque vivamus interdum sociis nulla scelerisque sem, dolor id wisi turpis magna aliquam magna. Risus accumsan hac eget etiam donec sed, senectus erat mattis quam, tempor vel urna occaecat cras, metus urna augue nec at. Et morbi amet dui praesent, nec eu at, ligula ipsum dui sollicitudin, quis nisl massa viverra ligula, mauris fermentum orci arcu enim fringilla. Arcu erat nulla in aenean lacinia ullamcorper, urna ante nam et sagittis, tristique vehicula nibh ipsum vivamus, proin proin. Porta commodo nibh quis libero amet. Taciti dui, sapien consectetuer.
-		</div>
-	</mat-sidenav-container>
 </div> -->

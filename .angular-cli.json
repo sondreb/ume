@@ -25,6 +25,7 @@
 			"styles": [
 				"app-theme.scss",
 				"styles.scss",
+				"print.scss",
 				"fonts/Open_Sans/OpenSans.css"
 			],
 			"scripts": [
@@ -63,6 +64,8 @@
 	},
 	"defaults": {
 		"styleExt": "css",
-		"component": {}
+		"component": {
+			"viewEncapsulation": "None"
+		}
 	}
 }

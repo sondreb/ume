@@ -26,23 +26,45 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 	public showSearch = false;
 	private subscription: any;
 
+	public backUrl: string;
+
 	constructor(public appState: ApplicationState, public router: Router, public route: ActivatedRoute, public location: Location) {
 		const self = this;
 
-		// this.subscription = router.events
-		// 	.filter(event => event instanceof NavigationStart)
-		// 	.subscribe((event: NavigationStart) => {
+		// debugger;
 
-		// 		// const root: ActivatedRoute = this.route.root;
-		// 		// console.log(root);
-		// 		this.crumbs = this.generateCrumbs(event);
-		// 		console.log(this.crumbs);
+		this.subscription = router.events
+			.filter(event => event instanceof NavigationStart)
+			.subscribe((event: NavigationStart) => {
 
-		// 	});
+				const url = event.url.substring(1);
+				const config = this.router.config.find(c => c.path === url);
+
+				if (!config || !config.data || !config.data.back) {
+					return;
+				}
+
+				this.backUrl = config.data.back;
+
+				// const root: ActivatedRoute = this.route.root;
+				// console.log(root);
+				// this.crumbs = this.generateCrumbs(event);
+				// console.log(this.crumbs);
+
+			});
 	}
 
 	public onGoBack() {
-		this.router.navigate([this.appState.backUrl]);
+
+		if (this.backUrl) {
+			this.router.navigateByUrl(this.backUrl);
+			this.backUrl = '';
+		} else {
+			this.router.navigate(['../'], { relativeTo: this.route });
+		}
+		// this.router.navigate(['./']);
+		// this.router.navigateByUrl('./');
+		// this.router.navigate([this.appState.backUrl]);
 		// this.location.back();
 	}
 

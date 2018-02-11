@@ -12,6 +12,7 @@ import { LocalStorageService } from './local-storage';
 import { StorageService } from './storage';
 import { EqualValidator } from './equal-validator.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './auth-guard';
 
 @NgModule({
 	imports: [
@@ -23,7 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 	],
 	exports: [FlexLayoutModule, MaterialModule, FormsModule, ReactiveFormsModule, BreadcrumbComponent, ScrollDirective, ToolbarComponent],
-	providers: [ApplicationState, LocalStorageService, StorageService],
+	providers: [ApplicationState, LocalStorageService, StorageService, AuthGuard],
 	declarations: [BreadcrumbComponent, ScrollDirective, ToolbarComponent, EqualValidator]
 })
 export class FrameworkModule { }

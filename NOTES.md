@@ -1,3 +1,7 @@
+# 2018-02-11
+
+The controllers was refactored to all go into a singular module, and not have separate modules. Plan is to get the prototype working, and eventually refactor into use of more RxJS-patterns.
+
 # System Flows
 
 ## Invitation Flow
@@ -8,11 +12,11 @@
 4. User receives a new public and private key pair. Keys can be stored as files on local disk drive, and/or be persisted in the web browser.
 
 ## Message (Publish) Flow
+
 1. User creates a new content to publish to a community.
 2. The content is encrypted with the user's private key.
 3. The content is added to a message, that contains the unique community ID.
 4. Message is sent to gateway and forwarded to all users of the community which is currently using the app.
-
 
 ## State Management Flow
 
@@ -29,34 +33,32 @@ For future scaling perspective: One SHA256 hash is 32-bytes (64-byte HEX), so 10
 
 Now the question of orchestration begins:
 
-Should all (USER1 and USER3) connected nodes, send a copy of their additional copies that USER2 is missing? Meaning that USER2 would have do receive the whole message twice, and then decrypt and validate the message twice. This calculation requirement increase N exponent (message * nodes). With a large community, this would greatly increase the bandwidth and CPU usage and requirement.
+Should all (USER1 and USER3) connected nodes, send a copy of their additional copies that USER2 is missing? Meaning that USER2 would have do receive the whole message twice, and then decrypt and validate the message twice. This calculation requirement increase N exponent (message \* nodes). With a large community, this would greatly increase the bandwidth and CPU usage and requirement.
 
 Another solution could be that USER1 iterates through all connected nodes, establishes exchange keys and transfers both it's own extra messages, and receives it's own missing messages. This would be beneficial in two ways: Additional layer of encryption, ensuring that the same cipher is never transfered to the gateway, even when it's the actual same encrypted (cipher) message being transfered. The keys generated and exchange can be discarded when a node moves on to the next node. Second, the amount of processing would increase a bit (additional encrypt and decrypt), but bandwidth reduced.
 
 A third option, and one that can be combined with the second solution, is for a new node to announce itself and then receive list of hashes from all nodes. Then doing a distinct sort, connect to the nodes that has messages available (random selection somehow?) and sync those across. If one of the nodes goes down during an sync, a re-calculation of node selection can be made by the newly connected node.
 
-
 ## Pass Phrase (BIP39) Restore
 
-The private keys seed for a user is a BIP39 derived pass phrase. This is used to generate distinct private keys for every single identity, that belongs to different communities. 
-
+The private keys seed for a user is a BIP39 derived pass phrase. This is used to generate distinct private keys for every single identity, that belongs to different communities.
 
 ## Random Noise
-The app could/should generated random data noise that is indistinguishable from real messages. This to improve security a bit by obscuring the traffic and making traffic analysis more difficult.
 
+The app could/should generated random data noise that is indistinguishable from real messages. This to improve security a bit by obscuring the traffic and making traffic analysis more difficult.
 
 ## Public Key Distribution Flow
 
 ## Questions:
 
-How do we verify the invitation key?   
-What meta-data should be contain within an invitation key?   
-Should the community ID be derived from invitation key non-reversible hash?  
+How do we verify the invitation key?  
+What meta-data should be contain within an invitation key?  
+Should the community ID be derived from invitation key non-reversible hash?
 
 # Community Data
 
-- Each community need a collection of public keys for all members of the community.
-- Public keys should be synced across all valid members of a community.
+* Each community need a collection of public keys for all members of the community.
+* Public keys should be synced across all valid members of a community.
 
 ## Message Flow
 
@@ -109,13 +111,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Questions and Answers
 
-Q: Will there be an **ume** app for mobile devices?   
+Q: Will there be an **ume** app for mobile devices?  
 A: No, the app only supports running in the web browser.
 
-Q: Are the content and security keys stored safely in the web browser?   
+Q: Are the content and security keys stored safely in the web browser?  
 A: No, there are few options to store local information in an encrypted and secure manner when only relying on the web browser. Developing a Cordova and/or Electron container could enable more secure local storage.
 
-Q: Can I use **ume** to share sensitive and secret information?   
+Q: Can I use **ume** to share sensitive and secret information?  
 A: While the app has been built for security and privacy as the main reasons for existing, you should not rely on **ume** for sensitive and secret information. This is an open source project with limited resources available for security review and monitoring of potential hacks, exploits, etc.
 
 # Algorithms
@@ -139,10 +141,10 @@ https://www.boxcryptor.com/en/blog/post/building-an-app-with-webcrypto-in-2016/
 
 # Alternative Services
 
-darkwire.io is a web socket based chat with end-to-end encryption:   
+darkwire.io is a web socket based chat with end-to-end encryption:  
 https://darkwire.io/
 
-Crypho is an end-to-end-encrypted messaging and file sharing.    
+Crypho is an end-to-end-encrypted messaging and file sharing.  
 https://www.crypho.com/
 
 Crypho relies on centralized server storage of public keys, and does not support anonymous usage. These are two primary factors for building **ume**, namely avoiding centeralized infrastructure and allowing users to decide how much details they want to share with others.

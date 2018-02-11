@@ -1,0 +1,24 @@
+<!-- <i class="material-icons float-right">delete_forever</i>
+<i class="material-icons float-right action" data-ume-page="home">chevron_left</i> -->
+<p>
+	To protect your privacy, you can clear this device of all community data.
+</p>
+<p>
+	BEWARE: If you clear the device, all your keys will be lost. Make sure you have a backup of your keys or remember your pass phrase.
+</p>
+<p>
+	<button mat-button>
+		<mat-icon>cloud_download</mat-icon>&nbsp;&nbsp;Backup first
+	</button>
+</p>
+<p>
+	The data wipe removes data from your browser cache. If the device is stolen, the data can potentially still be retrieved by recovering deleted files on the harddrive. After you wipe all data, restart the browser, go back to üme and verify data is wiped.
+</p>
+<p>
+	<button (click)="wipeDevice()" mat-button>
+		<mat-icon>delete_forever</mat-icon>&nbsp;&nbsp;Wipe all data on device
+	</button>
+</p>
+<p class="warning-card hidden" id="wipe-success">
+	Success. All data was wiped. Close the window or tab to exit üme.
+</p>

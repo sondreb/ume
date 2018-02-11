@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ApplicationState, StorageService } from './framework';
 import { Identity } from './framework/types';
 import { Subscription } from 'rxjs/Subscription';
-import { MediaChange, ObservableMedia } from '@angular/flex-layout';
+import { ObservableMedia, MediaChange } from '@angular/flex-layout';
 import { AppDatabase } from './storage';
 
 @Component({
@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	public menuOpened = true;
 	public statusIcon = '';
 	public statusText = '';
+	// private subscription;
 
 	constructor(public appState: ApplicationState, public media: ObservableMedia, public storage: StorageService, public db: AppDatabase) {
 		appState.main = true;
@@ -25,29 +26,24 @@ export class AppComponent implements OnInit, OnDestroy {
 		this.statusIcon = 'info_outline';
 		this.statusText = 'Loading database...';
 
-		db.open().then(result => {
-			console.log('Dexie:', result);
+		// this.subscription = $media.subscribe((change:MediaChange) => {
+		// 	this.isOpen = (change.mqAlias !== 'xs');
+		// 	this.mediaChange = change;
+		// });
 
-			setTimeout(() => {
-				this.statusIcon = 'info';
-				this.statusText = 'Database loaded. Connecting to network...';
-			}, 1000);
+		// db.transaction('rw', db.identities, async () => {
 
-		});
+		// 	const identity1 = new Identity();
+		// 	// identity1.displayName = 'TEST';
+		// 	identity1.id = '124';
+		// 	identity1.label = 'My Identity';
 
-		db.transaction('rw', db.identities, async () => {
+		// 	db.identities.put(identity1);
 
-			const identity1 = new Identity();
-			// identity1.displayName = 'TEST';
-			identity1.id = '124';
-			identity1.label = 'My Identity';
-
-			db.identities.put(identity1);
-
-		}).then(result => {
-			console.log('Identity inserted!');
-			console.log(result);
-		});
+		// }).then(result => {
+		// 	console.log('Identity inserted!');
+		// 	console.log(result);
+		// });
 
 		// During development, we'll delete the database on each reload. Uncomment this part as needed during development.
 		// storage.deleteDatabase().then(() => {
@@ -87,20 +83,45 @@ export class AppComponent implements OnInit, OnDestroy {
 	}
 
 	public async ngOnInit() {
+
+		const result = await this.db.open();
+		console.log('Dexie:', result);
+
+		setTimeout(() => {
+			this.statusIcon = 'info';
+			this.statusText = 'Database loaded. Connecting to network...';
+		}, 1000);
+
+		// Get the identity, if it exists.
+		const identity = await this.db.identity.get(1);
+
+		if (identity) {
+			this.appState.authenticated = true;
+		}
+
+		// .then(result => {
+
+		// });
+
 		this.appState.ismobile = (this.media.isActive('xs'));
 
 		this.watcher = this.media.subscribe((change: MediaChange) => {
+
 			this.appState.ismobile = (change.mqAlias === 'xs');
+
+			// Enforce the sidenav when not on mobile.
+			if (!this.appState.ismobile) {
+				this.appState.sidenav = true;
+			}
 		});
 
 		if (this.appState.ismobile) {
 			this.appState.sidenav = false;
 		}
-
-
 	}
 
 	public ngOnDestroy() {
+		// this.subscription.unsubscribe();
 		this.watcher.unsubscribe();
 	}
 

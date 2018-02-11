@@ -44,22 +44,22 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 				// Reset icon on navigation change.
 				this.appState.icon = null;
 
-				const currentRoute = this.getRoute(event.url);
+				// const currentRoute = this.getRoute(event.url);
 
-				if (currentRoute.route && currentRoute.route.data) {
-					const breadcrumb = currentRoute.route.data['breadcrumb'];
-					this.appState.title = breadcrumb;
+				// if (currentRoute.route && currentRoute.route.data) {
+				// 	const breadcrumb = currentRoute.route.data['breadcrumb'];
+				// 	this.appState.title = breadcrumb;
 
-					if (currentRoute.parent) {
-						this.appState.backUrl = currentRoute.parent.path;
-					} else {
-						this.appState.backUrl = '/';
-					}
-					// this.appState.backUrl = currentRoute.
-					console.log(breadcrumb);
-				} else {
-					this.appState.title = null;
-				}
+				// 	if (currentRoute.parent) {
+				// 		this.appState.backUrl = currentRoute.parent.path;
+				// 	} else {
+				// 		this.appState.backUrl = '/';
+				// 	}
+				// 	// this.appState.backUrl = currentRoute.
+				// 	console.log(breadcrumb);
+				// } else {
+				// 	this.appState.title = null;
+				// }
 
 				// console.log(this.router.routerState.root);
 				// console.log(this.router.routerState.root.firstChild);
@@ -73,6 +73,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 	}
 
 	public getRoute(url: string) {
+		debugger;
 		const segments = url.split('/').filter(String);
 
 		let children: any = this.router.config;
@@ -100,13 +101,14 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
 	}
 
 	public onNavigateBack() {
-		const previousCrumb = this.crumbs[this.crumbs.length - 2];
+		debugger;
+		// const previousCrumb = this.crumbs[this.crumbs.length - 2];
 
-		if (previousCrumb) {
-			this.router.navigateByUrl(previousCrumb.url);
-		} else {
-			this.router.navigateByUrl('/');
-		}
+		// if (previousCrumb) {
+		// 	this.router.navigateByUrl(previousCrumb.url);
+		// } else {
+		this.router.navigateByUrl('../');
+		// }
 	}
 
 	private generateCrumbs(event: NavigationStart): ICrumb[] {

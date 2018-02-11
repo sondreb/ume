@@ -1,0 +1,136 @@
+<div class="container">
+	<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+		<div class="print-visible">
+			<div>
+				<mat-icon class="logo-icon">verified_user</mat-icon>
+				<a class="logo-text">üme</a>
+			</div>
+			<div class="mnemonic">{{mnemonic}}</div>
+		</div>
+
+		<mat-vertical-stepper class="print-hidden" linear>
+			<mat-step label="Intro" editable="true">
+				<p>
+					<strong>Make sure nobody is watching your screen.</strong>
+				</p>
+				<p>
+					I'll generate a random 12 word sentence for you. It is very important that you remember this and keep it safe. You will not, for security reasons, be able to find this sentence inside the app, so make a backup after generating here.
+				</p>
+				<p>
+					The 12 word sentence can be used to restore and access all your identities, all your messages and content in communities you are a member of. So keep it safe.
+				</p>
+				<div>
+					<button mat-button matStepperNext type="button">Next</button>
+				</div>
+			</mat-step>
+			<mat-step label="Mnemonic" editable="true">
+				<!-- <div *ngIf="!mnemonic">
+					<button type="submit" mat-raised-button color="primary">Generate Pass Phrase</button>
+					<br>
+					<br>
+				</div> -->
+				<div>
+					<strong>Your personal pass phrase:</strong>
+					<div class="mnemonic">{{mnemonic}}
+						<button (click)="onPrint()" mat-icon-button title="Print your mnemonic">
+							<mat-icon aria-label="Print">print</mat-icon>
+						</button>
+					</div>
+
+					<!-- <button type="button" (click)="onPrint()" [disabled]="!form.valid" mat-raised-button *ngIf="mnemonic">Print</button>
+					<mat-icon>print</mat-icon> -->
+
+					<!-- <strong>Your personal password:</strong>
+					<p>You can protect your pass phrase with a personal password. It is strongly adviced that you use a password to protect your pass phrase. This will greatly improve your safety. It is not required to use a password. You will be prompted to enter this passord every time your start üme.</p>
+					<p>
+						<mat-form-field class="input-full-width">
+							<input matInput type="password" [formGroup]="form" [(ngModel)]="password1" placeholder="Password" name="password" formControlName="password" autocomplete="new-password">
+							<mat-hint>If you fill out password, you must remember both pass phrase and password to restore.</mat-hint>
+						</mat-form-field>
+					</p>
+					<p>
+						<mat-form-field class="input-full-width">
+							<input matInput type="password" [formGroup]="form" [(ngModel)]="password2" placeholder="Password" name="confirmPassword" formControlName="confirmPassword" autocomplete="new-password">
+							<mat-error *ngIf="form.get('confirmPassword').hasError('password') || form.get('password').hasError('password')">
+								Passwords must match. Please verify that you don't have caps-lock enabled.
+							</mat-error>
+						</mat-form-field>
+					</p>
+					<p>
+						<button type="button" (click)="onSave()" [disabled]="!form.valid" mat-raised-button *ngIf="mnemonic">Save to disk</button>
+						<button type="button" (click)="onLaunch()" [disabled]="!form.valid" color="primary" mat-raised-button *ngIf="mnemonic">Launch üme!</button>
+					</p> -->
+				</div>
+
+				<p>
+					It is important that you remember this sentence and save it securely. You can click the printer icon to save as PDF or print to paper.
+				</p>
+
+
+				<div>
+					<button mat-button matStepperPrevious type="button">Back</button>
+					<button mat-button matStepperNext type="button">Next</button>
+				</div>
+			</mat-step>
+			<mat-step label="Password" editable="true">
+				<!-- <div *ngIf="!mnemonic">
+					<button type="submit" mat-raised-button color="primary">Generate Pass Phrase</button>
+					<br>
+					<br>
+				</div> -->
+				<div *ngIf="mnemonic">
+					<!-- <strong>Your personal pass phrase:</strong>
+					<div class="mnemonic">{{mnemonic}}</div> -->
+					<strong>Your personal password:</strong>
+					<p>You can protect your pass phrase with a personal password. It is strongly adviced that you use a password to protect your pass phrase. This will greatly improve your safety. It is not required to use a password. You will be prompted to enter this passord every time your start üme.</p>
+					<p>
+						<mat-form-field class="input-full-width">
+							<input matInput type="password" [formGroup]="form" [(ngModel)]="password1" placeholder="Password" name="password" formControlName="password" autocomplete="new-password">
+							<mat-hint>If you fill out password, you must remember both pass phrase and password to restore.</mat-hint>
+						</mat-form-field>
+					</p>
+					<p>
+						<mat-form-field class="input-full-width">
+							<input matInput type="password" [formGroup]="form" [(ngModel)]="password2" placeholder="Password" name="confirmPassword" formControlName="confirmPassword" autocomplete="new-password">
+							<mat-error *ngIf="form.get('confirmPassword').hasError('password') || form.get('password').hasError('password')">
+								Passwords must match. Please verify that you don't have caps-lock enabled.
+							</mat-error>
+						</mat-form-field>
+					</p>
+				</div>
+				<div>
+					<button mat-button matStepperPrevious type="button">Back</button>
+					<button mat-button matStepperNext type="button">Next</button>
+				</div>
+			</mat-step>
+			<mat-step label="Backup" editable="true">
+				<p>
+					Please make sure you backup your mnemonic (pass phrase) and don't forget your password. This backup does NOT contain your password, only your mnemonic, which will be encrypted with your password.
+				</p>
+				<p>
+					This file does not contain your mnemonic in a human-readable format, if you forgot to print or save your mnemonic, go back to step 2.
+				</p>
+				<p>
+					<button type="button" (click)="onSave()" [disabled]="!form.valid" mat-raised-button color="primary" *ngIf="mnemonic">Save to disk</button>
+					<br>
+					<br>
+				</p>
+				<div>
+					<button mat-button matStepperPrevious type="button">Back</button>
+					<button mat-button matStepperNext type="button">Next</button>
+				</div>
+			</mat-step>
+			<mat-step label="Done" editable="false">
+				<p>
+					Success! You are ready to start using üme!
+				</p>
+				<div>
+					<!-- <button mat-button matStepperPrevious type="button">Back</button>
+					<button mat-button matStepperNext type="button">Next</button> -->
+					<button type="button" (click)="onLaunch()" [disabled]="!form.valid" color="primary" mat-raised-button *ngIf="mnemonic">Launch üme!</button>
+				</div>
+			</mat-step>
+		</mat-vertical-stepper>
+	</form>
+</div>
