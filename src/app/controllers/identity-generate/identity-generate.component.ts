@@ -115,6 +115,7 @@ export class IdentityGenerateComponent implements OnInit {
 
 		await this.savePrivateKey(() => {
 			// this.appState.authenticated = true;
+			this.appState.sidenav = true;
 			this.router.navigateByUrl('/');
 		});
 	}

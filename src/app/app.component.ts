@@ -103,20 +103,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
 		// });
 
-		this.appState.ismobile = (this.media.isActive('xs'));
-
-		this.watcher = this.media.subscribe((change: MediaChange) => {
-
-			this.appState.ismobile = (change.mqAlias === 'xs');
-
-			// Enforce the sidenav when not on mobile.
-			if (!this.appState.ismobile) {
-				this.appState.sidenav = true;
-			}
-		});
-
-		if (this.appState.ismobile) {
+		if (!this.appState.authenticated) {
 			this.appState.sidenav = false;
+		} else {
+			this.appState.ismobile = (this.media.isActive('xs'));
+
+			this.watcher = this.media.subscribe((change: MediaChange) => {
+
+				this.appState.ismobile = (change.mqAlias === 'xs');
+
+				// Enforce the sidenav when not on mobile.
+				if (!this.appState.ismobile) {
+					this.appState.sidenav = true;
+				}
+			});
+
+			if (this.appState.ismobile) {
+				this.appState.sidenav = false;
+			}
 		}
 	}
 
