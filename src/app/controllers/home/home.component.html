@@ -13,7 +13,7 @@
 	<img src="assets/images/favicon-256x256.png">
 	<br>
 	<br>
-	<p>
+	<p *ngIf="!appState.authenticated">
 		<button mat-raised-button color="primary" routerLink="identity/generate">New user</button>
 		<button mat-raised-button color="primary" routerLink="identity/restore">Returning user</button>
 	</p>

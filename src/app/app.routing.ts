@@ -90,6 +90,11 @@ const routes: Routes = [
 		component: IdentityGenerateComponent,
 		data: { breadcrumb: 'Generate' }
 	},
+	{
+		path: 'identity/:id',
+		component: IdentityComponent,
+		data: { breadcrumb: 'Generate' }
+	},
 
 	// {
 	// 	path: 'security',

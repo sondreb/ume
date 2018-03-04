@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Identity } from './types';
 
 @Injectable()
 export class ApplicationState {
@@ -10,6 +11,7 @@ export class ApplicationState {
 	public persist = true;
 	public icon: string;
 	public authenticated = false;
+	public identity: Identity;
 
 	constructor() {
 

@@ -1,74 +1,74 @@
 {
-  "name": "ume",
-  "version": "0.0.1",
-  "description": "Community Collaboration without centralized storage and end-to-end-encrypted communication.",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs",
-    "test": "tests"
-  },
-  "scripts": {
-    "watch": "watch-http-server ./src/app",
-    "start-test": "watch-http-server tests",
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build --target=production --environment=prod ",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/sondreb/ume.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/sondreb/ume/issues"
-  },
-  "homepage": "https://github.com/sondreb/ume#readme",
-  "dependencies": {
-    "@angular/animations": "5.2.4",
-    "@angular/cdk": "5.2.0",
-    "@angular/common": "5.2.4",
-    "@angular/compiler": "5.2.4",
-    "@angular/core": "5.2.4",
-    "@angular/flex-layout": "2.0.0-beta.12",
-    "@angular/forms": "5.2.4",
-    "@angular/http": "5.2.4",
-    "@angular/material": "5.2.0",
-    "@angular/platform-browser": "5.2.4",
-    "@angular/platform-browser-dynamic": "5.2.4",
-    "@angular/router": "5.2.4",
-    "bip39": "2.5.0",
-    "bitcoinjs-lib": "3.3.2",
-    "core-js": "2.5.3",
-    "dexie": "2.0.1",
-    "hammerjs": "2.0.8",
-    "rxjs": "5.5.6",
-    "zone.js": "0.8.20"
-  },
-  "devDependencies": {
-    "@angular/cli": "1.6.8",
-    "@angular/compiler-cli": "5.2.4",
-    "@angular/language-service": "5.2.4",
-    "@types/bitcoinjs-lib": "3.3.1",
-    "@types/jasmine": "2.8.6",
-    "@types/jasminewd2": "2.0.3",
-    "@types/node": "9.4.5",
-    "@types/text-encoding": "0.0.32",
-    "codelyzer": "4.1.0",
-    "jasmine-core": "2.99.1",
-    "jasmine-spec-reporter": "4.2.1",
-    "karma": "2.0.0",
-    "karma-chrome-launcher": "2.2.0",
-    "karma-cli": "1.0.1",
-    "karma-coverage-istanbul-reporter": "1.4.1",
-    "karma-jasmine": "1.1.1",
-    "karma-jasmine-html-reporter": "0.2.2",
-    "protractor": "5.3.0",
-    "ts-node": "4.1.0",
-    "tslint": "5.9.1",
-    "typescript": "2.7.1"
-  }
+	"name": "ume",
+	"version": "0.0.1",
+	"description": "Community Collaboration without centralized storage and end-to-end-encrypted communication.",
+	"main": "index.js",
+	"directories": {
+		"doc": "docs",
+		"test": "tests"
+	},
+	"scripts": {
+		"watch": "watch-http-server ./src/app",
+		"start-test": "watch-http-server tests",
+		"ng": "ng",
+		"start": "ng serve",
+		"build": "ng build --target=production --environment=prod ",
+		"test": "ng test",
+		"lint": "ng lint",
+		"e2e": "ng e2e"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/sondreb/ume.git"
+	},
+	"author": "",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/sondreb/ume/issues"
+	},
+	"homepage": "https://github.com/sondreb/ume#readme",
+	"dependencies": {
+		"@angular/animations": "5.2.7",
+		"@angular/cdk": "5.2.3",
+		"@angular/common": "5.2.7",
+		"@angular/compiler": "5.2.7",
+		"@angular/core": "5.2.7",
+		"@angular/flex-layout": "5.0.0-beta.13",
+		"@angular/forms": "5.2.7",
+		"@angular/http": "5.2.7",
+		"@angular/material": "5.2.3",
+		"@angular/platform-browser": "5.2.7",
+		"@angular/platform-browser-dynamic": "5.2.7",
+		"@angular/router": "5.2.7",
+		"bip39": "2.5.0",
+		"bitcoinjs-lib": "3.3.2",
+		"core-js": "2.5.3",
+		"dexie": "2.0.2",
+		"hammerjs": "2.0.8",
+		"rxjs": "5.5.6",
+		"zone.js": "0.8.20"
+	},
+	"devDependencies": {
+		"@angular/cli": "1.7.2",
+		"@angular/compiler-cli": "5.2.7",
+		"@angular/language-service": "5.2.7",
+		"@types/bitcoinjs-lib": "3.3.1",
+		"@types/jasmine": "2.8.6",
+		"@types/jasminewd2": "2.0.3",
+		"@types/node": "9.4.6",
+		"@types/text-encoding": "0.0.32",
+		"codelyzer": "4.2.1",
+		"jasmine-core": "3.1.0",
+		"jasmine-spec-reporter": "4.2.1",
+		"karma": "2.0.0",
+		"karma-chrome-launcher": "2.2.0",
+		"karma-cli": "1.0.1",
+		"karma-coverage-istanbul-reporter": "1.4.1",
+		"karma-jasmine": "1.1.1",
+		"karma-jasmine-html-reporter": "0.2.2",
+		"protractor": "5.3.0",
+		"ts-node": "5.0.1",
+		"tslint": "5.9.1",
+		"typescript": "2.7.2"
+	}
 }

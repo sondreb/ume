@@ -20,9 +20,19 @@
 					<!-- <div class="ume-scrolling-content ume-sidenav-communities" id="sidenav-menu2" umeScroll> -->
 
 					<div class="ume-scrolling-content ume-sidenav-communities" umeScroll>
-						<a class="ume-sidenav-community ume-sidenav-community-active">A</a>
-						<a class="ume-sidenav-community">L</a>
-						<a class="ume-sidenav-community">C</a>
+
+						<!-- <a class="ume-sidenav-community ume-sidenav-community-active">A</a>
+						<a class="ume-sidenav-community">L</a> -->
+						<!-- <a class="ume-sidenav-community" ng-class="{ 'ume-sidenav-community-active': community.active }" *ngFor="let community of communities">{{community.short}} {{community.active}}</a> -->
+
+						<ng-container *ngFor="let community of communities">
+							<a class="ume-sidenav-community" (click)="changeCommunity(community)" [ngClass]="{'ume-sidenav-community-active': community.active}">{{community.short}}</a>
+						</ng-container>
+
+						<!-- <ng-template ngFor let-hero [ngForOf]="heroes" let-i="index" let-odd="odd" [ngForTrackBy]="trackById">
+							<div [class.odd]="odd">({{i}}) {{hero.name}}</div>
+						</ng-template> -->
+
 						<a class="ume-sidenav-community-add" href="#">
 							<mat-icon>add_circle_outline</mat-icon>
 						</a>
@@ -37,10 +47,15 @@
 								<mat-icon>add_circle_outline</mat-icon>
 							</div>
 
-							<button mat-button routerLink="/topic/1" routerLinkActive="active" class="sidebar-items-item">
+							<ng-container *ngFor="let topic of topics">
+								<button mat-button routerLink="/topic/1" routerLinkActive="active" class="sidebar-items-item" [ngClass]="{'active': topic.active}">
+									<mat-icon>{{topic.icon}}</mat-icon> {{topic.name}}</button>
+							</ng-container>
+
+							<!-- <button mat-button routerLink="/topic/1" routerLinkActive="active" class="sidebar-items-item">
 								<mat-icon>forum</mat-icon> announcements</button>
 							<button mat-button routerLink="/topic/2" routerLinkActive="active" class="sidebar-items-item">
-								<mat-icon>forum</mat-icon> general</button>
+								<mat-icon>forum</mat-icon> general</button> -->
 
 							<div class="sidebar-items-headline">
 								<span>DIRECT MESSAGES</span>
@@ -56,19 +71,22 @@
 							<button mat-button routerLink="/chat/3" routerLinkActive="active" class="sidebar-items-item">
 								<mat-icon>chat</mat-icon> Mr. Grey</button>
 
-
 							<div class="sidebar-items-headline">
 								<span>IDENTITIES</span>
 								<mat-icon>add_circle_outline</mat-icon>
 							</div>
 
-							<button mat-button routerLink="/security/identities/62PByUXB" routerLinkActive="active" class="sidebar-items-item">
-								<mat-icon>account_box</mat-icon>62PByUXB</button>
-							<button mat-button routerLink="/security/identities/52PByUXB" routerLinkActive="active" class="sidebar-items-item">
-								<mat-icon>account_box</mat-icon>52PByUXB</button>
-							<button mat-button routerLink="/security/identities/31PByUXB" routerLinkActive="active" class="sidebar-items-item">
-								<mat-icon>account_box</mat-icon>31PByUXB</button>
+							<ng-container *ngFor="let identity of identities">
+								<!-- <button mat-button routerLink="/topic/1" routerLinkActive="active" class="sidebar-items-item" [ngClass]="{'active': topic.active}">
+									<mat-icon>{{topic.icon}}</mat-icon> {{topic.name}}</button> -->
+								<button mat-button routerLink="/identity/{{identity.identifier}}" routerLinkActive="active" class="sidebar-items-item" [ngClass]="{'active': identity.active}">
+									<mat-icon>account_box</mat-icon>{{identity.identifier}}</button>
+							</ng-container>
 
+							<!-- <button mat-button routerLink="/identity/52PByUXB" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>account_box</mat-icon>52PByUXB</button>
+							<button mat-button routerLink="/identity/31PByUXB" routerLinkActive="active" class="sidebar-items-item">
+								<mat-icon>account_box</mat-icon>31PByUXB</button> -->
 
 						</div>
 

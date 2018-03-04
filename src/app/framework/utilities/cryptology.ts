@@ -162,4 +162,26 @@ export class Cryptology {
 		const s = this.convertUint8ArrayToText(data);
 		return window.btoa(s);
 	}
+
+	/**
+    A string hashing function based on Daniel J. Bernstein's popular 'times 33' hash algorithm.
+    @param {string} text - String to hash
+    @return {number} Resulting number.
+	*/
+	public hash(text) {
+		'use strict';
+
+		let hash = 5381,
+			index = text.length;
+
+		while (index) {
+			hash = (hash * 33) ^ text.charCodeAt(--index);
+		}
+
+		return hash >>> 0;
+	}
+
+	public shortHash(text) {
+		return this.hash(text).toString(16);
+	}
 }

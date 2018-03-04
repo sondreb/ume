@@ -100,8 +100,8 @@
 	box-sizing: border-box;
 	width: 56px;
 	height: 48px;
-	border-left: 4px transparent;
-	border-right: 4px transparent;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
 	border-bottom: 1px solid gray;
 	text-align: center;
 	font-size: 20px;
@@ -119,6 +119,7 @@
 .ume-sidenav-community-active
 {
 	border-left: 4px solid $main-color;
+	border-right: 4px solid transparent;
 }
 
 .ume-sidenav-community-add
@@ -271,7 +272,7 @@
 //   }
 
   .sidebar-items .active {
-	background-color: $main-color;
+	background-color: #424242;
 	color: #FAFAFA;
   }
 

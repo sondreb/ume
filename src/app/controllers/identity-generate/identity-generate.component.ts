@@ -9,6 +9,8 @@ import * as bip39 from 'bip39';
 
 declare var saveAs: Function;
 declare var TextEncoder: any;
+import { Cryptology } from '../../framework/utilities/cryptology';
+import { HDNode } from 'bitcoinjs-lib';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 // export class PasswordErrorStateMatcher implements ErrorStateMatcher {
@@ -27,6 +29,7 @@ declare var TextEncoder: any;
 // 	}
 // }
 
+
 @Component({
 	selector: 'ume-identity-generate',
 	templateUrl: './identity-generate.component.html',
@@ -39,6 +42,7 @@ export class IdentityGenerateComponent implements OnInit {
 	public mnemonic: string;
 	public password1 = '';
 	public password2 = '';
+	public cryptology: Cryptology;
 	// public form: any;
 
 	// dateFormatted: new FormControl(this.forecast.dateFormatted, { validators: Validators.required, asyncValidators: [this.forecastValidators.existingDateValidator(this.forecast.dateFormatted)], updateOn: 'blur' }),
@@ -59,6 +63,8 @@ export class IdentityGenerateComponent implements OnInit {
 		appState.main = false;
 		appState.title = 'New user';
 		appState.icon = 'hot_tub';
+
+		this.cryptology = new Cryptology();
 
 		// const model = new Identity();
 		// model.id = 1;
@@ -147,24 +153,114 @@ export class IdentityGenerateComponent implements OnInit {
 
 		console.log(cryptoKey);
 
+		// importedKey can be stored to IndexedDB for persistence across browser sessions.
+		// To improve security, only the imported key could be persisted and user would be required to enter the salt (password) on every restart.
+		const derivedKey = await window.crypto.subtle.deriveKey(
+			{
+				'name': 'PBKDF2',
+				salt: bufferSalt,
+				iterations: 2048,
+				hash: { name: 'SHA-512' },
+			},
+			cryptoKey,
+			{
+				name: 'HMAC',
+				hash: 'SHA-512',
+				length: 512
+			},
+			true,
+			['sign']
+		);
+
+		// Root Seed
+		// Master Chain Code
+		// Master Private Key
+		// https://bitcoin.org/en/developer-guide#hierarchical-deterministic-key-creation
+		// https://bitcoin.org/en/developer-guide#hardened-keys
+		// https://raw.githubusercontent.com/bitcoin/bips/master/bip-0032/derivation.png
+
+		// derivedKey can be stored to IndexedDB for persistance across browser sessions.
+		// This is less secure, but more user friendly, not requiring user to supply their salt (password) on every use.
+		const exportedKey = await window.crypto.subtle.exportKey('raw', derivedKey);
+		const exportedKeyHex = this.cryptology.arrayBufferToHexString(exportedKey); // seed == exportedKeyHex - both values should be same.
+
+		const root = HDNode.fromSeedHex(exportedKeyHex);
+
+		console.log(root);
+
+		// .deriveHardened(0).derive(0).derive(1)
+
+		// Using 42 as the purpose-path for üme, since BIP44 introduced the usage of 44, future BIPs will likely use 44+.
+		const account0 = root.derivePath('m/42\'/0\'/0\'');
+
+		// Get the "address" (public key) of the root account.
+		const address0 = account0.getAddress();
+
+		// const xpubString = account0.neutered().toBase58();
+		// const key0 = account0.derivePath('0/0').keyPair;
+		// const key0FromXpub = account0.neutered().derivePath('0/0').keyPair;
+		// const address0 = key0.getAddress();
+		// const address0FromXpub = key0FromXpub.getAddress();
+
+		// console.log('address0: ', address0);
+		const identifier = this.cryptology.shortHash(address0);
+		console.log('identifier: ', identifier);
+
+		// const publicKeyHex = this.cryptology.arrayBufferToHexString(key0.getPublicKeyBuffer());
+		// console.log(publicKeyHex);
+
+		// $("#derived_public_key_hex").val(Crypto.util.bytesToHex(result.eckey.pub.getEncoded(true)));
+
+		// const hexAddress = this.cryptology.arrayToHexString(address0);
+		// console.log('Hex address: ' + hexAddress);
+
+		// 15a3JRVLot7dVgBqa1GcXwC7wx3yf4dw1P
+		// console.log(address0FromXpub);
+		// 15a3JRVLot7dVgBqa1GcXwC7wx3yf4dw1P
+		// console.log(address0 === address0FromXpub);
+		// true
+		// console.log(key0.toWIF());
+		// KyLVo6gfg5QnPnk4j4bF15RTVey2aJBBbwwfPbPMBjY3rqiRz9Qa
+		// console.log(key0FromXpub.toWIF());
+		// Error: Missing private key
+		//     at ECPair.toWIF (/home/linux/node_modules/bitcoinjs-lib/src/ecpair.js:122:22)
+
 		await this.db.transaction('rw', this.db.identity, async () => {
 
 			const identity = new Identity();
 			identity.id = 1;
+
 			identity.label = 'Master Identity';
+
+			// Mnemonic Key, non-exportable
 			identity.key = cryptoKey;
+
+			// Root Seed, exportable
+			identity.seed = derivedKey;
+
+			// Master Node
+			identity.root = root;
+
+			// Wallet/Account
+			identity.account = account0;
+
+			// Private/Public key pair for this account / instance.
+			// identity.address = address0;
+
+			identity.address = address0;
+
+			// Hashed public key (shortened)
+			identity.identifier = identifier;
+
+			// identity.signingKey = root;
 
 			this.db.identity.put(identity);
 
-		}).then(result => {
-			console.log('Identity inserted!');
-			console.log(result);
-
-			this.appState.authenticated = true;
-
-			callback();
 		});
 
+		this.appState.authenticated = true;
+
+		callback();
 	}
 
 	public onGenerate() {

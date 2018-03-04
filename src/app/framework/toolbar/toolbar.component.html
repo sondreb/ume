@@ -32,6 +32,10 @@
 		<mat-icon>search</mat-icon>
 	</button>
 
+	<button fxHide fxShow.gt-sm *ngIf="appState.authenticated" mat-icon-button routerLink="/settings" routerLinkActive="active">
+		<mat-icon aria-label="Settings">settings</mat-icon>
+	</button>
+
 	<button mat-icon-button [matMenuTriggerFor]="menu">
 		<mat-icon>more_vert</mat-icon>
 	</button>

@@ -20,11 +20,27 @@ export class AppComponent implements OnInit, OnDestroy {
 	public statusText = '';
 	// private subscription;
 
+	public communities = [];
+	public topics = [];
+	public identities = [];
+
 	constructor(public appState: ApplicationState, public media: ObservableMedia, public storage: StorageService, public db: AppDatabase) {
 		appState.main = true;
 
 		this.statusIcon = 'info_outline';
 		this.statusText = 'Loading database...';
+
+		this.communities.push({ id: 1, name: 'Avengers', short: 'A', active: true });
+		this.communities.push({ id: 2, name: 'Beta', short: 'B' });
+		this.communities.push({ id: 3, name: 'Weekends', short: 'W' });
+
+		this.topics.push({ id: 1, name: 'Announcements', icon: 'forum', active: true });
+		this.topics.push({ id: 1, name: 'General', icon: 'forum' });
+		this.topics.push({ id: 1, name: 'Off-Topic', icon: 'forum' });
+
+		// this.identities.push({ id: '62PByUXB' });
+		// this.identities.push({ id: '51PByUXY' });
+		// this.identities.push({ id: '31PByUAA' });
 
 		// this.subscription = $media.subscribe((change:MediaChange) => {
 		// 	this.isOpen = (change.mqAlias !== 'xs');
@@ -77,6 +93,16 @@ export class AppComponent implements OnInit, OnDestroy {
 		// });
 	}
 
+	public changeCommunity(community) {
+		for (let i = 0; i < this.communities.length; ++i) {
+			this.communities[i].active = false;
+		}
+
+		community.active = true;
+
+
+	}
+
 	public loadMobileContent() {
 		// Do something special since the viewport is currently
 		// using mobile display sizes
@@ -97,6 +123,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
 		if (identity) {
 			this.appState.authenticated = true;
+			this.appState.identity = identity;
+
+			this.identities.push(identity);
 		}
 
 		// .then(result => {
